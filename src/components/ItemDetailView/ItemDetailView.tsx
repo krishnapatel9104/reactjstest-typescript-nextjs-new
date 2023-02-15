@@ -32,10 +32,10 @@ interface itemDetailViewProps {
 export const ItemDetailView: FC<itemDetailViewProps> = () => {
     const router = useRouter();
     const dispatch = useDispatch();
-    console.log("router query : ", router.query.productDetails);
-    const [productDetail, setProductDetail] = useState<categoryProductListType>(
-        router.query.productDetails
-    );
+    console.log("router query : ", JSON.parse(router.query.productDetails));
+    let data = JSON.parse(router.query.productDetails);
+    const [productDetail, setProductDetail] =
+        useState<categoryProductListType>(data);
 
     const [value, setValue] = useState<string>("1");
     const handleChange = (newValue: string) => {
@@ -473,7 +473,7 @@ export const ItemDetailView: FC<itemDetailViewProps> = () => {
                                     }}
                                 >
                                     <TabList
-                                        onChange={handleChange}
+                                        onChange={() => handleChange(value)}
                                         aria-label="lab API tabs example"
                                     >
                                         <Tab label="Info" value="1" />
