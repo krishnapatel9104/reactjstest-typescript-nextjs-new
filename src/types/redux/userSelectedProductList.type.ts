@@ -21,3 +21,13 @@ export interface ImageDifferentAngle {
   id: number
   imagePath: string
 }
+
+export interface otherDetails {
+  Shipping: number
+  vatAndTax: number
+}
+
+export interface userSelectedProductListType {
+  userSelectedProductLists: categoryProductListType[]
+  otherDetails: otherDetails
+}

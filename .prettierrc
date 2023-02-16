@@ -1,0 +1,14 @@
+{
+  "bracketSpacing": true,
+  "bracketSameLine": true,
+  "printWidth": 100,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "tabWidth": 2,
+  "useTabs": false,
+  "arrowParens": "avoid",
+  "importOrder": ["<THIRD_PARTY_MODULES>", "^@src/(.*)$", "^@tests/(.*)$", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}

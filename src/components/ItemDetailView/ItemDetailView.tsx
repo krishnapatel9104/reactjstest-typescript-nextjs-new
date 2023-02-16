@@ -23,19 +23,33 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { FC } from "react";
 import { categoryProductListType } from "../../types/constants/categoryProductList.type";
+import { withRouter } from "next/router";
 
 // import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 // import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 interface itemDetailViewProps {
-    // productDetails: categoryProductListType;
+    // productData: categoryProductListType;
 }
-export const ItemDetailView: FC<itemDetailViewProps> = () => {
+const ItemDetailView: FC<itemDetailViewProps> = ({ router: { query } }) => {
     const router = useRouter();
     const dispatch = useDispatch();
-    console.log("router query : ", JSON.parse(router.query.productDetails));
-    let data = JSON.parse(router.query.productDetails);
-    const [productDetail, setProductDetail] =
-        useState<categoryProductListType>(data);
+    // if (router.query.productDetail) {
+    //     const params = JSON.parse(
+    //         decodeURIComponent(props.router.query.productDetail)
+    //     );
+    // }
+    const object = JSON.parse(query.productData);
+
+    console.log(
+        "props itemview : ",
+        object
+        // params
+        // props.router.query.productDetail
+    );
+
+    const [productDetail, setProductDetail] = useState<categoryProductListType>(
+        {}
+    );
 
     const [value, setValue] = useState<string>("1");
     const handleChange = (newValue: string) => {
@@ -667,3 +681,4 @@ export const ItemDetailView: FC<itemDetailViewProps> = () => {
         </>
     );
 };
+export default withRouter(ItemDetailView);
