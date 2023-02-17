@@ -1,4 +1,6 @@
-export const colorLists: colorType = [
+import { colorType } from "../types/constants/color.type";
+
+export const colorLists: colorType[] = [
   {
     id: 1,
     name: 'Blue',

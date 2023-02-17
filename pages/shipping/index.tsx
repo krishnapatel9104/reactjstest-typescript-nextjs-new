@@ -1,19 +1,22 @@
 import { Box, Button, InputLabel, NativeSelect, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { StepperComp } from '../common/StepperComp';
-import { YourOrder } from '../common/YourOrder';
+import { useDispatch, useSelector } from '../../src/store';
+// import { useNavigate } from 'react-router-dom';
+import { StepperComp } from '../../src/components/common/StepperComp';
+import { YourOrder } from '../../src/components/common/YourOrder';
 // import { setUserDetails } from "../../store/reducers/userDetailsSlice";
-import { ProtectedRoute } from '../../utils/ProtectedRoute';
+import { ProtectedRoute } from '../../src/utils/ProtectedRoute';
 import { format } from 'date-fns';
-import { isFuture } from 'date-fns/esm';
-import { categoryProductListType } from '../../types/constants/categoryProductList.type';
+import { isFuture } from 'date-fns';
+// import { categoryProductListType } from '../src/types/constants/categoryProductList.type';
 import Image from 'next/image';
 // import { useFormik } from "formik";
+import { useRouter } from 'next/router';
+import { GetServerSideProps, NextPage } from 'next';
 
-const Shipping = () => {
-  const navigate = useNavigate();
+interface ShippingPageProps {}
+const ShippingPage: NextPage<ShippingPageProps> = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const [userData, setUserData] = useState({
     firstName: '',
@@ -27,11 +30,8 @@ const Shipping = () => {
     zipCode: ''
   });
 
-  const productDetails: categoryProductListType[] = [];
+  const productDetails = useSelector(state => state.userSelectedProductListSlice);
 
-  // const productDetails = useSelector(
-  //   (state) => state.rootReducer.userSelectedProductListSlice.userSelectedProductLists
-  // );
   const [errors, setErrors] = useState({});
   const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     e.persist();
@@ -186,11 +186,11 @@ const Shipping = () => {
     else return false;
   };
   useEffect(() => {
-    if (productDetails.length === 0) {
-      navigate('/');
+    if (productDetails.cartProductDetails.length === 0) {
+      router.push('/');
     }
   });
-  console.log('userData : ', userData);
+  console.log(' : ', userData);
   const handleClick = () => {
     if (!userData.deliveryDate) {
       setErrors({ ...errors, deliveryDate: 'Required' });
@@ -199,7 +199,7 @@ const Shipping = () => {
     } else {
       if (isValidate()) {
         // dispatch(setUserDetails(userData));
-        navigate('/checkout');
+        router.push('/checkout');
       }
     }
   };
@@ -266,7 +266,8 @@ const Shipping = () => {
   //     },
   // });
   return (
-    <ProtectedRoute>
+    // <ProtectedRoute>
+    <>
       <Box
         sx={{
           marginTop: '50px',
@@ -285,7 +286,7 @@ const Shipping = () => {
           sx={{
             display: 'flex',
             width: '100%',
-            // justifyContent: "space-between",
+            justifyContent: 'space-between',
             flexDirection: 'column'
           }}>
           <StepperComp activeStep={0} />
@@ -667,7 +668,7 @@ const Shipping = () => {
                     height={0}
                     width={0}
                     sizes="(max-width:0) 100vw,
-                                                (max-height:0) 100vh"
+                        (max-height:0) 100vh"
                     style={{
                       objectFit: 'cover',
                       height: '100%',
@@ -756,7 +757,8 @@ const Shipping = () => {
           <YourOrder />
         </Box>
       </Box>
-    </ProtectedRoute>
+    </>
+    // </ProtectedRoute>
   );
 };
-export default Shipping;
+export default ShippingPage;

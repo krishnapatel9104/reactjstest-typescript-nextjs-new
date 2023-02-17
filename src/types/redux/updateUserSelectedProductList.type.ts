@@ -1,6 +1,11 @@
 export interface updateUserSelectedProductListType {
-  orderId: number
-  color?: string
+  productId: number
+  color?: number
   quantity?: string
-  size?: string
+  size?: number
+}
+export interface deleteUserSelectedProductListType {
+  productId: number
+  color: number
+  size: number
 }

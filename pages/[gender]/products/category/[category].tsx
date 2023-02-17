@@ -3,6 +3,7 @@ import { productLists } from '../../../../src/data/productLists';
 import { genderLists } from '../../../../src/data/genderLists';
 import { categoryLists } from '../../../../src/data/categoryLists';
 import CategroyDetails from '../../../../src/components/CategoryDetails/CategroyDetails';
+import { productsType } from '../../../../src/types/constants/products.type';
 interface CategoryProductPageProps {
   products: any;
 }
@@ -24,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     productItem => productItem.gender === gender?.id && productItem.category === category?.id
   );
   return {
-    props: { products: result }
+    props: { products: { result: result, gender: gender, category: category?.id } }
   };
 };
 export default CategoryProductPage;

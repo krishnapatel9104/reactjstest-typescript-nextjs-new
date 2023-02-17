@@ -10,7 +10,8 @@ export interface productsType {
   brand: number
   size: number[]
   color: number[]
-  reviewRate: number
+  reviewRate: number,
+  slug: string
 }
 
 export interface productImage {

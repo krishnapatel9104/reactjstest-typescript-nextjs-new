@@ -1,4 +1,6 @@
-export const sizeLists: sizeType = [
+import { sizeType } from "../types/constants/size.type";
+
+export const sizeLists: sizeType[] = [
   {
     id: 1,
     name: 'Extra Small',

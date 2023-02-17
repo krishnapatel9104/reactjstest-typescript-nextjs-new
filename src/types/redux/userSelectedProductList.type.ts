@@ -31,3 +31,14 @@ export interface userSelectedProductListType {
   userSelectedProductLists: categoryProductListType[]
   otherDetails: otherDetails
 }
+
+export interface userCartProductsType {
+  cartProductDetails: userCartProductType[]
+}
+
+export interface userCartProductType {
+  productId: number
+  quantity: number
+  size: number
+  color: number
+}

@@ -24,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     productItem => productItem.gender === gender?.id && productItem.brand === brand?.id
   );
   return {
-    props: { products: result }
+    props: { products: { result: result, gender: gender, brand: brand?.id } }
   };
 };
 export default BrandProductPage;

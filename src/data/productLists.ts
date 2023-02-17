@@ -23,6 +23,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -33,7 +37,8 @@ export const productLists: productsType[] = [
     brand: 4,
     size: [1, 2, 4],
     color: [1, 3, 5],
-    reviewRate: 3
+    reviewRate: 3,
+    slug: 'louis-vouiton-active-wear'
   },
   {
     id: 2,
@@ -58,6 +63,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -68,7 +77,8 @@ export const productLists: productsType[] = [
     brand: 3,
     size: [2, 3],
     color: [2, 5],
-    reviewRate: 3
+    reviewRate: 3,
+    slug: 'ocean-blue-ring'
   },
   {
     id: 3,
@@ -93,6 +103,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -103,7 +117,8 @@ export const productLists: productsType[] = [
     brand: 2,
     size: [2, 3, 4],
     color: [2, 5],
-    reviewRate: 3
+    reviewRate: 3,
+    slug: 'brown-leathered-wallet'
   },
   {
     id: 4,
@@ -128,6 +143,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -138,7 +157,8 @@ export const productLists: productsType[] = [
     brand: 10,
     size: [2, 4],
     color: [2, 3],
-    reviewRate: 3
+    reviewRate: 3,
+    slug: 'brown-leathered-wallet'
   },
   {
     id: 5,
@@ -163,6 +183,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -173,7 +197,8 @@ export const productLists: productsType[] = [
     brand: 2,
     size: [2, 3, 4],
     color: [2, 5],
-    reviewRate: 3
+    reviewRate: 3,
+    slug: 'brown-leathered-wallet'
   },
   {
     id: 6,
@@ -198,6 +223,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -208,7 +237,8 @@ export const productLists: productsType[] = [
     brand: 2,
     size: [2, 4, 5],
     color: [3, 5],
-    reviewRate: 3
+    reviewRate: 3,
+    slug: 'marie-claire-handbag'
   },
   {
     id: 7,
@@ -233,6 +263,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -243,7 +277,8 @@ export const productLists: productsType[] = [
     brand: 3,
     size: [2, 3],
     color: [2, 5],
-    reviewRate: 3
+    reviewRate: 3,
+    slug: 'red-gem-earrings'
   },
   {
     id: 8,
@@ -268,6 +303,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -278,7 +317,8 @@ export const productLists: productsType[] = [
     brand: 10,
     size: [3, 4],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'brown-leathered-wallet'
   },
   {
     id: 9,
@@ -303,6 +343,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -313,7 +357,8 @@ export const productLists: productsType[] = [
     brand: 3,
     size: [2, 5],
     color: [3, 4],
-    reviewRate: 2
+    reviewRate: 2,
+    slug: 'earning'
   },
   {
     id: 10,
@@ -338,6 +383,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -348,7 +397,8 @@ export const productLists: productsType[] = [
     brand: 3,
     size: [2, 3],
     color: [2, 5],
-    reviewRate: 3
+    reviewRate: 3,
+    slug: 'red-gem-earrings'
   },
   {
     id: 11,
@@ -373,6 +423,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -383,7 +437,8 @@ export const productLists: productsType[] = [
     brand: 0,
     size: [2, 3],
     color: [2, 5],
-    reviewRate: 3
+    reviewRate: 3,
+    slug: 'red-gem-earrings'
   },
   {
     id: 12,
@@ -408,6 +463,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -418,7 +477,8 @@ export const productLists: productsType[] = [
     brand: 0,
     size: [2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'red-gem-earrings'
   },
   {
     id: 13,
@@ -443,6 +503,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -453,7 +517,8 @@ export const productLists: productsType[] = [
     brand: 0,
     size: [2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'red-gem-earrings'
   },
   {
     id: 14,
@@ -478,6 +543,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -488,7 +557,8 @@ export const productLists: productsType[] = [
     brand: 0,
     size: [2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'red-gem-earrings'
   },
   {
     id: 15,
@@ -513,6 +583,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -523,7 +597,8 @@ export const productLists: productsType[] = [
     brand: 4,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'santiago-blood-white'
   },
   {
     id: 16,
@@ -548,6 +623,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -558,7 +637,8 @@ export const productLists: productsType[] = [
     brand: 4,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'salomon-lightning-blue'
   },
   {
     id: 17,
@@ -583,6 +663,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -593,7 +677,8 @@ export const productLists: productsType[] = [
     brand: 4,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'salomon-lightning-blue'
   },
   {
     id: 18,
@@ -618,6 +703,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -628,7 +717,8 @@ export const productLists: productsType[] = [
     brand: 4,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'salomon-lightning-blue'
   },
   {
     id: 19,
@@ -653,6 +743,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -663,7 +757,8 @@ export const productLists: productsType[] = [
     brand: 4,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'salomon-lightning-blue'
   },
   {
     id: 20,
@@ -688,6 +783,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -698,7 +797,8 @@ export const productLists: productsType[] = [
     brand: 9,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 21,
@@ -723,6 +823,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -733,7 +837,8 @@ export const productLists: productsType[] = [
     brand: 9,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 22,
@@ -758,6 +863,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -768,7 +877,8 @@ export const productLists: productsType[] = [
     brand: 9,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 23,
@@ -793,6 +903,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -803,7 +917,8 @@ export const productLists: productsType[] = [
     brand: 9,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 24,
@@ -828,6 +943,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -838,7 +957,8 @@ export const productLists: productsType[] = [
     brand: 9,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 25,
@@ -863,6 +983,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -873,7 +997,8 @@ export const productLists: productsType[] = [
     brand: 8,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 26,
@@ -898,6 +1023,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -908,7 +1037,8 @@ export const productLists: productsType[] = [
     brand: 8,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 27,
@@ -933,6 +1063,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -943,7 +1077,8 @@ export const productLists: productsType[] = [
     brand: 8,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 28,
@@ -968,6 +1103,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -978,7 +1117,8 @@ export const productLists: productsType[] = [
     brand: 8,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 29,
@@ -1003,6 +1143,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1013,7 +1157,8 @@ export const productLists: productsType[] = [
     brand: 8,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 30,
@@ -1038,6 +1183,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1048,7 +1197,8 @@ export const productLists: productsType[] = [
     brand: 2,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 31,
@@ -1073,6 +1223,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1083,7 +1237,8 @@ export const productLists: productsType[] = [
     brand: 2,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 32,
@@ -1108,6 +1263,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1118,7 +1277,8 @@ export const productLists: productsType[] = [
     brand: 2,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 33,
@@ -1143,6 +1303,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1153,7 +1317,8 @@ export const productLists: productsType[] = [
     brand: 2,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 34,
@@ -1178,6 +1343,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1188,7 +1357,8 @@ export const productLists: productsType[] = [
     brand: 2,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 35,
@@ -1213,6 +1383,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1223,7 +1397,8 @@ export const productLists: productsType[] = [
     brand: 10,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 36,
@@ -1248,6 +1423,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1258,7 +1437,8 @@ export const productLists: productsType[] = [
     brand: 10,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 37,
@@ -1283,6 +1463,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1293,7 +1477,8 @@ export const productLists: productsType[] = [
     brand: 10,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 38,
@@ -1318,6 +1503,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1328,7 +1517,8 @@ export const productLists: productsType[] = [
     brand: 10,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 39,
@@ -1353,6 +1543,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1363,7 +1557,8 @@ export const productLists: productsType[] = [
     brand: 10,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 40,
@@ -1388,6 +1583,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1398,7 +1597,8 @@ export const productLists: productsType[] = [
     brand: 2,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 41,
@@ -1423,6 +1623,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1433,7 +1637,8 @@ export const productLists: productsType[] = [
     brand: 2,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 42,
@@ -1458,6 +1663,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1468,7 +1677,8 @@ export const productLists: productsType[] = [
     brand: 2,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 43,
@@ -1493,6 +1703,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1503,7 +1717,8 @@ export const productLists: productsType[] = [
     brand: 2,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 44,
@@ -1528,6 +1743,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1538,7 +1757,8 @@ export const productLists: productsType[] = [
     brand: 2,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 45,
@@ -1563,6 +1783,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1573,7 +1797,8 @@ export const productLists: productsType[] = [
     brand: 3,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 46,
@@ -1598,6 +1823,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1608,7 +1837,8 @@ export const productLists: productsType[] = [
     brand: 3,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 47,
@@ -1633,6 +1863,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1643,7 +1877,8 @@ export const productLists: productsType[] = [
     brand: 3,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 48,
@@ -1668,6 +1903,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1678,7 +1917,8 @@ export const productLists: productsType[] = [
     brand: 3,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 49,
@@ -1703,6 +1943,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1713,7 +1957,8 @@ export const productLists: productsType[] = [
     brand: 3,
     size: [1, 2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'flat-hill-slingback'
   },
   {
     id: 50,
@@ -1738,6 +1983,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1748,7 +1997,8 @@ export const productLists: productsType[] = [
     brand: 1,
     size: [2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'red-gem-earrings'
   },
   {
     id: 51,
@@ -1773,6 +2023,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1783,7 +2037,8 @@ export const productLists: productsType[] = [
     brand: 1,
     size: [2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'red-gem-earrings'
   },
   {
     id: 52,
@@ -1808,6 +2063,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1818,7 +2077,8 @@ export const productLists: productsType[] = [
     brand: 1,
     size: [2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'red-gem-earrings'
   },
   {
     id: 53,
@@ -1843,6 +2103,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1853,7 +2117,8 @@ export const productLists: productsType[] = [
     brand: 1,
     size: [2, 3],
     color: [2, 5],
-    reviewRate: 4
+    reviewRate: 4,
+    slug: 'red-gem-earrings'
   },
   {
     id: 54,
@@ -1878,6 +2143,10 @@ export const productLists: productsType[] = [
       {
         id: 5,
         productImage: "/images/womenproduct5.png"
+      },
+      {
+        id: 6,
+        productImage: "/images/womenproduct5.png"
       }
     ],
     productDescription: ["desc 1", "desc 2"],
@@ -1888,804 +2157,7 @@ export const productLists: productsType[] = [
     brand: 1,
     size: [2, 3],
     color: [2, 5],
-    reviewRate: 4
-  },
-  // {
-  //   id: 1,
-  //   imageSource: "/images/womenproduct1.png",
-  //   productName: "Louis Vouiton active wear",
-  //   productPrice: 380,
-  //   isLike: false,
-  //   isNewArrival: false,
-  //   filter: "women",
-  //   brand: "Dior",
-  //   category: "clothes",
-  //   size: "L",
-  //   quantity: 1,
-  //   color: "Red",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 3,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/womenproduct1.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct4.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct1.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 2,
-  //   imageSource: "/images/womenproduct2.png",
-  //   productName: "Shiny dress Givenchy",
-  //   productPrice: 1610,
-  //   isLike: false,
-  //   isNewArrival: false,
-  //   filter: "babies",
-  //   brand: "H&M",
-  //   category: "Dresses",
-  //   size: "M",
-  //   quantity: 1,
-  //   color: "Yellow",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 4,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct1.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct4.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct1.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 11,
-  //   imageSource: "/images/womenproduct8.png",
-  //   productName: "Red dress Valentino",
-  //   productPrice: 715,
-  //   isLike: false,
-  //   isNewArrival: true,
-  //   filter: "women",
-  //   brand: "Dior",
-  //   category: "clothes",
-  //   size: "M",
-  //   quantity: 1,
-  //   color: "Red",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 3,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/womenproduct8.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct4.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct1.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 12,
-  //   imageSource: "/images/womenproduct9.png",
-  //   productName: "Shiny dress Givenchy",
-  //   productPrice: 715,
-  //   isLike: false,
-  //   isNewArrival: false,
-  //   filter: "ladies",
-  //   brand: "H&M",
-  //   category: "Dresses",
-  //   size: "M",
-  //   quantity: 1,
-  //   color: "Red",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 3,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/womenproduct9.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct4.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct1.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 3,
-  //   imageSource: "/images/womenproduct3.png",
-  //   productName: "Dolce&Gabbana Dress",
-  //   productPrice: 715,
-  //   isLike: false,
-  //   isNewArrival: false,
-  //   filter: "girls",
-  //   brand: "H&M",
-  //   category: "Dresses",
-  //   size: "XS",
-  //   quantity: 1,
-  //   color: "Red",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 3,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct8.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct4.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct1.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 4,
-  //   imageSource: "/images/womenproduct4.png",
-  //   productName: "Elegant dress Dries van Noten",
-  //   productPrice: 715,
-  //   isLike: false,
-  //   isNewArrival: false,
-  //   filter: "babies",
-  //   brand: "H&M",
-  //   category: "Dresses",
-  //   size: "M",
-  //   quantity: 1,
-  //   color: "Black",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 2,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/womenproduct4.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct7.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct1.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 5,
-  //   imageSource: "/images/womenproduct5.png",
-  //   productName: "Women's white jacket",
-  //   productPrice: 715,
-  //   isLike: false,
-  //   isNewArrival: true,
-  //   filter: "women",
-  //   brand: "H&M",
-  //   category: "clothes",
-  //   size: "M",
-  //   quantity: 1,
-  //   color: "Red",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 3,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct4.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct1.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 6,
-  //   imageSource: "/images/womenproduct6.png",
-  //   productName: "Black Valentino dress with tulle",
-  //   productPrice: 715,
-  //   isLike: false,
-  //   isNewArrival: false,
-  //   filter: "women",
-  //   brand: "H&M",
-  //   category: "Dresses",
-  //   size: "M",
-  //   quantity: 1,
-  //   color: "Pink",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 1,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/womenproduct6.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct4.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct1.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 7,
-  //   imageSource: "/images/womenproduct7.png",
-  //   productName: "Women's black vest Gucci",
-  //   productPrice: 715,
-  //   isLike: false,
-  //   isNewArrival: false,
-  //   filter: "men",
-  //   brand: "H&M",
-  //   category: "clothes",
-  //   size: "M",
-  //   quantity: 1,
-  //   color: "Red",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 3,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/womenproduct7.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct4.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct1.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 8,
-  //   imageSource: "/images/womenproduct8.png",
-  //   productName: "Red dress Valentino",
-  //   productPrice: 715,
-  //   isLike: false,
-  //   isNewArrival: true,
-  //   filter: "men",
-  //   brand: "H&M",
-  //   category: "clothes",
-  //   size: "M",
-  //   quantity: 1,
-  //   color: "Red",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 5,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/womenproduct8.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct4.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct1.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 9,
-  //   imageSource: "/images/womenproduct9.png",
-  //   productName: "Shiny dress Givenchy",
-  //   productPrice: 715,
-  //   isLike: false,
-  //   isNewArrival: false,
-  //   filter: "women",
-  //   brand: "H&M",
-  //   category: "Dresses",
-  //   size: "S",
-  //   quantity: 1,
-  //   color: "Red",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 3,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/womenproduct9.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct4.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct1.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 10,
-  //   imageSource: "/images/womenproduct7.png",
-  //   productName: "Women's black vest Gucci",
-  //   productPrice: 340,
-  //   isLike: false,
-  //   isNewArrival: false,
-  //   filter: "men",
-  //   brand: "H&M",
-  //   category: "clothes",
-  //   size: "M",
-  //   quantity: 1,
-  //   color: "Red",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 3,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/womenproduct7.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct4.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct1.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 13,
-  //   imageSource: "/images/womenproduct7.png",
-  //   productName: "Shoes A1",
-  //   productPrice: 460,
-  //   isLike: false,
-  //   isNewArrival: false,
-  //   filter: "men",
-  //   brand: "gucci",
-  //   category: "shoes",
-  //   size: "M",
-  //   quantity: 1,
-  //   color: "Red",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 3,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/womenproduct7.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 14,
-  //   imageSource: "/images/womenproduct9.png",
-  //   productName: "Shoes Nike",
-  //   productPrice: 560,
-  //   isLike: false,
-  //   isNewArrival: false,
-  //   filter: "men",
-  //   brand: "fendi",
-  //   category: "shoes",
-  //   size: "L",
-  //   quantity: 1,
-  //   color: "Red",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 3,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/womenproduct9.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 15,
-  //   imageSource: "/images/womenproduct2.png",
-  //   productName: "Shoes Lona",
-  //   productPrice: 830,
-  //   isLike: false,
-  //   isNewArrival: false,
-  //   filter: "men",
-  //   brand: "fendi",
-  //   category: "shoes",
-  //   size: "M",
-  //   quantity: 1,
-  //   color: "Red",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 3,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 16,
-  //   imageSource: "/images/purse2.png",
-  //   productName: "Marie Claire Handbag",
-  //   productPrice: 450,
-  //   isLike: false,
-  //   isNewArrival: false,
-  //   filter: "women",
-  //   brand: "fendi",
-  //   category: "bags",
-  //   size: "M",
-  //   quantity: 1,
-  //   color: "Red",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 3,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/purse2.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct4.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 17,
-  //   imageSource: "/images/earning.png",
-  //   productName: "Red Gem Earrings",
-  //   productPrice: 340,
-  //   isLike: false,
-  //   isNewArrival: false,
-  //   filter: "women",
-  //   brand: "fendi",
-  //   category: "accessories",
-  //   size: "M",
-  //   quantity: 1,
-  //   color: "Red",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 3,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/earning.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct4.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 18,
-  //   imageSource: "/images/watch1.png",
-  //   productName: "Brown Leathered Wallet",
-  //   productPrice: 830,
-  //   isLike: false,
-  //   isNewArrival: false,
-  //   filter: "men",
-  //   brand: "Dior",
-  //   category: "watches",
-  //   size: "M",
-  //   quantity: 1,
-  //   color: "Red",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 3,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/watch1.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct4.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 19,
-  //   imageSource: "/images/tie.png",
-  //   productName: "Red Gem Earrings",
-  //   productPrice: 830,
-  //   isLike: false,
-  //   isNewArrival: false,
-  //   filter: "men",
-  //   brand: "Gucci",
-  //   category: "accessories",
-  //   size: "M",
-  //   quantity: 1,
-  //   color: "Red",
-  //   productDesc: ["Product description 1", "Product desc 2"],
-  //   reviewRate: 3,
-  //   imageDifferentAngle: [
-  //     {
-  //       id: 1,
-  //       imagePath: "/images/tie.png",
-  //     },
-  //     {
-  //       id: 2,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //     {
-  //       id: 3,
-  //       imagePath: "/images/womenproduct3.png",
-  //     },
-  //     {
-  //       id: 4,
-  //       imagePath: "/images/womenproduct4.png",
-  //     },
-  //     {
-  //       id: 5,
-  //       imagePath: "/images/womenproduct5.png",
-  //     },
-  //     {
-  //       id: 6,
-  //       imagePath: "/images/womenproduct2.png",
-  //     },
-  //   ],
-  // },
+    reviewRate: 4,
+    slug: 'red-gem-earrings'
+  }
 ];

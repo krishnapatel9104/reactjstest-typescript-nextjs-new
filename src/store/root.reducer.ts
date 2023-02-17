@@ -4,7 +4,7 @@ import UserSlice from './reducers/user/user.slice';
 import userSelectedProductListSlice from './reducers/userSelectedProductList/userSelectedProductList.slice';
 
 const rootReducer = combineReducers<RootReduxState>({
-  UserSlice
+  UserSlice,
   userSelectedProductListSlice
 });
 export default rootReducer;

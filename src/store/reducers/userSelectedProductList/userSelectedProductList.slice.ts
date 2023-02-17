@@ -1,87 +1,107 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { userSelectedProductListType } from "../../../types/redux/userSelectedProductList.type";
-import { updateUserSelectedProductListType } from '../../../types/redux/updateUserSelectedProductList.type';
-import { categoryProductListType } from "../../../types/constants/categoryProductList.type";
-const initialState: userSelectedProductListType = {
-  userSelectedProductLists: [],
-  otherDetails: {
-    Shipping: 64,
-    vatAndTax: 64,
-  },
+import { userCartProductsType, userCartProductType, userSelectedProductListType } from "../../../types/redux/userSelectedProductList.type";
+import { deleteUserSelectedProductListType, updateUserSelectedProductListType } from '../../../types/redux/updateUserSelectedProductList.type';
+// import { categoryProductListType } from "../../../types/constants/categoryProductList.type";
+const initialState: userCartProductsType = {
+  cartProductDetails: []
 };
 export const userSelectedProductListSlice = createSlice({
   name: "userSelectedProductList",
   initialState: initialState,
   reducers: {
-    setUserSelectedProductList: (state, action) => {
-      console.log("sslice : ", state.userSelectedProductLists, action.payload);
-      let alreadyExist = state.userSelectedProductLists.findIndex((product) => {
-        return product.id === action.payload.id;
+    setUserSelectedProductList: (state: userCartProductsType, action: PayloadAction<userCartProductType>) => {
+      console.log("sslice action called : ", state.cartProductDetails, action.payload);
+      let alreadyExist = state.cartProductDetails.findIndex((product) => {
+        return product.productId === action.payload.productId && product.size === action.payload.size && product.color === action.payload.color;
       });
       if (alreadyExist === -1) {
         return {
           ...state,
-          userSelectedProductLists: state.userSelectedProductLists.concat(action.payload),
+          cartProductDetails: state.cartProductDetails.concat(action.payload),
         };
       } else {
-        let newArrayObj = [...state.userSelectedProductLists];
-        newArrayObj[alreadyExist] = {
-          ...newArrayObj[alreadyExist],
-          quantity: newArrayObj[alreadyExist].quantity + 1,
-        };
-        return {
-          ...state,
-          userSelectedProductLists: newArrayObj,
-        };
+
+        let newArrayObj = [...state.cartProductDetails];
+        console.log("already existis product : ", state.cartProductDetails);
+        console.log("new product : ", action.payload);
+
+
+        if (newArrayObj[alreadyExist].size !== action.payload.size && newArrayObj[alreadyExist].color !== action.payload.color) {
+          console.log("if change any");
+          return {
+            ...state,
+            cartProductDetails: state.cartProductDetails.concat(action.payload),
+          };
+        } else {
+          newArrayObj[alreadyExist] = {
+            ...newArrayObj[alreadyExist],
+            quantity: newArrayObj[alreadyExist].quantity + 1,
+          };
+          return {
+            ...state,
+            cartProductDetails: newArrayObj,
+          };
+        }
       }
+
     },
-    deleteSelectedProductList: (state, action) => {
+    deleteSelectedProductList: (state: userCartProductsType, action: PayloadAction<deleteUserSelectedProductListType>) => {
+      let list = state.cartProductDetails.filter(
+        (product) => product.productId === action.payload.productId && product.size === action.payload.size && product.color === action.payload.color
+      );
+      console.log("delete after list ::::::::::::::: ", list);
+
       return {
         ...state,
-        userSelectedProductLists: state.userSelectedProductLists.filter(
-          (product) => product.id !== action.payload
-        ),
+        cartProductDetails: list
       };
     },
-    updateUserSelectedProductList: (state: userSelectedProductListType, action: PayloadAction<updateUserSelectedProductListType>) => {
-      let obj = state.userSelectedProductLists.map((product) => {
-        if (product.id === action.payload.orderId) {
-          if (action.payload.quantity) {
+    updateUserSelectedProductList: (state: userCartProductsType, action: PayloadAction<updateUserSelectedProductListType>) => {
+      console.log("redux update action : ", action.payload);
+
+      let result = state.cartProductDetails.map((product) => {
+        if (product.productId === action.payload.productId) {
+          if (action.payload?.quantity) {
+            console.log("update quantnity : ");
             return {
               ...product,
               quantity:
                 action.payload.quantity === "add" ? product.quantity + 1 : product.quantity - 1,
             };
           }
-          if (action.payload.size) {
+          if (action.payload?.size) {
+            console.log("update size : ");
             return {
               ...product,
               size: action.payload.size,
             };
           }
-          if (action.payload.color) {
+          if (action.payload?.color) {
+            console.log("update color : ");
             return {
               ...product,
               color: action.payload.color,
             };
           }
-        } else return product;
+        }
       });
+      console.log("result REDUXXXXXXXXXXXXXXXXX: ", result)
+
       return {
         ...state,
-        userSelectedProductLists: obj,
+        cartProductDetails: result ? result : []
       };
     },
     resetUserSelectedProductList: (state) => {
       return {
         ...state,
-        userSelectedProductLists: [],
+        cartProductDetails: [],
       };
     },
     restoreUserSelectedProductList: (state, action) => {
       return {
         ...state,
-        userSelectedProductLists: action.payload,
+        cartProductDetails: action.payload,
       };
     },
   },
