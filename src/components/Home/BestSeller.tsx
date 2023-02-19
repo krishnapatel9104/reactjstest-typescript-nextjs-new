@@ -19,10 +19,10 @@ import React, { useEffect, useState } from 'react';
 export const BestSeller = () => {
   // const navigator = useNavigate();
   const router = useRouter();
-//   const handleClick = () => {
-//     console.log('btn clicked');
-//     router.push('/women/products/accessories');
-//   };
+  //   const handleClick = () => {
+  //     console.log('btn clicked');
+  //     router.push('/women/products/accessories');
+  //   };
 
   const [bestSellerProducts, setBestSellerProducts] = useState<productsType[]>();
 
@@ -40,7 +40,7 @@ export const BestSeller = () => {
       }}>
       <Typography
         sx={{
-          fontFamily: theme.typography.titleHeading.fontFamily,
+          fontFamily: theme.typography.h1.fontFamily,
           fontWeight: '700',
           fontSize: {
             xl: '42px',
@@ -146,7 +146,7 @@ export const BestSeller = () => {
                       alignItems: 'center'
                     }}
                     // onClick={handleClick}
-                    >
+                  >
                     <Box
                       sx={{
                         marginLeft: '10px',
@@ -194,7 +194,7 @@ export const BestSeller = () => {
                       <Box>
                         <Typography
                           sx={{
-                            fontFamily: theme.typography.titleHeading.fontFamily,
+                            fontFamily: theme.typography.h1.fontFamily,
                             fontWeight: '700',
                             fontSize: {
                               lg: '22px',
@@ -208,11 +208,11 @@ export const BestSeller = () => {
                         <Typography>
                           <span
                             style={{
-                              fontFamily: theme.typography.titleHeading.fontFamily,
+                              fontFamily: theme.typography.h1.fontFamily,
                               fontWeight: '400',
                               fontSize: '20px',
                               textDecorationLine: 'line-through',
-                              color: theme.palette.originalPrice.color
+                              color: theme.palette.secondary.light
                             }}>
                             ${product.productOriginalPrice}
                           </span>
@@ -220,10 +220,10 @@ export const BestSeller = () => {
                           <span
                             className="currentprice"
                             style={{
-                              fontFamily: theme.typography.titleHeading.fontFamily,
+                              fontFamily: theme.typography.h1.fontFamily,
                               fontWeight: '400',
                               fontSize: '20px',
-                              color: theme.palette.currentPrice.color
+                              color: theme.palette.secondary.dark
                             }}>
                             ${product.productCurrentPrice}
                           </span>
@@ -274,13 +274,13 @@ export const BestSeller = () => {
             marginBottom: { xs: '0', md: '70px' },
             padding: { xs: '5px 20px', sm: '10px 40px' },
             background: '#212121',
-            fontFamily: theme.typography.titleHeading.fontFamily,
+            fontFamily: theme.typography.h1.fontFamily,
             fontWeight: '700',
             fontSize: { xs: '10px', sm: '20px' },
             color: '#FFFFFF'
           }}
-        //   onClick={handleClick}
-          >
+          //   onClick={handleClick}
+        >
           View All
         </Button>
       </Box>

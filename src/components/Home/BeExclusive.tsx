@@ -46,7 +46,7 @@ export const BeExclusive = () => {
             }}>
             <Typography
               sx={{
-                fontFamily: theme.typography.titleHeading.fontFamily,
+                fontFamily: theme.typography.h1.fontFamily,
                 fontWeight: '700',
                 color: '#616161',
                 fontSize: {
@@ -60,7 +60,7 @@ export const BeExclusive = () => {
             </Typography>
             <Typography
               sx={{
-                fontFamily: theme.typography.titleHeading.fontFamily,
+                fontFamily: theme.typography.h1.fontFamily,
                 fontWeight: '700',
                 color: theme.palette.primary.main,
                 fontSize: {
@@ -75,7 +75,7 @@ export const BeExclusive = () => {
             <Typography
               sx={{
                 textAlign: 'left',
-                fontFamily: theme.typography.desc.fontFamily,
+                fontFamily: theme.typography.h4.fontFamily,
                 fontWeight: '400',
                 fontSize: {
                   xs: '12px',
@@ -98,7 +98,7 @@ export const BeExclusive = () => {
                     md: '10px 40px'
                   },
                   background: '#212121',
-                  fontFamily: theme.typography.titleHeading.fontFamily,
+                  fontFamily: theme.typography.h1.fontFamily,
                   fontWeight: '700',
                   fontSize: {
                     xs: '15px',

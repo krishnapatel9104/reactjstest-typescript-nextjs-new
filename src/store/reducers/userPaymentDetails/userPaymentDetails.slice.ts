@@ -22,7 +22,6 @@ export const userPaymentDetailsSlice = createSlice({
       }
     },
     resetPaymentDetails: (state: userPaymentDetailsType) => {
-      console.log("reset paymentDetails action : ", state);
       return {
         ...state,
         paymentMethod: '',

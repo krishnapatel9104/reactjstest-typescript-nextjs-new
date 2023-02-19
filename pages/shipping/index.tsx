@@ -320,8 +320,7 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
   //     },
   // });
   return (
-    // <ProtectedRoute>
-    <>
+    <ProtectedRoute>
       <Box
         sx={{
           marginTop: '50px',
@@ -787,8 +786,7 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
           <YourOrder />
         </Box>
       </Box>
-    </>
-    // </ProtectedRoute>
+    </ProtectedRoute>
   );
 };
 export default ShippingPage;

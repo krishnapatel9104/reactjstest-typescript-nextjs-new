@@ -26,6 +26,7 @@ import { colorLists } from '../../data/colorLists';
 // import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 // import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useSelector, useDispatch } from '../../store/index';
+import { ProtectedRoute } from '../../utils/ProtectedRoute';
 
 interface itemDetailViewProps {
   product: productsType;
@@ -154,7 +155,7 @@ const ItemDetailView: FC<itemDetailViewProps> = ({ product }) => {
   }, [selectedImage]);
 
   return (
-    <>
+    <ProtectedRoute>
       <Box
         sx={{
           marginTop: { xs: '0', md: '150px' }
@@ -537,8 +538,8 @@ const ItemDetailView: FC<itemDetailViewProps> = ({ product }) => {
                           padding: '10px 20px',
                           backgroundColor: selectedSize === size ? '#1B2437 !important' : 'white'
                         }}
-                        onClick={e => changeHandler('size', sizeDetail.id)}>
-                        {sizeDetail.value}
+                        onClick={e => changeHandler('size', sizeDetail?.id)}>
+                        {sizeDetail?.value}
                       </Button>
                     );
                   })}
@@ -633,7 +634,7 @@ const ItemDetailView: FC<itemDetailViewProps> = ({ product }) => {
           </Box>
         </Box>
       </Box>
-    </>
+    </ProtectedRoute>
   );
 };
 export default ItemDetailView;

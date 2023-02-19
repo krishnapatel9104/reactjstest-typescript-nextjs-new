@@ -26,7 +26,9 @@ export const BestDeal = () => {
   const [bestDealProducts, setBestDealProducts] = useState<productsType[]>();
 
   useEffect(() => {
-    let result = productLists.filter(productItem => bestDealProductLists.productId.some(productId => productItem.id === productId));
+    let result = productLists.filter(productItem =>
+      bestDealProductLists.productId.some(productId => productItem.id === productId)
+    );
     console.log('best deal data object : ', result);
     setBestDealProducts(result);
   }, [productLists]);
@@ -44,7 +46,7 @@ export const BestDeal = () => {
       <Typography
         title="Best Deals"
         sx={{
-          fontFamily: theme.typography.titleHeading.fontFamily,
+          fontFamily: theme.typography.h1.fontFamily,
           fontWeight: '700',
           fontSize: {
             xl: '42px',
@@ -152,7 +154,7 @@ export const BestDeal = () => {
                       alignItems: 'center'
                     }}
                     // onClick={() => handleClick(product.gender,product.category)}
-                    >
+                  >
                     <Box
                       sx={{
                         marginLeft: '10px',
@@ -193,7 +195,7 @@ export const BestDeal = () => {
                       <Box>
                         <Typography
                           sx={{
-                            fontFamily: theme.typography.titleHeading.fontFamily,
+                            fontFamily: theme.typography.h1.fontFamily,
                             fontWeight: '700',
                             fontSize: {
                               lg: '22px',
@@ -207,11 +209,11 @@ export const BestDeal = () => {
                         <Typography>
                           <span
                             style={{
-                              fontFamily: theme.typography.titleHeading.fontFamily,
+                              fontFamily: theme.typography.h1.fontFamily,
                               fontWeight: '400',
                               fontSize: '20px',
                               textDecorationLine: 'line-through',
-                              color: theme.palette.originalPrice.color
+                              color: theme.palette.secondary.light
                             }}>
                             ${product.productOriginalPrice}
                           </span>
@@ -219,10 +221,10 @@ export const BestDeal = () => {
                           <span
                             className="currentprice"
                             style={{
-                              fontFamily: theme.typography.titleHeading.fontFamily,
+                              fontFamily: theme.typography.h1.fontFamily,
                               fontWeight: '400',
                               fontSize: '20px',
-                              color: theme.palette.currentPrice.color
+                              color: theme.palette.secondary.dark
                             }}>
                             ${product.productCurrentPrice}
                           </span>
@@ -273,13 +275,13 @@ export const BestDeal = () => {
             marginBottom: '70px',
             padding: { xs: '5px 20px', sm: '10px 40px' },
             background: '#212121',
-            fontFamily: theme.typography.titleHeading.fontFamily,
+            fontFamily: theme.typography.h1.fontFamily,
             fontWeight: '700',
             fontSize: { xs: '10px', sm: '20px' },
             color: '#FFFFFF'
           }}
           // onClick={handleClick}
-          >
+        >
           View All
         </Button>
       </Box>

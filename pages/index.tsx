@@ -21,23 +21,23 @@ import { NextPage } from 'next';
 interface IndexPageProps {}
 const Index: NextPage<IndexPageProps> = () => {
   return (
-    // <ProtectedRoute>
-    <Box sx={{ backgroundColor: theme.palette?.backgroundColor.default }}>
-      <Navbar />
-      <Header />
-      <BestDeal />
-      <BeExclusive />
-      <CheckoutNewArrivals />
-      <ShopByCategory />
-      <CountryLightSection />
-      <BestSeller />
-      <SummerSection />
-      <GentleFormalLookSection />
-      <CardFooterSection />
-      <FooterSliderSection />
-      <Footer />
-    </Box>
-    // </ProtectedRoute>
+    <ProtectedRoute>
+      <Box sx={{ backgroundColor: theme.palette?.background.default }}>
+        <Navbar />
+        <Header />
+        <BestDeal />
+        <BeExclusive />
+        <CheckoutNewArrivals />
+        <ShopByCategory />
+        <CountryLightSection />
+        <BestSeller />
+        <SummerSection />
+        <GentleFormalLookSection />
+        <CardFooterSection />
+        <FooterSliderSection />
+        <Footer />
+      </Box>
+    </ProtectedRoute>
   );
 };
 export default Index;

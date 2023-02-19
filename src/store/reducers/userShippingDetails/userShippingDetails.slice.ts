@@ -30,7 +30,6 @@ export const userShippingDetailsSlice = createSlice({
       }
     },
     resetShippingDetails: (state: userShippingDataType) => {
-      console.log("action reset setshippingDetails called : ", state);
       return {
         ...state,
         firstName: '',

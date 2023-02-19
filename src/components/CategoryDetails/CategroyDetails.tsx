@@ -139,8 +139,7 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
     if (brandFilter || sizeFilter || categoryFilter || priceFilter) {
       const newProductList = productLists.filter(product => {
         if (
-          (brandFilter.includes(product.brand) ||
-          categoryFilter.includes(product.category)) &&
+          (brandFilter.includes(product.brand) || categoryFilter.includes(product.category)) &&
           product.gender === selectedGender &&
           product.productCurrentPrice >= priceFilter[0] &&
           product.productCurrentPrice <= priceFilter[1]
@@ -245,8 +244,7 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
     if (page !== 1) setPage(page - 1);
   };
   return (
-    // <ProtectedRoute>
-    <>
+    <ProtectedRoute>
       <Box
         sx={{
           marginTop: { xs: '0', md: '150px' }
@@ -991,8 +989,7 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
           </Box>
         </Box>
       </Box>
-    </>
-    // </ProtectedRoute>
+    </ProtectedRoute>
   );
 };
 export default CategroyDetails;

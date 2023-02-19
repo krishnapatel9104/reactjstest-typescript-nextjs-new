@@ -1,16 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserType } from '../../../types/redux/user.type';
-import userData from '../../initialState';
 
+const initialState: UserType = {
+  id: 0,
+  username: '',
+  password: 0
+}
 const UserSlice = createSlice({
   name: 'UserSlice',
-  initialState: userData,
+  initialState: initialState,
   reducers: {
     getUser: (state) => {
       return state;
     },
-    setUser: (state, { payload }: PayloadAction<UserType>) => {
-      return state.concat(payload);
+    setUser: (state, action: PayloadAction<UserType>) => {
+      return {
+        ...state,
+        id: action.payload.id,
+        username: action.payload.username,
+        password: action.payload.password
+      };
     }
   }
 });

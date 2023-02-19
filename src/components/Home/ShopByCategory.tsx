@@ -71,7 +71,7 @@ export const ShopByCategory = () => {
       <Typography
         sx={{
           marginBottom: '50px',
-          fontFamily: theme.typography.titleHeading.fontFamily,
+          fontFamily: theme.typography.h1.fontFamily,
           fontWeight: '700',
           fontSize: {
             xl: '42px',
@@ -101,7 +101,7 @@ export const ShopByCategory = () => {
                 key={index}
                 sx={{
                   textDecoration: 'none',
-                  fontFamily: theme.typography.titleHeading.fontFamily,
+                  fontFamily: theme.typography.h1.fontFamily,
                   fontWeight: '400',
                   fontSize: '25px',
                   color: selectedGender === gender.id ? theme.palette.primary.main : '#757575',
@@ -129,7 +129,7 @@ export const ShopByCategory = () => {
             <Link
               key={categoryObj.id}
               sx={{
-                fontFamily: theme.typography.titleHeading.fontFamily,
+                fontFamily: theme.typography.h1.fontFamily,
                 fontWeight: '400',
                 fontSize: '20px',
                 textDecoration: 'none',
@@ -142,9 +142,7 @@ export const ShopByCategory = () => {
                       }
                     : 0,
                 background:
-                  selectedCategory === categoryObj.id
-                    ? '#E0E0E0'
-                    : theme.palette.backgroundColor.default
+                  selectedCategory === categoryObj.id ? '#E0E0E0' : theme.palette.background.default
               }}
               onClick={() => setSelectedCategory(categoryObj.id)}>
               {categoryObj.name}
@@ -287,7 +285,7 @@ export const ShopByCategory = () => {
                         <Box>
                           <Typography
                             sx={{
-                              fontFamily: theme.typography.headerNavbarLink.fontFamily,
+                              fontFamily: theme.typography.h2.fontFamily,
                               fontWeight: '700',
                               fontSize: {
                                 lg: '22px',
@@ -301,11 +299,11 @@ export const ShopByCategory = () => {
                           <Typography>
                             <span
                               style={{
-                                fontFamily: theme.typography.headerNavbarLink.fontFamily,
+                                fontFamily: theme.typography.h2.fontFamily,
                                 fontWeight: '400',
                                 fontSize: '20px',
                                 textDecorationLine: 'line-through',
-                                color: theme.palette.originalPrice.color
+                                color: theme.palette.secondary.light
                               }}>
                               ${product.productOriginalPrice}
                             </span>
@@ -313,10 +311,10 @@ export const ShopByCategory = () => {
                             <span
                               className="currentprice"
                               style={{
-                                fontFamily: theme.typography.headerNavbarLink.fontFamily,
+                                fontFamily: theme.typography.h2.fontFamily,
                                 fontWeight: '400',
                                 fontSize: '20px',
-                                color: theme.palette.currentPrice.color
+                                color: theme.palette.secondary.dark
                               }}>
                               ${product.productCurrentPrice}
                             </span>
@@ -372,7 +370,7 @@ export const ShopByCategory = () => {
             marginTop: { xs: '50px', sm: '0', md: '100px' },
             padding: { xs: '5px 20px', sm: '10px 40px' },
             background: '#212121',
-            fontFamily: theme.typography.titleHeading.fontFamily,
+            fontFamily: theme.typography.h1.fontFamily,
             fontWeight: '700',
             fontSize: { xs: '10px', sm: '20px' },
             color: '#FFFFFF'

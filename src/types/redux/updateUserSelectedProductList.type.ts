@@ -6,7 +6,4 @@ export interface updateUserSelectedProductListType {
 }
 export interface deleteUserSelectedProductListType {
   id: number
-  // productId: number
-  // color: number
-  // size: number
 }

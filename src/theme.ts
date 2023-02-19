@@ -20,44 +20,49 @@ const theme = createTheme({
   //     },
   // },
   typography: {
-    titleHeading: {
+    h1: {  //titleHeading
       fontFamily: 'Jost'
     },
-    headerNavbarLink: {
+    h2: {  //headerNavbarLink
       fontFamily: 'Josefin Sans'
     },
-    headerNavbarSubLink: {
+    h3: { //headerNavbarSubLink
       fontFamily: 'Inter'
     },
-    desc: {
+    h4: {  //desc
       fontFamily: 'Lato'
     }
   },
   palette: {
-    backgroundColor: {
+    background: {  //backgroundColor
       default: '#F5F5F5'
     },
     primary: {
-      main: '#212121'
+      main: '#212121',
+      dark: '#8E8E93', //navbarSubLink
+      light: '#1B2437' //navbarLink
     },
     secondary: {
-      main: '#424242'
+      main: '#424242',
+      dark: '#FF705C', //currentPrice
+      light: '#9E9E9E',//originalPrice
+      contrastText: '#616161' //footerSubLink
     },
-    navbarSubLink: {
-      color: '#8E8E93'
-    },
-    navbarLink: {
-      color: '#1B2437'
-    },
-    currentPrice: {
-      color: '#FF705C'
-    },
-    originalPrice: {
-      color: '#9E9E9E'
-    },
-    footerSubLink: {
-      color: '#616161'
-    }
+    // navbarSubLink: {  //navbarSubLink
+    //   color: '#8E8E93'
+    // },
+    // navbarLink: {
+    //   color: '#1B2437'
+    // },
+    // currentPrice: {
+    //   color: '#FF705C'
+    // },
+    // originalPrice: {
+    //   color: '#9E9E9E'
+    // },
+    // footerSubLink: {
+    //   color: '#616161'
+    // }
   }
 });
 export default theme;

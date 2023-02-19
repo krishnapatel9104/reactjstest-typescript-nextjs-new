@@ -3,7 +3,3 @@ export interface UserType {
   username: string;
   password: number
 }
-
-// export interface UserData {
-//   userData: UserType[]
-// }

@@ -21,8 +21,6 @@ const Navbar = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const productDetails = useSelector(state => state.userSelectedProductListSlice);
-  const paymentDetails = useSelector(state => state.userPaymentDetailsSlice);
-  const shippingDetails = useSelector(state => state.userShippingDetailsSlice);
 
   const [totalItems, setTotalItems] = useState<number>(0);
   useEffect(() => {
@@ -109,7 +107,7 @@ const Navbar = () => {
               display: 'flex',
               gap: '6px',
               alignItems: 'center',
-              fontFamily: theme.typography.headerNavbarLink.fontFamily,
+              fontFamily: theme.typography.h2.fontFamily,
               fontWeight: '700',
               fontSize: '16px',
               letterSpacing: '0.085em',
@@ -130,7 +128,7 @@ const Navbar = () => {
                     cursor: 'pointer',
                     textDecoration:
                       selectedGender === genderItem.slug ? 'underline !important' : 'auto',
-                    fontFamily: theme.typography.headerNavbarLink.fontFamily,
+                    fontFamily: theme.typography.h2.fontFamily,
                     fontWeight: '700',
                     fontSize: '16px',
                     color: theme.palette.primary.main
@@ -196,7 +194,7 @@ const Navbar = () => {
             display: 'flex',
             gap: '6px',
             alignItems: 'center',
-            fontFamily: theme.typography.headerNavbarLink.fontFamily,
+            fontFamily: theme.typography.h2.fontFamily,
             fontWeight: '700',
             fontSize: '16px',
             letterSpacing: '0.085em',
@@ -237,12 +235,12 @@ const Navbar = () => {
                   <Accordion
                     key={index}
                     sx={{
-                      backgroundColor: theme.palette.backgroundColor.default
+                      backgroundColor: theme.palette.background.default
                     }}
                     onClick={() => handleClickMobile(genderItem.slug)}>
                     <AccordionSummary
                       sx={{
-                        backgroundColor: theme.palette.backgroundColor.default
+                        backgroundColor: theme.palette.background.default
                       }}
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel1a-content"
@@ -251,7 +249,7 @@ const Navbar = () => {
                     </AccordionSummary>
                     <AccordionDetails
                       sx={{
-                        backgroundColor: theme.palette.backgroundColor.default
+                        backgroundColor: theme.palette.background.default
                       }}>
                       <Accordion>
                         <AccordionSummary
@@ -271,9 +269,9 @@ const Navbar = () => {
                               return (
                                 <Link
                                   style={{
-                                    color: theme.palette.navbarSubLink.color,
+                                    color: theme.palette.primary.dark,
                                     textDecoration: 'none',
-                                    fontFamily: theme.typography.headerNavbarSubLink.fontFamily,
+                                    fontFamily: theme.typography.h3.fontFamily,
                                     fontWeight: '400',
                                     fontSize: '16px'
                                   }}
@@ -304,9 +302,9 @@ const Navbar = () => {
                               return (
                                 <Link
                                   style={{
-                                    color: theme.palette.navbarSubLink.color,
+                                    color: theme.palette.primary.dark,
                                     textDecoration: 'none',
-                                    fontFamily: theme.typography.headerNavbarSubLink.fontFamily,
+                                    fontFamily: theme.typography.h3.fontFamily,
                                     fontWeight: '400',
                                     fontSize: '16px'
                                   }}
@@ -337,9 +335,9 @@ const Navbar = () => {
                               return (
                                 <Link
                                   style={{
-                                    color: theme.palette.navbarSubLink.color,
+                                    color: theme.palette.primary.dark,
                                     textDecoration: 'none',
-                                    fontFamily: theme.typography.headerNavbarSubLink.fontFamily,
+                                    fontFamily: theme.typography.h3.fontFamily,
                                     fontWeight: '400',
                                     fontSize: '16px'
                                   }}
@@ -433,10 +431,10 @@ const Navbar = () => {
                 }}>
                 <Typography
                   sx={{
-                    fontFamily: theme.typography.headerNavbarSubLink.fontFamily,
+                    fontFamily: theme.typography.h3.fontFamily,
                     fontWeight: '400',
                     fontSize: '24px',
-                    color: theme.palette.navbarLink.color,
+                    color: theme.palette.primary.light,
                     marginBottom: '25px'
                   }}>
                   Products
@@ -445,9 +443,9 @@ const Navbar = () => {
                   return (
                     <Link
                       style={{
-                        color: theme.palette.navbarSubLink.color,
+                        color: theme.palette.primary.dark,
                         textDecoration: 'none',
-                        fontFamily: theme.typography.headerNavbarSubLink.fontFamily,
+                        fontFamily: theme.typography.h3.fontFamily,
                         fontWeight: '400',
                         fontSize: '16px'
                       }}
@@ -466,10 +464,10 @@ const Navbar = () => {
                 }}>
                 <Typography
                   sx={{
-                    fontFamily: theme.typography.headerNavbarSubLink.fontFamily,
+                    fontFamily: theme.typography.h3.fontFamily,
                     fontWeight: '400',
                     fontSize: '24px',
-                    color: theme.palette.navbarLink.color,
+                    color: theme.palette.primary.light,
                     marginBottom: '25px'
                   }}>
                   Designers
@@ -478,9 +476,9 @@ const Navbar = () => {
                   return (
                     <Link
                       style={{
-                        color: theme.palette.navbarSubLink.color,
+                        color: theme.palette.primary.dark,
                         textDecoration: 'none',
-                        fontFamily: theme.typography.headerNavbarSubLink.fontFamily,
+                        fontFamily: theme.typography.h3.fontFamily,
                         fontWeight: '400',
                         fontSize: '16px'
                       }}
@@ -499,10 +497,10 @@ const Navbar = () => {
                 }}>
                 <Typography
                   sx={{
-                    fontFamily: theme.typography.headerNavbarSubLink.fontFamily,
+                    fontFamily: theme.typography.h3.fontFamily,
                     fontWeight: '400',
                     fontSize: '24px',
-                    color: theme.palette.navbarLink.color,
+                    color: theme.palette.primary.light,
                     marginBottom: '25px'
                   }}>
                   Archived collections
@@ -513,7 +511,7 @@ const Navbar = () => {
                       style={{
                         color: '#8E8E93',
                         textDecoration: 'none',
-                        fontFamily: theme.typography.headerNavbarSubLink.fontFamily,
+                        fontFamily: theme.typography.h3.fontFamily,
                         fontWeight: '400',
                         fontSize: '16px'
                       }}
@@ -551,7 +549,7 @@ const Navbar = () => {
                 />
                 <Typography
                   sx={{
-                    color: theme.palette.navbarLink.color
+                    color: theme.palette.primary.light
                   }}>
                   Sales on ChanelAccessories
                 </Typography>
