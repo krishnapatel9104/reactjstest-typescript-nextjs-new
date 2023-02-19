@@ -5,7 +5,7 @@ import { categoryLists } from '../../../../src/data/categoryLists';
 import CategroyDetails from '../../../../src/components/CategoryDetails/CategroyDetails';
 import { productsType } from '../../../../src/types/constants/products.type';
 interface CategoryProductPageProps {
-  products: any;
+  products: productsType[];
 }
 
 const CategoryProductPage: NextPage<CategoryProductPageProps> = ({ products }) => {
@@ -24,8 +24,10 @@ export const getServerSideProps: GetServerSideProps = async context => {
   let result = productLists.filter(
     productItem => productItem.gender === gender?.id && productItem.category === category?.id
   );
+  console.log('filter data on click navbar category : ', result);
+
   return {
-    props: { products: { result: result, gender: gender, category: category?.id } }
+    props: { products: result }
   };
 };
 export default CategoryProductPage;

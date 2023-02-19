@@ -3,8 +3,9 @@ import { productLists } from '../../../../src/data/productLists';
 import { genderLists } from '../../../../src/data/genderLists';
 import { brandLists } from '../../../../src/data/brandLists';
 import CategroyDetails from '../../../../src/components/CategoryDetails/CategroyDetails';
+import { productsType } from '../../../../src/types/constants/products.type';
 interface BrandProductPageProps {
-  products: any;
+  products: productsType[];
 }
 
 const BrandProductPage: NextPage<BrandProductPageProps> = ({ products }) => {
@@ -23,8 +24,10 @@ export const getServerSideProps: GetServerSideProps = async context => {
   let result = productLists.filter(
     productItem => productItem.gender === gender?.id && productItem.brand === brand?.id
   );
+  console.log("filter data on click navbar brand: ",result);
+
   return {
-    props: { products: { result: result, gender: gender, brand: brand?.id } }
+    props: { products: result }
   };
 };
 export default BrandProductPage;

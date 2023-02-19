@@ -1,10 +1,19 @@
-import { Box, Button, InputLabel, NativeSelect, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  FormHelperText,
+  InputLabel,
+  NativeSelect,
+  TextField,
+  Typography
+} from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from '../../src/store';
 // import { useNavigate } from 'react-router-dom';
 import { StepperComp } from '../../src/components/common/StepperComp';
 import { YourOrder } from '../../src/components/common/YourOrder';
-// import { setUserDetails } from "../../store/reducers/userDetailsSlice";
+import { setUserDetails } from '../../src/store/reducers/userShippingDetails/userShippingDetails.slice';
+
 import { ProtectedRoute } from '../../src/utils/ProtectedRoute';
 import { format } from 'date-fns';
 import { isFuture } from 'date-fns';
@@ -12,13 +21,34 @@ import { isFuture } from 'date-fns';
 import Image from 'next/image';
 // import { useFormik } from "formik";
 import { useRouter } from 'next/router';
-import { GetServerSideProps, NextPage } from 'next';
+import { NextPage } from 'next';
+import { userShippingDataType } from '../../src/types/redux/userShippingDetails.type';
+import {
+  setUserSelectedProductList,
+  restoreUserSelectedProductList
+} from '../../src/store/reducers/userSelectedProductList/userSelectedProductList.slice';
 
 interface ShippingPageProps {}
 const ShippingPage: NextPage<ShippingPageProps> = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState<userShippingDataType>({
+    firstName: '',
+    lastName: '',
+    emailAddress: '',
+    phoneNumber: '',
+    deliveryDate: '',
+    convenientTime: '',
+    city: '0',
+    address: '',
+    zipCode: ''
+  });
+
+  const reduxProductDetails = useSelector(state => state.userSelectedProductListSlice);
+  const shippingDetails = useSelector(state => state.userShippingDetailsSlice);
+  console.log('productdetail after save : ', reduxProductDetails.cartProductDetails);
+
+  const [errors, setErrors] = useState({
     firstName: '',
     lastName: '',
     emailAddress: '',
@@ -29,10 +59,6 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
     address: '',
     zipCode: ''
   });
-
-  const productDetails = useSelector(state => state.userSelectedProductListSlice);
-
-  const [errors, setErrors] = useState({});
   const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     e.persist();
     const { name, value } = e.target;
@@ -42,12 +68,13 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
           ...errors,
           [name]: 'Please select city'
         });
+        setUserData({ ...userData, city: value });
       } else {
         setErrors({
           ...errors,
           [name]: ''
         });
-        setUserData({ ...userData, [name]: value });
+        setUserData({ ...userData, city: value });
       }
     }
   };
@@ -124,10 +151,19 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
         setErrors({ ...errors, [name]: '' });
         setUserData({ ...userData, deliveryDate: value });
       } else {
-        setErrors({ ...errors, [name]: 'Required' });
+        if (!value) setErrors({ ...errors, [name]: 'Required' });
+        else setErrors({ ...errors, [name]: 'Date should be in future' });
       }
     }
-    if (name === 'convenientTime') setUserData({ ...userData, convenientTime: value });
+    if (name === 'convenientTime') {
+      console.log('time value : ', value);
+
+      if (!value) setErrors({ ...errors, [name]: 'Required' });
+      else {
+        setErrors({ ...errors, [name]: '' });
+        setUserData({ ...userData, convenientTime: value });
+      }
+    }
     // if (name === "city") {
     //     if (parseInt(value) === 0) {
     //         setErrors({
@@ -176,29 +212,47 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
       userData.lastName &&
       userData.emailAddress &&
       userData.phoneNumber &&
-      userData.city &&
-      userData.address &&
-      userData.zipCode &&
-      userData.deliveryDate &&
-      userData.convenientTime
+      // userData.city !== '0' &&
+      userData.address !== '' &&
+      userData.zipCode
+      // userData.deliveryDate &&
+      // userData.convenientTime
     )
       return true;
     else return false;
   };
   useEffect(() => {
-    if (productDetails.cartProductDetails.length === 0) {
-      router.push('/');
+    if (reduxProductDetails?.cartProductDetails?.length === 0) {
+      let list = JSON.parse(localStorage.getItem('userSelectedProductList'));
+      console.log('localstroage shipping : ', list);
+
+      if (list?.length > 0) {
+        dispatch(restoreUserSelectedProductList(list));
+      } else {
+        router.push('/');
+      }
     }
   });
+  // useEffect(() => {
+  //   if (reduxProductDetails?.cartProductDetails?.length > 0) {
+  //     localStorage.setItem(
+  //       'userSelectedProductList',
+  //       JSON.stringify(reduxProductDetails.cartProductDetails)
+  //     );
+  //   }
+  // }, [reduxProductDetails]);
+
   console.log(' : ', userData);
   const handleClick = () => {
     if (!userData.deliveryDate) {
       setErrors({ ...errors, deliveryDate: 'Required' });
     } else if (!userData.convenientTime) {
       setErrors({ ...errors, convenientTime: 'Required' });
+    } else if (userData.city === '0') {
+      setErrors({ ...errors, city: 'Required' });
     } else {
       if (isValidate()) {
-        // dispatch(setUserDetails(userData));
+        dispatch(setUserDetails(userData));
         router.push('/checkout');
       }
     }
@@ -322,10 +376,8 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
                   shrink: true
                 }}
                 name="firstName"
-                // error={errors?.firstName ? true : false}
-                // helperText={
-                //     errors?.firstName ? errors?.firstName : null
-                // }
+                error={errors?.firstName ? true : false}
+                helperText={errors?.firstName ? errors?.firstName : null}
                 // value={formik.values.firstName}
                 // onChange={formik.handleChange}
                 onChange={handleChange}
@@ -353,10 +405,8 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
                 InputLabelProps={{
                   shrink: true
                 }}
-                // error={errors?.lastName ? true : false}
-                // helperText={
-                //     errors?.lastName ? errors?.lastName : null
-                // }
+                error={errors?.lastName ? true : false}
+                helperText={errors?.lastName ? errors?.lastName : null}
                 // helperText={
                 //     formik.errors.lastName ? (
                 //         <div>{formik.errors.lastName}</div>
@@ -402,12 +452,8 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
                 InputLabelProps={{
                   shrink: true
                 }}
-                // error={errors?.emailAddress ? true : false}
-                // helperText={
-                //     errors?.emailAddress
-                //         ? errors?.emailAddress
-                //         : null
-                // }
+                error={errors?.emailAddress ? true : false}
+                helperText={errors?.emailAddress ? errors?.emailAddress : null}
                 // helperText={
                 //     formik.errors.emailAddress ? (
                 //         <div>{formik.errors.emailAddress}</div>
@@ -442,12 +488,8 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
                   shrink: true
                 }}
                 name="phoneNumber"
-                // error={errors?.phoneNumber ? true : false}
-                // helperText={
-                //     errors?.phoneNumber
-                //         ? errors?.phoneNumber
-                //         : null
-                // }
+                error={errors?.phoneNumber ? true : false}
+                helperText={errors?.phoneNumber ? errors?.phoneNumber : null}
                 // helperText={
                 //     formik.errors.phoneNumber ? (
                 //         <div>{formik.errors.phoneNumber}</div>
@@ -508,12 +550,8 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
                 name="deliveryDate"
                 onChange={handleChange}
                 // onChange={formik.handleChange}
-                // error={errors?.deliveryDate ? true : false}
-                // helperText={
-                //     errors?.deliveryDate
-                //         ? errors.deliveryDate
-                //         : null
-                // }
+                error={errors?.deliveryDate ? true : false}
+                helperText={errors?.deliveryDate ? errors.deliveryDate : null}
                 variant="standard"
                 placeholder="DD/MM/YYYY"
                 sx={{
@@ -538,12 +576,8 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
                 name="convenientTime"
                 // onChange={formik.handleChange}
                 onChange={handleChange}
-                // error={errors?.convenientTime ? true : false}
-                // helperText={
-                //     errors?.convenientTime
-                //         ? errors.convenientTime
-                //         : null
-                // }
+                error={errors?.convenientTime ? true : false}
+                helperText={errors?.convenientTime ? errors.convenientTime : null}
                 variant="standard"
                 placeholder="1pm-9pm"
                 sx={{
@@ -588,10 +622,7 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
                   }}
                   name="city"
                   value={userData.city}
-                  // error={errors?.city ? true : false}
-                  // helperText={
-                  //     errors?.city ? errors?.city : null
-                  // }
+                  error={errors?.city ? true : false}
                   // // helperText={
                   //     formik.errors.city ? (
                   //         <div>{formik.errors.city}</div>
@@ -610,6 +641,9 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
                   <option value={'Pune'}>Pune</option>
                   <option value={'Mumbai'}>Mumbai</option>
                 </NativeSelect>
+                <FormHelperText style={{ color: 'red' }}>
+                  {errors?.city ? errors?.city : null}
+                </FormHelperText>
               </Box>
               <Box
                 sx={{
@@ -629,10 +663,8 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
                   //         <div>{formik.errors.address}</div>
                   //     ) : null
                   // }
-                  // error={errors?.address ? true : false}
-                  // helperText={
-                  //     errors?.address ? errors?.address : null
-                  // }
+                  error={errors?.address ? true : false}
+                  helperText={errors?.address ? errors?.address : null}
                   onChange={handleChange}
                   // value={formik.values.address}
                   // onChange={formik.handleChange}
@@ -684,10 +716,8 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
                 InputLabelProps={{
                   shrink: true
                 }}
-                // error={errors?.zipCode ? true : false}
-                // helperText={
-                //     errors?.zipCode ? errors?.zipCode : null
-                // }
+                error={errors?.zipCode ? true : false}
+                helperText={errors?.zipCode ? errors?.zipCode : null}
                 // helperText={
                 //     formik.errors.zipCode ? (
                 //         <div>{formik.errors.firstName}</div>

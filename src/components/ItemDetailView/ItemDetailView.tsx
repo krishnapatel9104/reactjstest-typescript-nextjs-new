@@ -49,15 +49,44 @@ const ItemDetailView: FC<itemDetailViewProps> = ({ product }) => {
   const userCartProductDetails = useSelector(state => state.userSelectedProductListSlice);
   console.log('FFFFFFFFFFFFFFFFFFFFFFF : ', userCartProductDetails);
 
-  const [productDetail, setProductDetail] = useState<productsType>(product);
+  useEffect(() => {
+    console.log(
+      'change cart product list useffect in itemview page : ',
+      userCartProductDetails.cartProductDetails
+    );
 
+    // if (userCartProductDetails?.cartProductDetails?.length === 0) {
+    //   console.log(
+    //     'data are there in redux ::::: ',
+    //     userCartProductDetails?.cartProductDetails?.length
+    //   );
+
+    localStorage.setItem(
+      'userSelectedProductList',
+      JSON.stringify(userCartProductDetails.cartProductDetails)
+    );
+
+    // }
+  }, [userCartProductDetails.cartProductDetails]);
+
+  const [productDetail, setProductDetail] = useState<productsType>(product);
+  const [selectedImage, setSelectedImage] = useState<number>();
+  const [selectedSize, setSelectedSize] = useState<number>(productDetail?.size[0]);
+  const [selectedColor, setSelectedColor] = useState<number>(productDetail?.color[0]);
   const [value, setValue] = useState<string>('1');
+
+  // useEffect(() => {
+  //   setProductDetail(product);
+  // }, [product]);
+
+  // useEffect(() => {
+  //   setSelectedSize(productDetail?.size[0]);
+  //   setSelectedColor(productDetail?.color[0]);
+  // }, [productDetail]);
+
   const handleChange = (newValue: string) => {
     setValue(newValue);
   };
-  const [selectedImage, setSelectedImage] = useState<number>();
-  const [selectedSize, setSelectedSize] = useState<number>(productDetail.size[0]);
-  const [selectedColor, setSelectedColor] = useState<number>(productDetail.color[0]);
 
   const swiperRef = useRef(null);
 
@@ -68,50 +97,50 @@ const ItemDetailView: FC<itemDetailViewProps> = ({ product }) => {
   };
   console.log('Selected size : ', selectedSize);
   const handleShopNow = () => {
-    setDataInLocalStorage();
     let addProductToCartObject = {
-      productId: productDetail.id,
+      productId: productDetail?.id,
       quantity: 1,
       size: selectedSize,
       color: selectedColor
     };
+    // setDataInLocalStorage(addProductToCartObject);
     // dispatch(setUserSelectedProductList(productDetail));
     dispatch(setUserSelectedProductList(addProductToCartObject));
     router.push('/shipping');
   };
-  const setDataInLocalStorage = () => {
-    // let newListItems = [];
-    // let list = JSON.parse(localStorage.getItem("userSelectedProductList"));
-    // if (list) {
-    //   let alreadyExist = list.findIndex((product) => {
-    //     return product.id === productDetail.id;
-    //   });
-    //   if (alreadyExist === -1) {
-    //     newListItems = [...list, productDetail];
-    //     localStorage.setItem("userSelectedProductList", JSON.stringify(newListItems));
-    //   } else {
-    //     let newArrayObj = [...list];
-    //     newArrayObj[alreadyExist] = {
-    //       ...newArrayObj[alreadyExist],
-    //       quantity: newArrayObj[alreadyExist].quantity + 1,
-    //     };
-    //     newListItems = [...newArrayObj];
-    //     localStorage.setItem("userSelectedProductList", JSON.stringify(newListItems));
-    //   }
-    // } else {
-    //   newListItems.push(productDetail);
-    //   localStorage.setItem("userSelectedProductList", JSON.stringify(newListItems));
-    // }
-    // console.log("final new product list : ", newListItems);
-  };
+  // const setDataInLocalStorage = cartProduct => {
+  //   let newListItems = [];
+  //   let list = JSON.parse(localStorage.getItem('userSelectedProductList'));
+  //   if (list) {
+  //     let alreadyExist = list.findIndex(product => {
+  //       return product.productId === productDetail.productId;
+  //     });
+  //     if (alreadyExist === -1) {
+  //       newListItems = [...list, productDetail];
+  //       localStorage.setItem('userSelectedProductList', JSON.stringify(newListItems));
+  //     } else {
+  //       let newArrayObj = [...list];
+  //       newArrayObj[alreadyExist] = {
+  //         ...newArrayObj[alreadyExist],
+  //         quantity: newArrayObj[alreadyExist].quantity + 1
+  //       };
+  //       newListItems = [...newArrayObj];
+  //       localStorage.setItem('userSelectedProductList', JSON.stringify(newListItems));
+  //     }
+  //   } else {
+  //     newListItems.push(productDetail);
+  //     localStorage.setItem('userSelectedProductList', JSON.stringify(newListItems));
+  //   }
+  //   console.log('final new product list : ', newListItems);
+  // };
   const handleAddToCart = () => {
-    setDataInLocalStorage();
     let addProductToCartObject = {
-      productId: productDetail.id,
+      productId: productDetail?.id,
       quantity: 1,
       size: selectedSize,
       color: selectedColor
     };
+    // setDataInLocalStorage(addProductToCartObject);
     dispatch(setUserSelectedProductList(addProductToCartObject));
   };
   const changeProductImage = (item: number) => {

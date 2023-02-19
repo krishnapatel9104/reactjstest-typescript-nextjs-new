@@ -20,7 +20,7 @@ import {
   allFilterListType,
   sizeFilterListType
 } from '../../types/constants/filterList.type';
-import { categoryProductListType } from '../../types/constants/categoryProductList.type';
+// import { categoryProductListType } from '../../types/constants/categoryProductList.type';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
@@ -30,14 +30,10 @@ import { previousDay } from 'date-fns';
 import { productLists } from '../../data/productLists';
 import { brandLists } from '../../data/brandLists';
 import { sizeLists } from '../../data/sizeLists';
+import { genderLists } from '../../data/genderLists';
 
 interface categoryDetailsProps {
-  products: {
-    result: productsType[];
-    gender: Object;
-    brand?: Object;
-    category?: Object;
-  };
+  products: productsType[];
 }
 const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,6 +45,9 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
   const [sizeFilter, setSizeFilter] = useState<number[]>([]);
   const [categoryFilter, setCategoryFilter] = useState<number[]>([]);
   const [priceFilter, setPriceFilter] = useState<[number, number]>([400, 500]);
+
+  const [selectedGender, setSelectedGender] = useState<number>();
+  const [selectedType, setSelectedType] = useState<string>();
 
   const router = useRouter();
   const [filterCategoryData, setFilterCategoryData] = useState<productsType[]>([]);
@@ -62,30 +61,35 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
   console.log('start log : ', products);
 
   useEffect(() => {
-    // if (products) {
-    //   let gender = products.gender;
-    //   let brand = products?.brand;
-    //   let category = products?.category;
-    // }
-    // if (products?.result) {
-    //   const newProductList = products?.result.filter(product => {
-    //     console.log('11111111111 filter PRODUCT :LLLLLLLLLLLLLLLLLLL  :', product);
-    //     if (
-    //       brandFilter.includes(product.brand) ||
-    //       categoryFilter.includes(product.category) ||
-    //       (product.productCurrentPrice >= priceFilter[0] &&
-    //         product.productCurrentPrice <= priceFilter[1])
-    //     ) {
-    //       return product;
-    //     }
-    //   });
-    //   console.log('productnewlist :::::::::::::::: ', newProductList);
+    console.log('useeffect :::::::::::!!!!!!!!!!!!!!!!!!!!!!! : ', router.asPath, products.length);
 
-    //   if (newProductList?.length > 0) setFilterCategoryData(newProductList);
-    //   else setFilterCategoryData([]);
-    // }
-    setFilterCategoryData(products.result);
-  }, [products?.result]);
+    if (products.length > 0) {
+      let minPrice = Math.min(...products.map(product => product.productCurrentPrice));
+      let maxPrice = Math.max(...products.map(product => product.productCurrentPrice));
+      setPriceFilter([minPrice, maxPrice]);
+      let curRoute = router.asPath;
+      let genderValue = curRoute.split('/')[1];
+      let object = genderLists.find(gender => gender.slug === genderValue);
+      if (object) setSelectedGender(object.id);
+      let brandOrCategoryType = curRoute.split('/')[3];
+      if (brandOrCategoryType) setSelectedType(brandOrCategoryType);
+      let brandOrCategoryValue = curRoute.split('/')[4];
+      if (brandOrCategoryType === 'category' && brandOrCategoryValue && categoryLists) {
+        let object = categoryLists.find(category => category.slug === brandOrCategoryValue);
+        if (object) setCategoryFilter([...categoryFilter, object.id]);
+      }
+      console.log('brandOrCategoryType : ', brandOrCategoryType);
+
+      if (brandOrCategoryType === 'brand' && brandOrCategoryValue && brandLists) {
+        console.log('if brand then : ', brandOrCategoryValue);
+
+        let object = brandLists.find(brand => brand.slug === brandOrCategoryValue);
+        console.log('found brand object : ', object);
+
+        if (object) setBrandFilter([...brandFilter, object.id]);
+      }
+    }
+  }, [products, router.asPath]);
 
   //   useEffect(() => {
   //     let mainCatName = router.asPath.split('/')[1];
@@ -131,27 +135,36 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
   // };
 
   useEffect(() => {
-    console.log('useeffect filter  : ');
-    // if (brandFilter || sizeFilter || categoryFilter || priceFilter) {
-    //   const newProductList = productLists.filter(product => {
-    //     if (
-    //       // brandFilter.includes(product.brand) ||
-    //       // categoryFilter.includes(product.category) ||
-    //       product.productCurrentPrice >= priceFilter[0] &&
-    //       product.productCurrentPrice <= priceFilter[1]
-    //     ) {
-    //       return product;
-    //     }
-    //   });
+    console.log('filters : ', selectedGender, priceFilter, brandFilter, categoryFilter, sizeFilter);
+    if (brandFilter || sizeFilter || categoryFilter || priceFilter) {
+      const newProductList = productLists.filter(product => {
+        if (
+          (brandFilter.includes(product.brand) ||
+          categoryFilter.includes(product.category)) &&
+          product.gender === selectedGender &&
+          product.productCurrentPrice >= priceFilter[0] &&
+          product.productCurrentPrice <= priceFilter[1]
+        ) {
+          return product;
+        }
+      });
+      console.log('newProductList AAAAAAAAAAAAAAAAAAAAAAAAAA : ', newProductList);
 
-    //   // const list = productLists.map(product => {
-    //   //   const productObj = product.size.filter(size => sizeFilter.includes(size));
-    //   //   console.log('productObj : ', productObj);
-    //   //   return productObj;
-    //   // });
-    //   setFilterCategoryData(newProductList);
-    // }
-  }, [brandFilter, sizeFilter, categoryFilter, priceFilter]);
+      // if (sizeFilter) {
+      //   const list = productLists.filter(product =>
+      //     product.size.some(size => sizeFilter.includes(size))
+      //   );
+      //   console.log('list AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa : ', list);
+      // }
+      // let allFilterProducts = newProductList.filter(newProduct => list.filter(l => l.id === newProduct.id));
+      // let allFilterProducts = newProductList.filter(productItem =>
+      //   list.some(product => productItem.id === product.id)
+      // );
+
+      // let allFilterProducts = [...newProductList, ...list];
+      setFilterCategoryData(newProductList);
+    }
+  }, [brandFilter, sizeFilter, categoryFilter, priceFilter, selectedGender]);
   console.log('final productList : ', filterCategoryData);
 
   // useEffect(() => {
@@ -167,7 +180,6 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
 
   const handleProductClick = (productDetail: categoryProductListType) => {
     setIsOpen(!isOpen);
-    let curPath = router.asPath;
     router.replace(
       {
         pathname: `/product/${productDetail.slug}`,
@@ -176,7 +188,46 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
       // `/product/${productDetail.slug}`
     );
   };
-
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let name = e.target.name;
+    let value = parseInt(e.target.value);
+    if (name === 'brand') {
+      if (brandFilter[0] !== value && !brandFilter.includes(value)) {
+        setBrandFilter([...brandFilter, value]);
+      } else {
+        console.log('brand filter logic else part :::::::::::::::::::::::::::::::::::: ');
+        if (selectedType === 'brand' && brandFilter[0] !== value) {
+          let newBrandFilter = brandFilter.filter(brand => brand !== value);
+          setBrandFilter(newBrandFilter);
+        } else if (selectedType !== 'brand' && brandFilter[0] === value) {
+          let newBrandFilter = brandFilter.filter(brand => brand !== value);
+          setBrandFilter(newBrandFilter);
+        }
+      }
+    }
+    if (name === 'category') {
+      if (categoryFilter[0] !== value && !categoryFilter.includes(value)) {
+        setCategoryFilter([...categoryFilter, value]);
+      } else {
+        console.log('category filter logic else part :::::::::::::::::::::::::::::::::::: ');
+        if (selectedType === 'category' && categoryFilter[0] !== value) {
+          let newCategoryFilter = categoryFilter.filter(category => category !== value);
+          setCategoryFilter(newCategoryFilter);
+        } else if (selectedType !== 'category' && categoryFilter[0] === value) {
+          let newCategoryFilter = categoryFilter.filter(category => category !== value);
+          setCategoryFilter(newCategoryFilter);
+        }
+      }
+    }
+    if (name === 'size') {
+      if (!sizeFilter.includes(value)) {
+        setSizeFilter([...sizeFilter, value]);
+      } else {
+        let newSizeFilter = sizeFilter.filter(size => size !== value);
+        setSizeFilter(newSizeFilter);
+      }
+    }
+  };
   const [isBrandExtend, setIsBrandExtend] = useState<boolean>(false);
   const [isCategorydExtend, setIsCategoryExtend] = useState<boolean>(false);
 
@@ -345,9 +396,8 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
                               checked={brandFilter.includes(filter.id)}
                               value={filter.id}
                               name="brand"
-                              onChange={e =>
-                                setBrandFilter([...brandFilter, parseInt(e.target.value)])
-                              }
+                              onChange={handleChange}
+                              disabled={filter.id === brandFilter[0]}
                             />
                           }
                           label={filter.name}
@@ -405,10 +455,8 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
                             <Checkbox
                               checked={categoryFilter.includes(filter.id)}
                               value={filter.id}
-                              name="brand"
-                              onChange={e =>
-                                setCategoryFilter([...categoryFilter, parseInt(e.target.value)])
-                              }
+                              name="category"
+                              onChange={handleChange}
                             />
                           }
                           label={filter.name}
@@ -463,7 +511,7 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
                             checked={sizeFilter.includes(filter.id)}
                             value={filter.id}
                             name="size"
-                            onChange={e => setSizeFilter([...sizeFilter, parseInt(e.target.value)])}
+                            onChange={handleChange}
                           />
                         }
                         label={filter.name}
@@ -585,17 +633,26 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
                         color: '#1F2937'
                       }}>
                       <FormControlLabel
+                        label={filter.name}
                         control={
                           <Checkbox
                             checked={brandFilter.includes(filter.id)}
                             value={filter.id}
                             name="brand"
-                            onChange={e =>
-                              setBrandFilter([...brandFilter, parseInt(e.target.value)])
-                            }
+                            onChange={handleChange}
+                            // setBrandFilter(filter => {
+                            //   if (!brandFilter.includes(parseInt(e.target.value)))
+                            //     [...filter, parseInt(e.target.value)];
+                            // });
+                            // }}
+                            // onChange={e =>
+                            //   setBrandFilter(brandFilter => [
+                            //     ...brandFilter,
+                            //     parseInt(e.target.value)
+                            //   ])
+                            // }
                           />
                         }
-                        label={filter.name}
                       />
                     </FormGroup>
                   );
@@ -650,10 +707,8 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
                           <Checkbox
                             checked={categoryFilter.includes(filter.id)}
                             value={filter.id}
-                            name="brand"
-                            onChange={e =>
-                              setCategoryFilter([...categoryFilter, parseInt(e.target.value)])
-                            }
+                            name="category"
+                            onChange={handleChange}
                           />
                         }
                         label={filter.name}
@@ -709,7 +764,7 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
                           checked={sizeFilter.includes(filter.id)}
                           value={filter.id}
                           name="size"
-                          onChange={e => setSizeFilter([...sizeFilter, parseInt(e.target.value)])}
+                          onChange={handleChange}
                         />
                       }
                       label={filter.name}
@@ -772,7 +827,7 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
                   letterSpacing: '0.02em',
                   color: '#4B5563'
                 }}>
-                {products.result.length}&nbsp;results
+                {filterCategoryData.length}&nbsp;results
               </Typography>
             </Box>
             <Box

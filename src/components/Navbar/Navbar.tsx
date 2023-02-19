@@ -8,41 +8,41 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-// import { restoreUserSelectedProductList } from "../../store/reducers/userSelectedProductListSlice";
+import { restoreUserSelectedProductList } from '../../../src/store/reducers/userSelectedProductList/userSelectedProductList.slice';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { genderLists } from '../../data/genderLists';
 import { categoryLists } from '../../data/categoryLists';
 import { brandLists } from '../../data/brandLists';
+import { useDispatch, useSelector } from '../../store';
 const Navbar = () => {
   const themes = useTheme();
   const matches = useMediaQuery(themes.breakpoints.down('md'));
   const router = useRouter();
-  //   const dispatch = useDispatch();
-  // const productDetails = useSelector(
-  //     (state) =>
-  //         state.rootReducer.userSelectedProductListSlice
-  //             .userSelectedProductLists
-  // );
-  const [totalItems, setTotalItems] = useState<number>(0);
-  // useEffect(() => {
-  //     let total = 0;
-  //     productDetails?.forEach((product) => {
-  //         total += product.quantity;
-  //     });
-  //     setTotalItems(total);
-  // }, [productDetails]);
+  const dispatch = useDispatch();
+  const productDetails = useSelector(state => state.userSelectedProductListSlice);
+  const paymentDetails = useSelector(state => state.userPaymentDetailsSlice);
+  const shippingDetails = useSelector(state => state.userShippingDetailsSlice);
 
-  // useEffect(() => {
-  //     if (productDetails?.length === 0) {
-  //         let list = JSON.parse(
-  //             localStorage.getItem("userSelectedProductList")
-  //         );
-  //         if (list !== null) {
-  //             dispatch(restoreUserSelectedProductList(list));
-  //         }
-  //     }
-  // });
+  const [totalItems, setTotalItems] = useState<number>(0);
+  useEffect(() => {
+    if (productDetails?.cartProductDetails?.length > 0) {
+      let total = 0;
+      productDetails?.cartProductDetails.forEach(product => {
+        total += product.quantity;
+      });
+      setTotalItems(total);
+    }
+  }, [productDetails]);
+
+  useEffect(() => {
+    if (productDetails?.cartProductDetails?.length === 0) {
+      let list = JSON.parse(localStorage.getItem('userSelectedProductList'));
+      if (list?.length > 0) {
+        dispatch(restoreUserSelectedProductList(list));
+      }
+    }
+  });
   useEffect(() => {
     if (isOpen) setIsOpen(false);
   }, [router.asPath]);
@@ -62,13 +62,11 @@ const Navbar = () => {
 
   if (matches && isOpen) setIsOpen(false);
   const handleClick = () => {
-    // if (productDetails.length > 0) {
-    //     router.push("/shipping", {
-    //         state: { productDetail: productDetails },
-    //     });
-    // } else {
-    //     router.push("/");
-    // }
+    if (productDetails?.cartProductDetails.length > 0) {
+      router.push('/shipping');
+    } else {
+      router.push('/');
+    }
   };
 
   const handleClickNavbar = (slug: string) => {
@@ -132,7 +130,6 @@ const Navbar = () => {
                     cursor: 'pointer',
                     textDecoration:
                       selectedGender === genderItem.slug ? 'underline !important' : 'auto',
-
                     fontFamily: theme.typography.headerNavbarLink.fontFamily,
                     fontWeight: '700',
                     fontSize: '16px',
