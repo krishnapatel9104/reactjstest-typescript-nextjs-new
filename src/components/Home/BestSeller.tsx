@@ -11,26 +11,18 @@ import { productLists } from '../../data/productLists';
 import { productsType } from '../../types/constants/products.type';
 
 import theme from '../../theme';
-// import { useNavigate } from "react-router-dom";
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 export const BestSeller = () => {
-  // const navigator = useNavigate();
   const router = useRouter();
-  //   const handleClick = () => {
-  //     console.log('btn clicked');
-  //     router.push('/women/products/accessories');
-  //   };
-
   const [bestSellerProducts, setBestSellerProducts] = useState<productsType[]>();
 
   useEffect(() => {
     let result = productLists.filter(productItem =>
       bestSellerProductLists.productId.some(productId => productItem.id === productId)
     );
-    console.log('best seller data object : ', result);
     setBestSellerProducts(result);
   }, [productLists]);
   return (

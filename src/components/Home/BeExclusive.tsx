@@ -18,11 +18,6 @@ export const BeExclusive = () => {
           md: '50px 200px',
           lg: '50px 250px'
         }
-        // padding: {
-        //     xs: "0px 30px",
-        //     sm: "50px 65px",
-        //     lg: "50px 250px",
-        // },
       }}>
       <Grid container spacing={2} rowSpacing={1} columnSpacing={{ sm: 1 }}>
         <Grid

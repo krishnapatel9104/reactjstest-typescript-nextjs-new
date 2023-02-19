@@ -40,7 +40,6 @@ const LoginPage: NextPage<LoginPageProps> = () => {
       setUserData({ ...userData, [e.target.name]: e.target.value });
     }
   };
-  console.log('user info : ', userData);
   return (
     <form>
       <Box

@@ -9,7 +9,6 @@ export const FooterSliderSection = () => {
     <Box
       sx={{
         position: 'relative'
-        // marginTop: "50px",
       }}>
       <Image
         src="/images/footersliderimage.png"
@@ -17,7 +16,7 @@ export const FooterSliderSection = () => {
         height={0}
         width={0}
         sizes="(max-width:0) 100vw,
-                                (max-height:0) 100vh"
+                (max-height:0) 100vh"
         style={{
           objectFit: 'cover',
           height: '100%',
@@ -120,19 +119,6 @@ export const FooterSliderSection = () => {
             See Addresses
           </Typography>
           <Image src={'/images/arrowwhite.png'} alt="footerslider" width={25} height={25} />
-          {/* <Image
-                        src="/images/arrowwhite.png"
-                        alt="imageGirl"
-                        height={0}
-                        width={0}
-                        sizes="(max-width:0) 100vw,
-                                (max-height:0) 100vh"
-                        style={{
-                            objectFit: "cover",
-                            height: "100%",
-                            width: "100%",
-                        }}
-                    /> */}
         </Box>
       </Box>
     </Box>

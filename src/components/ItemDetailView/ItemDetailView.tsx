@@ -5,28 +5,16 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import React, { useEffect, useRef, useState } from 'react';
 import Navbar from '../Navbar/Navbar';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import { Navigation, Scrollbar, Pagination, Mousewheel, Keyboard } from 'swiper';
 import { setUserSelectedProductList } from '../../store/reducers/userSelectedProductList/userSelectedProductList.slice';
-// import { useDispatch } from 'react-redux';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
-// import { categoryProductListType } from '../../types/constants/categoryProductList.type';
-import { withRouter } from 'next/router';
 import { productsType } from '../../types/constants/products.type';
 import { sizeLists } from '../../data/sizeLists';
 import { colorLists } from '../../data/colorLists';
-// import { setUserSelectedProductList } from '../../store/reducers/userSelectedProductListSlice';
-// import { useDispatch } from '../../store';
-// import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-// import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useSelector, useDispatch } from '../../store/index';
 import { ProtectedRoute } from '../../utils/ProtectedRoute';
+import SwiperSlider from './SwiperSlider';
 
 interface itemDetailViewProps {
   product: productsType;
@@ -34,69 +22,29 @@ interface itemDetailViewProps {
 const ItemDetailView: FC<itemDetailViewProps> = ({ product }) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  // if (router.query.productDetail) {
-  //     const params = JSON.parse(
-  //         decodeURIComponent(props.router.query.productDetail)
-  //     );
-  // }
-  //   const object = JSON.parse(query.productData);
-
-  console.log(
-    'props itemview : ',
-    product
-    // params
-    // props.router.query.productDetail
-  );
-  const userCartProductDetails = useSelector(state => state.userSelectedProductListSlice);
-  console.log('FFFFFFFFFFFFFFFFFFFFFFF : ', userCartProductDetails);
-
-  useEffect(() => {
-    console.log(
-      'change cart product list useffect in itemview page : ',
-      userCartProductDetails.cartProductDetails
-    );
-
-    // if (userCartProductDetails?.cartProductDetails?.length === 0) {
-    //   console.log(
-    //     'data are there in redux ::::: ',
-    //     userCartProductDetails?.cartProductDetails?.length
-    //   );
-
-    localStorage.setItem(
-      'userSelectedProductList',
-      JSON.stringify(userCartProductDetails.cartProductDetails)
-    );
-
-    // }
-  }, [userCartProductDetails.cartProductDetails]);
-
   const [productDetail, setProductDetail] = useState<productsType>(product);
-  const [selectedImage, setSelectedImage] = useState<number>();
   const [selectedSize, setSelectedSize] = useState<number>(productDetail?.size[0]);
   const [selectedColor, setSelectedColor] = useState<number>(productDetail?.color[0]);
   const [value, setValue] = useState<string>('1');
+  const userCartProductDetails = useSelector(state => state.userSelectedProductListSlice);
 
-  // useEffect(() => {
-  //   setProductDetail(product);
-  // }, [product]);
-
-  // useEffect(() => {
-  //   setSelectedSize(productDetail?.size[0]);
-  //   setSelectedColor(productDetail?.color[0]);
-  // }, [productDetail]);
+  useEffect(() => {
+    if (userCartProductDetails?.cartProductDetails?.length !== 0) {
+      localStorage.setItem(
+        'userSelectedProductList',
+        JSON.stringify(userCartProductDetails.cartProductDetails)
+      );
+    }
+  }, [userCartProductDetails.cartProductDetails]);
 
   const handleChange = (newValue: string) => {
     setValue(newValue);
   };
 
-  const swiperRef = useRef(null);
-
-  const changeHandler = (type: string, value: number) => {
-    if (type === 'color') setSelectedColor(value);
-    else if (type === 'size') setSelectedSize(value);
-    // setProductDetail({ ...productDetail, size: size });
+  const changeHandler = (type: string, value: number | undefined) => {
+    if (type === 'color' && value) setSelectedColor(value);
+    else if (type === 'size' && value) setSelectedSize(value);
   };
-  console.log('Selected size : ', selectedSize);
   const handleShopNow = () => {
     let addProductToCartObject = {
       productId: productDetail?.id,
@@ -104,36 +52,10 @@ const ItemDetailView: FC<itemDetailViewProps> = ({ product }) => {
       size: selectedSize,
       color: selectedColor
     };
-    // setDataInLocalStorage(addProductToCartObject);
-    // dispatch(setUserSelectedProductList(productDetail));
     dispatch(setUserSelectedProductList(addProductToCartObject));
     router.push('/shipping');
   };
-  // const setDataInLocalStorage = cartProduct => {
-  //   let newListItems = [];
-  //   let list = JSON.parse(localStorage.getItem('userSelectedProductList'));
-  //   if (list) {
-  //     let alreadyExist = list.findIndex(product => {
-  //       return product.productId === productDetail.productId;
-  //     });
-  //     if (alreadyExist === -1) {
-  //       newListItems = [...list, productDetail];
-  //       localStorage.setItem('userSelectedProductList', JSON.stringify(newListItems));
-  //     } else {
-  //       let newArrayObj = [...list];
-  //       newArrayObj[alreadyExist] = {
-  //         ...newArrayObj[alreadyExist],
-  //         quantity: newArrayObj[alreadyExist].quantity + 1
-  //       };
-  //       newListItems = [...newArrayObj];
-  //       localStorage.setItem('userSelectedProductList', JSON.stringify(newListItems));
-  //     }
-  //   } else {
-  //     newListItems.push(productDetail);
-  //     localStorage.setItem('userSelectedProductList', JSON.stringify(newListItems));
-  //   }
-  //   console.log('final new product list : ', newListItems);
-  // };
+
   const handleAddToCart = () => {
     let addProductToCartObject = {
       productId: productDetail?.id,
@@ -141,18 +63,8 @@ const ItemDetailView: FC<itemDetailViewProps> = ({ product }) => {
       size: selectedSize,
       color: selectedColor
     };
-    // setDataInLocalStorage(addProductToCartObject);
     dispatch(setUserSelectedProductList(addProductToCartObject));
   };
-  const changeProductImage = (item: number) => {
-    console.log('product image clicked : ', item);
-    setSelectedImage(item);
-  };
-  useEffect(() => {
-    console.log('in useeffect when clicked img : ', swiperRef);
-    if (swiperRef !== null && selectedImage !== undefined)
-      swiperRef.current?.swiper?.slideTo(selectedImage - 1);
-  }, [selectedImage]);
 
   return (
     <ProtectedRoute>
@@ -175,194 +87,7 @@ const ItemDetailView: FC<itemDetailViewProps> = ({ product }) => {
             gap: '60px'
           }}>
           {/* left box */}
-          <Box
-            sx={{
-              width: { xs: '100%', md: '45%' },
-              textAlign: 'center',
-              '& .swiper-button-next, .swiper-button-prev': {
-                color: '#D1D1D6'
-              }
-            }}>
-            <Box
-              className="mainSlider"
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: {
-                  xs: '30px',
-                  sm: '180px',
-                  md: '60px',
-                  lg: '60px',
-                  xl: '100px'
-                }
-              }}>
-              <Box className="swiper-button image-swiper-button-prev">
-                <Image src={'/images/vectorLeft.png'} alt="left" height={20} width={15} />
-                {/* <KeyboardArrowLeftIcon style={{ color: "#333333", fontSize: "20px" }} /> */}
-              </Box>
-              <Swiper
-                // onSwiper={swiper => console.log('1st :', swiper)}
-                // onSlideChange={() => console.log('slide change 1st')}
-                slidesPerView={1}
-                spaceBetween={30}
-                centeredSlides={false}
-                slidesPerGroupSkip={1}
-                cssMode={true}
-                navigation={{
-                  nextEl: '.image-swiper-button-next',
-                  prevEl: '.image-swiper-button-prev',
-                  disabledClass: 'swiper-button-disabled'
-                }}
-                pagination={false}
-                mousewheel={true}
-                keyboard={true}
-                modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-                ref={swiperRef}>
-                {productDetail.productImages.map((item, index) => {
-                  return (
-                    <Box
-                      key={item.id}
-                      sx={{
-                        height: {
-                          xs: '450px',
-                          md: '550px'
-                        },
-                        width: {
-                          xs: '250px',
-                          md: '500px'
-                        }
-                      }}>
-                      <SwiperSlide>
-                        <Image
-                          src={item.productImage}
-                          alt="imageGirl"
-                          height={0}
-                          width={0}
-                          sizes="(max-width:0) 100vw,
-                                (max-height:0) 100vh"
-                          style={{
-                            objectFit: 'contain',
-                            height: '80%',
-                            width: '80%'
-                          }}
-                        />
-                      </SwiperSlide>
-                    </Box>
-                  );
-                })}
-              </Swiper>
-              <Box className="swiper-button image-swiper-button-next">
-                <Image src={'/images/vectorRight.png'} alt="left" height={20} width={15} />
-                {/* <ChevronRightIcon style={{ color: "#333333" }} /> */}
-              </Box>
-            </Box>
-            <Box
-              className="secondSlider"
-              sx={{
-                marginTop: '50px',
-                '& .swiper-button-next, .swiper-button-prev': {
-                  color: '#D1D1D6'
-                },
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                gap: '50px'
-              }}>
-              <Box className="swiper-button image-swiper-button-prev">
-                <Image src={'/images/vectorLeft.png'} alt="left" height={20} width={15} />
-                {/* <KeyboardArrowLeftIcon style={{ color: "#333333" }} /> */}
-              </Box>
-              <Swiper
-                onSwiper={swiper => console.log('2nd : ', swiper)}
-                onSlideChange={() => console.log('slide change 2nd')}
-                slidesPerView={5}
-                spaceBetween={30}
-                slidesPerGroupSkip={1}
-                grabCursor={true}
-                keyboard={{
-                  enabled: true
-                }}
-                breakpoints={{
-                  1500: {
-                    slidesPerView: 5,
-                    slidesPerGroup: 1
-                  },
-                  1280: {
-                    slidesPerView: 4,
-                    slidesPerGroup: 1
-                  },
-                  900: {
-                    slidesPerView: 4,
-                    slidesPerGroup: 1
-                  },
-                  600: {
-                    slidesPerView: 5,
-                    slidesPerGroup: 1
-                  },
-                  500: {
-                    slidesPerView: 4,
-                    slidesPerGroup: 1
-                  },
-                  400: {
-                    slidesPerView: 3,
-                    slidesPerGroup: 1
-                  },
-                  380: {
-                    slidesPerView: 2,
-                    slidesPerGroup: 1
-                  },
-                  300: {
-                    slidesPerView: 2,
-                    slidesPerGroup: 1
-                  },
-                  0: {
-                    slidesPerView: 1,
-                    slidesPerGroup: 1
-                  }
-                }}
-                scrollbar={false}
-                navigation={{
-                  nextEl: '.image-swiper-button-next',
-                  prevEl: '.image-swiper-button-prev',
-                  disabledClass: 'swiper-button-disabled'
-                }}
-                pagination={false}
-                modules={[Keyboard, Scrollbar, Navigation, Pagination]}>
-                {productDetail.productImages.map((item, index) => {
-                  return (
-                    <Box key={item.id}>
-                      <SwiperSlide
-                        style={{
-                          marginTop: '50px',
-                          textAlign: 'center',
-                          fontSize: '18px',
-                          background: '#fff',
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center'
-                        }}>
-                        <Image
-                          src={item.productImage}
-                          alt="likeicon"
-                          style={{
-                            display: 'block'
-                          }}
-                          height={130}
-                          width={100}
-                          onClick={e => changeProductImage(item.id)}
-                        />
-                      </SwiperSlide>
-                    </Box>
-                  );
-                })}
-              </Swiper>
-              <Box className="swiper-button image-swiper-button-next">
-                <Image src={'/images/vectorRight.png'} alt="left" height={20} width={15} />
-                {/* <ChevronRightIcon style={{ color: "#333333" }} /> */}
-              </Box>
-            </Box>
-          </Box>
+          <SwiperSlider productDetail={productDetail}/>
           {/* right side */}
           <Box
             sx={{
@@ -577,12 +302,10 @@ const ItemDetailView: FC<itemDetailViewProps> = ({ product }) => {
                             outlineColor:
                               selectedColor === color ? '1px solid red' : '1px solid black',
                             padding: '20px',
-                            backgroundColor: colorDetail.haxValue,
-                            '&:hover': { backgroundColor: colorDetail.haxValue }
+                            backgroundColor: colorDetail?.haxValue,
+                            '&:hover': { backgroundColor: colorDetail?.haxValue }
                           }}
-                          onClick={e => changeHandler('color', colorDetail.id)}>
-                          {colorDetail.value}
-                        </Button>
+                          onClick={e => changeHandler('color', colorDetail?.id)}></Button>
                       );
                     })}
                   </Box>

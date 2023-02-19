@@ -17,16 +17,11 @@ import { setUserDetails } from '../../src/store/reducers/userShippingDetails/use
 import { ProtectedRoute } from '../../src/utils/ProtectedRoute';
 import { format } from 'date-fns';
 import { isFuture } from 'date-fns';
-// import { categoryProductListType } from '../src/types/constants/categoryProductList.type';
 import Image from 'next/image';
-// import { useFormik } from "formik";
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { userShippingDataType } from '../../src/types/redux/userShippingDetails.type';
-import {
-  setUserSelectedProductList,
-  restoreUserSelectedProductList
-} from '../../src/store/reducers/userSelectedProductList/userSelectedProductList.slice';
+import { restoreUserSelectedProductList } from '../../src/store/reducers/userSelectedProductList/userSelectedProductList.slice';
 
 interface ShippingPageProps {}
 const ShippingPage: NextPage<ShippingPageProps> = () => {
@@ -45,8 +40,6 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
   });
 
   const reduxProductDetails = useSelector(state => state.userSelectedProductListSlice);
-  const shippingDetails = useSelector(state => state.userShippingDetailsSlice);
-  console.log('productdetail after save : ', reduxProductDetails.cartProductDetails);
 
   const [errors, setErrors] = useState({
     firstName: '',
@@ -156,28 +149,12 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
       }
     }
     if (name === 'convenientTime') {
-      console.log('time value : ', value);
-
       if (!value) setErrors({ ...errors, [name]: 'Required' });
       else {
         setErrors({ ...errors, [name]: '' });
         setUserData({ ...userData, convenientTime: value });
       }
     }
-    // if (name === "city") {
-    //     if (parseInt(value) === 0) {
-    //         setErrors({
-    //             ...errors,
-    //             [name]: "Please select city",
-    //         });
-    //     } else {
-    //         setErrors({
-    //             ...errors,
-    //             [name]: "",
-    //         });
-    //         setUserData({ ...userData, [name]: value });
-    //     }
-    // }
     if (name === 'address') {
       if (value === '') {
         setErrors({ ...errors, [name]: 'Required' });
@@ -212,11 +189,8 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
       userData.lastName &&
       userData.emailAddress &&
       userData.phoneNumber &&
-      // userData.city !== '0' &&
       userData.address !== '' &&
       userData.zipCode
-      // userData.deliveryDate &&
-      // userData.convenientTime
     )
       return true;
     else return false;
@@ -224,8 +198,6 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
   useEffect(() => {
     if (reduxProductDetails?.cartProductDetails?.length === 0) {
       let list = JSON.parse(localStorage.getItem('userSelectedProductList'));
-      console.log('localstroage shipping : ', list);
-
       if (list?.length > 0) {
         dispatch(restoreUserSelectedProductList(list));
       } else {
@@ -233,16 +205,7 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
       }
     }
   });
-  // useEffect(() => {
-  //   if (reduxProductDetails?.cartProductDetails?.length > 0) {
-  //     localStorage.setItem(
-  //       'userSelectedProductList',
-  //       JSON.stringify(reduxProductDetails.cartProductDetails)
-  //     );
-  //   }
-  // }, [reduxProductDetails]);
 
-  console.log(' : ', userData);
   const handleClick = () => {
     if (!userData.deliveryDate) {
       setErrors({ ...errors, deliveryDate: 'Required' });

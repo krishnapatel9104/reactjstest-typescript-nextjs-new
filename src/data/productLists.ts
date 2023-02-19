@@ -1126,7 +1126,7 @@ export const productLists: productsType[] = [
     productImages: [
       {
         id: 1,
-        productImage: "/images/womenproduct10.png"
+        productImage: "/images/womenproduct5.png"
       },
       {
         id: 2,

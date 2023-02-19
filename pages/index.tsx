@@ -15,7 +15,6 @@ import { CardFooterSection } from '../src/components/Home/CardFooterSection';
 import { FooterSliderSection } from '../src/components/Home/FooterSliderSection';
 import { Footer } from '../src/components/Home/Footer';
 import Navbar from '../src/components/Navbar/Navbar';
-import { FC } from 'react';
 import { NextPage } from 'next';
 
 interface IndexPageProps {}

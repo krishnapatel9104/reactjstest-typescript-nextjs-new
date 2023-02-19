@@ -1,9 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import { StepperComp } from '../../src/components/common/StepperComp';
 import { useSelector, useDispatch } from '../../src/store';
-// import { ProtectedRoute } from '../../utils/ProtectedRoute';
 import { resetPaymentDetails } from '../../src/store/reducers/userPaymentDetails/userPaymentDetails.slice';
 import { resetUserSelectedProductList } from '../../src/store/reducers/userSelectedProductList/userSelectedProductList.slice';
 import { resetShippingDetails } from '../../src/store/reducers/userShippingDetails/userShippingDetails.slice';
@@ -17,14 +15,9 @@ const ConfirmationPage: NextPage<ConfirmationPageProps> = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const reduxProductDetail = useSelector(state => state.userSelectedProductListSlice);
-  // useEffect(() => {
-  //   if (reduxProductDetail?.cartProductDetails.length === 0) router.push('/');
-  // });
   useEffect(() => {
     if (reduxProductDetail?.cartProductDetails?.length === 0) {
       let list = JSON.parse(localStorage.getItem('userSelectedProductList'));
-      console.log('localstroage shipping : ', list);
-
       if (list?.length > 0) {
         dispatch(restoreUserSelectedProductList(list));
       } else {
@@ -37,7 +30,7 @@ const ConfirmationPage: NextPage<ConfirmationPageProps> = () => {
     localStorage.removeItem('userSelectedProductList');
     dispatch(resetShippingDetails());
     dispatch(resetPaymentDetails());
-    dispatch(resetUserSelectedProductList());
+    dispatch(resetUserSelectedProductList([]));
     router.push('/');
   };
   return (

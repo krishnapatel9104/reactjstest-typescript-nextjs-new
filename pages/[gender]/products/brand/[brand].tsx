@@ -17,14 +17,12 @@ const BrandProductPage: NextPage<BrandProductPageProps> = ({ products }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  console.log('Context==>>', context.query);
   let gender = genderLists.find(gender => gender.slug === context.query.gender);
   let brand = brandLists.find(brand => brand.slug === context.query.brand);
 
   let result = productLists.filter(
     productItem => productItem.gender === gender?.id && productItem.brand === brand?.id
   );
-  console.log("filter data on click navbar brand: ",result);
 
   return {
     props: { products: result }

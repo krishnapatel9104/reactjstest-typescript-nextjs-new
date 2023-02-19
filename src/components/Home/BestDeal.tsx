@@ -18,18 +18,12 @@ import { productsType } from '../../types/constants/products.type';
 
 export const BestDeal = () => {
   const router = useRouter();
-  // const handleClick = () => {
-  //   console.log('btn clicked');
-  //   router.push('/women/products/clothes');
-  // };
-
   const [bestDealProducts, setBestDealProducts] = useState<productsType[]>();
 
   useEffect(() => {
     let result = productLists.filter(productItem =>
       bestDealProductLists.productId.some(productId => productItem.id === productId)
     );
-    console.log('best deal data object : ', result);
     setBestDealProducts(result);
   }, [productLists]);
 

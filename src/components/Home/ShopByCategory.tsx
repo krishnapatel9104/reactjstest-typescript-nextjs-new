@@ -6,65 +6,17 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 import { Keyboard, Scrollbar, Pagination, Navigation } from 'swiper';
-// import { shopByCategoryList } from "../../data/shopByCategoryList";
 import { productLists } from '../../data/productLists';
 import { genderLists } from '../../data/genderLists';
 import { categoryLists } from '../../data/categoryLists';
 import theme from '../../theme';
-// import { useNavigate } from "react-router-dom";
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 export const ShopByCategory = () => {
-  // const navigator = useNavigate();
   const router = useRouter();
-  //   const handleClick = () => {
-  //     router.push('/men/products/shoes');
-  //   };
-  //   const genderCategoryList = [
-  //     { id: 1, name: 'Women' },
-  //     { id: 2, name: 'Men' }
-  //   ];
-  //   const shopByCategory = [
-  //     {
-  //       id: 1,
-  //       name: 'Shirt',
-  //       value: 'Both'
-  //     },
-  //     {
-  //       id: 2,
-  //       name: 'TShirt',
-  //       value: 'Both'
-  //     },
-  //     {
-  //       id: 3,
-  //       name: 'Shoes',
-  //       value: 'Both'
-  //     },
-  //     {
-  //       id: 4,
-  //       name: 'Watch',
-  //       value: 'Men'
-  //     },
-  //     {
-  //       id: 5,
-  //       name: 'Earning',
-  //       value: 'Women'
-  //     },
-  //     {
-  //       id: 6,
-  //       name: 'Tie',
-  //       value: 'Men'
-  //     },
-  //     {
-  //       id: 7,
-  //       name: 'Purse',
-  //       value: 'Both'
-  //     }
-  //   ];
   const [selectedGender, setSelectedGender] = useState<number>(genderLists[0].id);
   const [selectedCategory, setSelectedCategory] = useState<number>(categoryLists[0].id);
-  console.log('selctedGende : ', selectedGender, selectedCategory);
 
   return (
     <Box>
@@ -94,7 +46,6 @@ export const ShopByCategory = () => {
           marginBottom: '40px'
         }}>
         {genderLists.map((gender, index) => {
-          console.log('category selected & gender loop id : ', selectedGender, gender);
           if (index < 2) {
             return (
               <Link

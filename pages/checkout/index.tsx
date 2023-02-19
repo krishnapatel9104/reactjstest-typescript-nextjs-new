@@ -2,28 +2,24 @@ import {
   Box,
   Button,
   FormControlLabel,
+  FormHelperText,
   Radio,
   RadioGroup,
   TextField,
   Typography
 } from '@mui/material';
-// import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { StepperComp } from '../../src/components/common/StepperComp';
 import { YourOrder } from '../../src/components/common/YourOrder';
 import { useDispatch, useSelector } from '../../src/store';
 import { setPaymentDetails } from '../../src/store/reducers/userPaymentDetails/userPaymentDetails.slice';
 import { restoreUserSelectedProductList } from '../../src/store/reducers/userSelectedProductList/userSelectedProductList.slice';
-
-// import { ProtectedRoute } from '../../utils/ProtectedRoute';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { DatePicker } from '@mui/lab';
 import { userPaymentDetailsType } from '../../src/types/redux/userPaymentDetails.type';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { NextPage } from 'next';
 import { ProtectedRoute } from '../../src/utils/ProtectedRoute';
+import { PatternFormat } from 'react-number-format';
 
 interface CheckoutPageProps {}
 const CheckoutPage: NextPage<CheckoutPageProps> = () => {
@@ -45,13 +41,9 @@ const CheckoutPage: NextPage<CheckoutPageProps> = () => {
     cvvCode: 0
   });
   const reduxProductDetail = useSelector(state => state.userSelectedProductListSlice);
-  const reduxPaymentDetail = useSelector(state => state.userPaymentDetailsSlice);
-
-  console.log('reduxProductDetail paymentdetail : ', reduxPaymentDetail);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    console.log('expiration changes : ', name, value);
     if (name === 'paymentMethod') setPaymentData({ ...paymentData, paymentMethod: value });
     if (name === 'cardName') {
       if (value === '') {
@@ -63,10 +55,6 @@ const CheckoutPage: NextPage<CheckoutPageProps> = () => {
         });
       } else {
         setErrors({ ...errors, [name]: '' });
-        // setErrors(current => {
-        //   const { cardName, ...rest } = current;
-        //   return rest;
-        // });
         setPaymentData({ ...paymentData, cardName: value });
       }
     }
@@ -96,14 +84,25 @@ const CheckoutPage: NextPage<CheckoutPageProps> = () => {
         setPaymentData({ ...paymentData, cvvCode: parseInt(value) });
       }
     }
-    if (name === 'expiration') setPaymentData({ ...paymentData, expiration: value });
+    if (name === 'expiration') {
+      let month = value.substring(0, 2);
+      let year = value.substring(3, 5);
+      let curMonth = (new Date().getMonth() + 1).toString().padStart(2, '0');
+      let curYear = new Date().getFullYear().toString().slice(-2);
+      if (month.includes('_') || year.includes('_')) {
+        setErrors({ ...errors, expiration: 'Enter Properly' });
+      } else if ((month < curMonth && year < curYear) || (month < curMonth && year <= curYear)) {
+        setErrors({ ...errors, expiration: 'Expiration must be in future' });
+      } else {
+        setErrors({ ...errors, expiration: '' });
+        setPaymentData({ ...paymentData, expiration: value });
+      }
+    }
   };
 
   useEffect(() => {
     if (reduxProductDetail?.cartProductDetails?.length === 0) {
       let list = JSON.parse(localStorage.getItem('userSelectedProductList'));
-      console.log('localstroage shipping : ', list);
-
       if (list?.length > 0) {
         dispatch(restoreUserSelectedProductList(list));
       } else {
@@ -111,14 +110,6 @@ const CheckoutPage: NextPage<CheckoutPageProps> = () => {
       }
     }
   });
-  // useEffect(() => {
-  //   if (reduxProductDetails?.cartProductDetails) {
-  //     localStorage.setItem(
-  //       'userSelectedProductList',
-  //       JSON.stringify(reduxProductDetails.cartProductDetails)
-  //     );
-  //   }
-  // }, [reduxProductDetails]);
 
   const isValidate = () => {
     if (
@@ -137,6 +128,7 @@ const CheckoutPage: NextPage<CheckoutPageProps> = () => {
       router.push('/confirmation');
     }
   };
+
   return (
     <ProtectedRoute>
       <Box
@@ -304,92 +296,24 @@ const CheckoutPage: NextPage<CheckoutPageProps> = () => {
                 marginTop: '50px',
                 width: '100%'
               }}>
-              {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DatePicker
-                  inputFormat="DD-MM-YYYY"
-                  label="Expiration"
-                  value={paymentData.expiration}
-                  onChange={(value) => setPaymentData({ ...paymentData, expiration: value })}
-                  renderInput={(props) => <TextField {...props} />}
+              <Box sx={{ dislay: 'flex', flexDirection: 'column', width: '45%', gap: '20px' }}>
+                <PatternFormat
+                  name="expiration"
+                  format="##/##"
+                  allowEmptyFormatting
+                  mask="_"
+                  style={{
+                    border: 'none',
+                    borderBottom: '1px solid #c9c1c1',
+                    width: '100%',
+                    height: '32px'
+                  }}
+                  onChange={handleChange}
                 />
-              </LocalizationProvider> */}
-              {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  label="Expiration"
-                  value={paymentData.expiration}
-                  onChange={(value) => setPaymentData({ ...paymentData, expiration: value })}
-                  renderInput={(params) => <TextField {...params} value={paymentData.expiration} />}
-                />
-
-                <DatePicker
-                  autoOk
-                  mask="__/__"
-                  placeholder="YY/MM"
-                  format="YY/MM"
-                  value={paymentData.expiration}
-                  onChange={(value) => setPaymentData({ ...paymentData, expiration: value })}
-                  renderInput={(params) => <TextField {...params} value={paymentData.expiration} />}
-                />
-
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <Grid container justifyContent="space-around">
-                    <DatePicker
-                      margin="normal"
-                      id="date-picker-dialog"
-                      label={label}
-                      inputFormat={format ?? "MM/dd/yyyy"}
-                      mask={mask ?? "__/__/____"}
-                      onChange={handleDateChange}
-                      value={selectedDate}
-                      InputAdornmentProps={{ position: "start" }}
-                      minDate={minDate}
-                      maxDate={new Date(maxdate)}
-                      shouldDisableDate={disableCustomDate}
-                      disablePast={disablePastDate === "true" ? true : false}
-                      views={views ?? ["year", "month", "day"]}
-                      InputProps={{ "data-testid": "datePicker" }}
-                      renderInput={(props) => (
-                        <TextField
-                          {...props}
-                          {...otherProps}
-                          fullWidth={true}
-                          placeholder={placeholder}
-                          error={error ? error : errorTF}
-                          helperText={error ? helperText : helperTextTF}
-                          type="password"
-                          variant="standard"
-                        />
-                      )}
-                    />
-                  </Grid>
-                </LocalizationProvider>
-              </LocalizationProvider> */}
-
-              <TextField
-                id="standard-number"
-                type="text"
-                InputLabelProps={{
-                  shrink: true
-                }}
-                name="expiration"
-                onChange={handleChange}
-                variant="standard"
-                // format="yy/MM"
-                placeholder="yy/MM"
-                sx={{
-                  fontSize: '22px',
-                  width: '45%',
-                  '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
-                    fontSize: '22px'
-                  },
-                  '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
-                    marginTop: '30px !important'
-                  },
-                  '& .MuiFormHelperText-root': {
-                    color: 'red'
-                  }
-                }}
-              />
+                <FormHelperText style={{ color: 'red' }}>
+                  {errors?.expiration ? errors?.expiration : null}
+                </FormHelperText>
+              </Box>
               <TextField
                 id="standard-number"
                 type="text"

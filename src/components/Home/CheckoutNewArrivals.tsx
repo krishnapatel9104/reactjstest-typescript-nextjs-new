@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React,{useEffect,useState} from 'react';
 import { Box, Grid, Typography } from '@mui/material';
 import theme from '../../theme';
 import Image from 'next/image';
 import { checkoutNewArrivalProductLists } from '../../data/checkoutNewArrivalProductLists';
 import { productLists } from '../../data/productLists';
+import { productsType } from '../../types/constants/products.type';
 
 export const CheckoutNewArrivals = () => {
-  const [checkoutNewArrivalProducts, setCheckoutNewArrivalProducts] = useState<productsType[]>();
+     const [checkoutNewArrivalProducts, setCheckoutNewArrivalProducts] = useState<productsType[]>();
 
   useEffect(() => {
-    let result = productLists.filter(productItem =>
-      checkoutNewArrivalProductLists.productId.some(productId => productItem.id === productId)
-    );
-    console.log('CheckoutNewArrivalProductLists data object : ', result);
+    let result = productLists.filter(productItem => checkoutNewArrivalProductLists.productId.some(productId => productItem.id === productId));
     setCheckoutNewArrivalProducts(result);
-  }, [productLists]);
+  },[productLists]);
 
   return (
     <Box
@@ -44,26 +42,25 @@ export const CheckoutNewArrivals = () => {
         Checkout New Arrivals
       </Typography>
       <Grid container columnSpacing={1}>
-        {checkoutNewArrivalProducts?.length &&
-          checkoutNewArrivalProducts.map(product => {
-            return (
-              <Grid key={product.id} item sm={3} xs={6} sx={{ width: '100%', height: '100%' }}>
-                <Image
-                  src={product.productImages[0].productImage}
-                  alt="imageGirl"
-                  height={0}
-                  width={0}
-                  sizes="(max-width:0) 100vw,
+        {checkoutNewArrivalProducts?.length && checkoutNewArrivalProducts.map(product => {
+          return (
+            <Grid key={product.id} item sm={3} xs={6} sx={{ width: '100%', height: '100%' }}>
+              <Image
+                src={product.productImages[0].productImage}
+                alt="imageGirl"
+                height={0}
+                width={0}
+                sizes="(max-width:0) 100vw,
                                 (max-height:0) 100vh"
-                  style={{
-                    objectFit: 'cover',
-                    height: '100%',
-                    width: '100%'
-                  }}
-                />
-              </Grid>
-            );
-          })}
+                style={{
+                  objectFit: 'cover',
+                  height: '100%',
+                  width: '100%'
+                }}
+              />
+            </Grid>
+          );
+        })}
       </Grid>
     </Box>
   );

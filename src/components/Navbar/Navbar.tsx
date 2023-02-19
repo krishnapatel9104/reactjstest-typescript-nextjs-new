@@ -42,7 +42,7 @@ const Navbar = () => {
     }
   });
   useEffect(() => {
-    if (isOpen) setIsOpen(false);
+    setIsOpen(false);
   }, [router.asPath]);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -68,8 +68,6 @@ const Navbar = () => {
   };
 
   const handleClickNavbar = (slug: string) => {
-    console.log('e : ', slug);
-
     if (!matches) {
       setIsOpen(!isOpen);
       setSelectedGender(slug);

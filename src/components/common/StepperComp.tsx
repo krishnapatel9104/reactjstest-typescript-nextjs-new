@@ -6,6 +6,7 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import Image from 'next/image';
+import { StepIconProps } from '@mui/material/StepIcon';
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -29,7 +30,9 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   }
 }));
 
-const ColorlibStepIconRoot = styled('div')(({ theme, ownerState: any }) => ({
+const ColorlibStepIconRoot = styled('div')<{
+  ownerState: { completed?: boolean; active?: boolean };
+}>(({ theme, ownerState }) => ({
   zIndex: 1,
   color: '#fff',
   width: 50,
@@ -40,10 +43,10 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState: any }) => ({
   alignItems: 'center'
 }));
 
-function ColorlibStepIcon(props: any) {
+function ColorlibStepIcon(props: StepIconProps) {
   const { active, completed, className } = props;
 
-  const icons = {
+  const icons: { [index: string]: React.ReactElement } = {
     1: active ? (
       <Image src={'/images/currentstep.png'} height={20} width={20} alt="icon" />
     ) : completed ? (
@@ -69,6 +72,7 @@ function ColorlibStepIcon(props: any) {
 
   return (
     <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
+      {/* {icons[parseInt(props.icon)]} */}
       {icons[String(props.icon)]}
     </ColorlibStepIconRoot>
   );

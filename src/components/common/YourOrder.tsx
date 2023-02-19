@@ -10,7 +10,6 @@ import {
 } from '../../store/reducers/userSelectedProductList/userSelectedProductList.slice';
 
 import Image from 'next/image';
-// import { categoryProductListType } from '../../types/constants/categoryProductList.type';
 import { productsType } from '../../types/constants/products.type';
 import { productLists } from '../../data/productLists';
 import { userCartProductType } from '../../types/redux/userSelectedProductList.type';
@@ -19,8 +18,6 @@ import { colorLists } from '../../data/colorLists';
 
 export const YourOrder = () => {
   const dispatch = useDispatch();
-  //   const colourList = ['Red', 'Pink', 'Yellow', 'Black'];
-  //   const sizeList = ['M', 'L', 'S', 'XS'];
   let total = 0;
 
   const otherDetails = {
@@ -30,49 +27,19 @@ export const YourOrder = () => {
   const reduxData = useSelector(state => state.userSelectedProductListSlice);
   const productDetails = reduxData.cartProductDetails;
   const [userCartProductLists, setUserCartProductLists] = useState<productsType[]>([]);
-  // const [selectedSize, setSelectedSize] = useState<number>();
-  // const [selectedColor, setSelectedColor] = useState<number>();
 
   useEffect(() => {
-    console.log(
-      'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA updated',
-      productDetails
-    );
     if (productDetails) {
-      //   productDetails.forEach(product => {
-      //     let cartProducts = productLists.find(p => p.id === product.productId);
-      //     return
-      //   });
-
-      // let pids = productDetails.reduce<userCartProductType>((acc, e) => {
-      //       acc.push(e.productId);
-      //       return acc;
-      //     }, [])
-      //   );
       let allCartProductIds = productDetails.map(p => p.productId);
-      console.log('result ::::::: ', allCartProductIds);
-
       let cartProductLists = productLists.filter(productItem =>
         allCartProductIds.some(cartProductId => productItem.id === cartProductId)
       );
-      console.log('cart product object : ', cartProductLists, productDetails);
       if (productDetails.length > 0) {
         localStorage.setItem('userSelectedProductList', JSON.stringify(productDetails));
       }
       setUserCartProductLists(cartProductLists);
-      //   const results = productLists.filter(({ id: id }) =>
-      //     productDetails.some(({ productId: productId }) => id === productId)
-      //   );
-      //   console.log('results : ', results);
     }
   }, [productDetails]);
-
-  // useEffect(() => {
-  //     localStorage.setItem(
-  //         "userSelectedProductList",
-  //         JSON.stringify(productDetails)
-  //     );
-  // }, [productDetails]);
 
   const handleClick = (id: number) => {
     dispatch(deleteSelectedProductList({ id: id }));
@@ -97,14 +64,10 @@ export const YourOrder = () => {
   };
   const handleChange = (e: SelectChangeEvent<string>, id: number) => {
     const { name, value } = e.target;
-    console.log('handle change function : ', id, value, name);
     if (name === 'size') {
-      console.log('size condi for update now : ');
       dispatch(updateUserSelectedProductList({ id: id, size: parseInt(value) }));
     }
     if (name === 'color') {
-      console.log('size condi for update now : ');
-
       dispatch(
         updateUserSelectedProductList({
           id: id,
@@ -131,13 +94,9 @@ export const YourOrder = () => {
         Your Order
       </Typography>
       {productDetails?.map((order, index) => {
-        console.log('productIDDDDDDDDDDDDDDDDDDDD : ', order);
         let cartProductDetails = productLists.find(p => p.id === order.productId);
         let sizeObjects = sizeLists.filter(s => cartProductDetails?.size.includes(s.id));
         let colorObjects = colorLists.filter(s => cartProductDetails?.color.includes(s.id));
-        console.log('sizeObject : ', sizeObjects);
-        console.log('colorObject : ', colorObjects);
-        console.log('cartProductDetails : ', cartProductDetails);
 
         total += order.quantity * cartProductDetails?.productCurrentPrice;
         return (
@@ -267,13 +226,6 @@ export const YourOrder = () => {
                   Size
                 </Box>
                 <Box sx={{ marginTop: '20px' }}>
-                  {/* {console.log(
-                    'order isze : ',
-                    cartProductDetails?.size.filter(s => {
-                      if (s.id === order.size) return s.name;
-                    })
-                  )} */}
-
                   <Select
                     labelId="demo-multiple-name-label"
                     id="demo-multiple-name"
