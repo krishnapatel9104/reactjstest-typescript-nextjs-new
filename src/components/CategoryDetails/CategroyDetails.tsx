@@ -14,6 +14,7 @@ import { sizeLists } from '../../data/sizeLists';
 import { genderLists } from '../../data/genderLists';
 import FilterComponent from './FilterComponent';
 import ProductCatelog from './ProductCatelog';
+import { arrayBuffer } from 'stream/consumers';
 
 interface categoryDetailsProps {
   products: productsType[];
@@ -72,11 +73,24 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
           return product;
         }
       });
+      console.log('newProduct list : ', newProductList);
 
-      setFilterCategoryData(newProductList);
+      const list = productLists.filter(product => {
+        if (product.gender === selectedGender) {
+          return product.size.find(size => sizeFilter.includes(size));
+        }
+      });
+
+      console.log('size list : ', list);
+
+      let newFilterPRoductLists = [...newProductList, ...list].filter(
+        (product, ind, lists) => ind === lists.findIndex(productId => productId.id === product.id)
+      );
+      console.log('r unqiue array::::::::::::::: ', newFilterPRoductLists);
+      setFilterCategoryData(newFilterPRoductLists);
     }
   }, [brandFilter, sizeFilter, categoryFilter, priceFilter, selectedGender]);
-
+  console.log('filter data : ', filterCategoryData);
   useEffect(() => {
     setPage(1);
   }, [filterCategoryData]);

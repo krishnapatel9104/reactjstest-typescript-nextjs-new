@@ -15,6 +15,7 @@ import Image from 'next/image';
 import { bestDealProductLists } from '../../data/bestDealProductLists';
 import { productLists } from '../../data/productLists';
 import { productsType } from '../../types/constants/products.type';
+import { genderLists } from '../../data/genderLists';
 
 export const BestDeal = () => {
   const router = useRouter();
@@ -52,7 +53,7 @@ export const BestDeal = () => {
           textAlign: 'center',
           marginBottom: { xs: '50px', sm: '100px' }
         }}>
-        {/* Best Deals */}
+        Best Deals
       </Typography>
 
       <Box
@@ -94,7 +95,7 @@ export const BestDeal = () => {
             height={0}
             width={0}
             sizes="(max-width:0) 100vw,
-                                (max-height:0) 100vh"
+                    (max-height:0) 100vh"
             style={{
               objectFit: 'contain',
               height: '100%',
@@ -135,7 +136,8 @@ export const BestDeal = () => {
           }}
           modules={[Keyboard, Scrollbar, Navigation, Pagination]}
           className="mySwiper">
-          {bestDealProducts?.length &&
+          {bestDealProducts !== undefined &&
+            bestDealProducts?.length > 0 &&
             bestDealProducts.map(product => {
               return (
                 <Box key={product.id}>
@@ -147,8 +149,7 @@ export const BestDeal = () => {
                       justifyContent: 'center',
                       alignItems: 'center'
                     }}
-                    // onClick={() => handleClick(product.gender,product.category)}
-                  >
+                    onClick={() => router.push(`/product/${product.slug}`)}>
                     <Box
                       sx={{
                         marginLeft: '10px',
@@ -274,8 +275,7 @@ export const BestDeal = () => {
             fontSize: { xs: '10px', sm: '20px' },
             color: '#FFFFFF'
           }}
-          // onClick={handleClick}
-        >
+          onClick={() => router.push(`women/products/category/clothes`)}>
           View All
         </Button>
       </Box>

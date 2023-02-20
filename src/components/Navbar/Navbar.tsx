@@ -80,7 +80,7 @@ const Navbar = () => {
   };
 
   return (
-    <>
+    <Box>
       <Box
         sx={{
           backgroundColor: isOpen ? 'white' : 'inherit',
@@ -558,7 +558,7 @@ const Navbar = () => {
       ) : (
         <></>
       )}
-    </>
+    </Box>
   );
 };
 

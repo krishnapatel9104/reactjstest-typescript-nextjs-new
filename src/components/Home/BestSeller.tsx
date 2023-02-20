@@ -126,7 +126,8 @@ export const BestSeller = () => {
           }}
           modules={[Keyboard, Scrollbar, Navigation, Pagination]}
           className="mySwiper">
-          {bestSellerProducts?.length > 0 &&
+          {bestSellerProducts !== undefined &&
+            bestSellerProducts?.length > 0 &&
             bestSellerProducts.map(product => {
               return (
                 <Box key={product.id}>
@@ -137,8 +138,7 @@ export const BestSeller = () => {
                       justifyContent: 'center',
                       alignItems: 'center'
                     }}
-                    // onClick={handleClick}
-                  >
+                    onClick={() => router.push(`/product/${product.slug}`)}>
                     <Box
                       sx={{
                         marginLeft: '10px',
@@ -174,7 +174,7 @@ export const BestSeller = () => {
                             height={0}
                             width={0}
                             sizes="(max-width:0) 100vw,
-                                                            (max-height:0) 100vh"
+                                    (max-height:0) 100vh"
                             style={{
                               objectFit: 'contain',
                               height: '100%',
@@ -271,8 +271,7 @@ export const BestSeller = () => {
             fontSize: { xs: '10px', sm: '20px' },
             color: '#FFFFFF'
           }}
-          //   onClick={handleClick}
-        >
+          onClick={() => router.push(`women/products/category/clothes`)}>
           View All
         </Button>
       </Box>

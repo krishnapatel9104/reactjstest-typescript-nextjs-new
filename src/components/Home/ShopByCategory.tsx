@@ -184,7 +184,12 @@ export const ShopByCategory = () => {
           className="mySwiper">
           {productLists.length > 0 ? (
             productLists.map(product => {
+              let gender = genderLists.find(gender => gender.id === selectedGender);
+              let category = categoryLists.find(category => category.id === selectedCategory);
+
               if (product.category === selectedCategory && product.gender === selectedGender) {
+                console.log('product :::::::::::: ', product);
+
                 return (
                   <Box key={product.id}>
                     <SwiperSlide
@@ -194,8 +199,9 @@ export const ShopByCategory = () => {
                         justifyContent: 'center',
                         alignItems: 'center'
                       }}
-                      //   onClick={handleClick}
-                    >
+                      onClick={() =>
+                        router.push(`${gender?.slug}/products/category/${category?.slug}`)
+                      }>
                       <Box
                         sx={{
                           marginLeft: '10px',
@@ -326,8 +332,7 @@ export const ShopByCategory = () => {
             fontSize: { xs: '10px', sm: '20px' },
             color: '#FFFFFF'
           }}
-          //   onClick={handleClick}
-        >
+          onClick={() => router.push(`women/products/category/clothes`)}>
           View All
         </Button>
       </Box>

@@ -32,7 +32,7 @@ export const productLists: productsType[] = [
     productDescription: ["desc 1", "desc 2"],
     productOriginalPrice: 400,
     productCurrentPrice: 330,
-    gender: 1,
+    gender: 0,
     category: 4,
     brand: 4,
     size: [2, 4],
@@ -282,7 +282,7 @@ export const productLists: productsType[] = [
   },
   {
     id: 8,
-    productName: "Brown Leathered Wallet",
+    productName: "Brown Wallet",
     productImages: [
       {
         id: 1,
@@ -1995,7 +1995,7 @@ export const productLists: productsType[] = [
     gender: 1,
     category: 1,
     brand: 1,
-    size: [2, 3],
+    size: [1, 3],
     color: [2, 5],
     reviewRate: 4,
     slug: 'red-gem-earrings'
@@ -2072,7 +2072,7 @@ export const productLists: productsType[] = [
     productDescription: ["desc 1", "desc 2"],
     productOriginalPrice: 400,
     productCurrentPrice: 530,
-    gender: 2,
+    gender: 1,
     category: 1,
     brand: 1,
     size: [2, 3],

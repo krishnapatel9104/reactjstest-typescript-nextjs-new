@@ -207,49 +207,6 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
             ) : (
               <></>
             )}
-            {/* {brandLists.map((filter, index) => {
-              if ((isBrandExtend && index < brandLists.length) || (!isBrandExtend && index < 10)) {
-                return (
-                  <FormGroup
-                    key={filter.id}
-                    sx={{
-                      fontFamily: 'Jost',
-                      fontWeight: '400',
-                      fontSize: '20px',
-                      letterSpacing: '0.02em',
-                      color: '#1F2937'
-                    }}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={brandFilter.includes(filter.id)}
-                          value={filter.id}
-                          name="brand"
-                          onChange={handleChange}
-                          // disabled={filter.id === brandFilter[0]}
-                        />
-                      }
-                      label={filter.name}
-                    />
-                  </FormGroup>
-                );
-              }
-            })}
-            {brandLists.length > 10 ? (
-              !isBrandExtend ? (
-                <Button onClick={() => handlerExtendFilters('brand')}>
-                  +{brandLists.length - 10} more
-                </Button>
-              ) : (
-                <Button
-                  onClick={() => handlerExtendFilters('brand')}
-                  sx={{ textTransform: 'capitalize' }}>
-                  See Less
-                </Button>
-              )
-            ) : (
-              <></>
-            )} */}
           </Box>
           <Box>
             <Typography
