@@ -72,6 +72,10 @@ export const userSelectedProductListSlice = createSlice({
               ...product,
               color: action.payload.color,
             };
+          } else {
+            return {
+              ...product,
+            }
           }
         } else {
           return {
@@ -90,7 +94,7 @@ export const userSelectedProductListSlice = createSlice({
         cartProductDetails: [],
       };
     },
-    restoreUserSelectedProductList: (state: userCartProductsType, action: PayloadAction<updateUserSelectedProductListType>) => {
+    restoreUserSelectedProductList: (state: userCartProductsType, action: PayloadAction<userCartProductType[]>) => {
       return {
         ...state,
         cartProductDetails: action.payload,

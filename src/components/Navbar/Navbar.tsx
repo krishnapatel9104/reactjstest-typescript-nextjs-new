@@ -35,7 +35,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if (productDetails?.cartProductDetails?.length === 0) {
-      let list = JSON.parse(localStorage.getItem('userSelectedProductList'));
+      let list = JSON.parse(localStorage.getItem('userSelectedProductList') || '');
       if (list?.length > 0) {
         dispatch(restoreUserSelectedProductList(list));
       }

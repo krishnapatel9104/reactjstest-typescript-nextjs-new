@@ -3,7 +3,7 @@ export interface userCartProductsType {
 }
 
 export interface userCartProductType {
-  id: number
+  id?: number
   productId: number
   quantity: number
   size: number

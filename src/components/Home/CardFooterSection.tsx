@@ -64,21 +64,12 @@ export const CardFooterSection = () => {
                       background: '#FCFCFC',
                       marginBottom: '25px'
                     }}>
-                    {/* <Box
-                                    sx={{
-                                        position: "relative",
-                                        height: "100%",
-                                        width: "100%",
-                                    }}
-                              > */}
-
                     <Image
                       src={product.secondaryImageSource}
                       alt={'imageGirl'}
                       height={89}
                       width={89}
                     />
-                    {/* </Box> */}
                     <Box>
                       <Image
                         src={'/images/view.png'}

@@ -109,8 +109,8 @@ export const BestDeal = () => {
           />
         </Box>
         <Swiper
-          onReachBeginning={(e) =>setSwiperCurrentIndex(0)}
-          onReachEnd={(e) => setSwiperCurrentIndex(1)}
+          onReachBeginning={e => setSwiperCurrentIndex(0)}
+          onReachEnd={e => setSwiperCurrentIndex(1)}
           slidesPerView={4}
           centeredSlides={false}
           slidesPerGroupSkip={1}
@@ -169,12 +169,12 @@ export const BestDeal = () => {
                           width: {
                             xs: '150px',
                             lg: '200px',
-                            xl: '300px'
+                            xl: '280px'
                           },
                           height: {
                             xs: '150px',
                             lg: '200px',
-                            xl: '300px'
+                            xl: '280px'
                           },
                           gap: '30px',
                           display: 'flex',
@@ -186,7 +186,7 @@ export const BestDeal = () => {
                           height={0}
                           width={0}
                           sizes="(max-width:0) 100vw,
-                                                        (max-height:0) 100vh"
+                                  (max-height:0) 100vh"
                           style={{
                             objectFit: 'contain',
                             height: '100%',

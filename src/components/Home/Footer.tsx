@@ -211,17 +211,19 @@ export const Footer = () => {
                 position: 'relative'
               }}>
               <TextField id="outlined-basic" label="Enter Email" variant="outlined" />
-              <Image
-                src={'/images/arrow.png'}
-                alt="arrowIcon"
-                width={15}
-                height={15}
-                style={{
+              <Box
+                sx={{
                   position: 'absolute',
-                  top: '35%',
-                  right: { xs: '40%', sm: '10%' }
-                }}
-              />
+                  right: { xs: '45%', sm: '10%' },
+                  top: '35%'
+                }}>
+                <Image
+                  src={'/images/arrow.png'}
+                  alt="arrowIcon"
+                  width={15}
+                  height={15}
+                />
+              </Box>
             </Box>
             <Box
               style={{

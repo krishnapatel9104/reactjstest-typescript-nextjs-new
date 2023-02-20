@@ -17,7 +17,7 @@ const ConfirmationPage: NextPage<ConfirmationPageProps> = () => {
   const reduxProductDetail = useSelector(state => state.userSelectedProductListSlice);
   useEffect(() => {
     if (reduxProductDetail?.cartProductDetails?.length === 0) {
-      let list = JSON.parse(localStorage.getItem('userSelectedProductList'));
+      let list = JSON.parse(localStorage.getItem('userSelectedProductList') || "");
       if (list?.length > 0) {
         dispatch(restoreUserSelectedProductList(list));
       } else {
@@ -30,7 +30,7 @@ const ConfirmationPage: NextPage<ConfirmationPageProps> = () => {
     localStorage.removeItem('userSelectedProductList');
     dispatch(resetShippingDetails());
     dispatch(resetPaymentDetails());
-    dispatch(resetUserSelectedProductList([]));
+    dispatch(resetUserSelectedProductList());
     router.push('/');
   };
   return (

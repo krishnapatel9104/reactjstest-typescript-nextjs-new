@@ -20,6 +20,7 @@ import Image from 'next/image';
 import { NextPage } from 'next';
 import { ProtectedRoute } from '../../src/utils/ProtectedRoute';
 import { PatternFormat } from 'react-number-format';
+import { userCartProductType } from '../../src/types/redux/userSelectedProductList.type';
 
 interface CheckoutPageProps {}
 const CheckoutPage: NextPage<CheckoutPageProps> = () => {
@@ -102,7 +103,9 @@ const CheckoutPage: NextPage<CheckoutPageProps> = () => {
 
   useEffect(() => {
     if (reduxProductDetail?.cartProductDetails?.length === 0) {
-      let list = JSON.parse(localStorage.getItem('userSelectedProductList'));
+      let list: userCartProductType[] = JSON.parse(
+        localStorage.getItem('userSelectedProductList') || ''
+      );
       if (list?.length > 0) {
         dispatch(restoreUserSelectedProductList(list));
       } else {

@@ -5,7 +5,7 @@ import { userShippingDataType } from '../types/redux/userShippingDetails.type';
 import { userPaymentDetailsType } from '../types/redux/userPaymentDetails.type';
 
 export interface RootReduxState {
-  UserSlice: UserType[];
+  UserSlice: UserType;
   userSelectedProductListSlice: userCartProductsType;
   userShippingDetailsSlice: userShippingDataType;
   userPaymentDetailsSlice: userPaymentDetailsType

@@ -23,8 +23,12 @@ const ItemDetailView: FC<itemDetailViewProps> = ({ product }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [productDetail, setProductDetail] = useState<productsType>(product);
-  const [selectedSize, setSelectedSize] = useState<number>(productDetail?.size[0]);
-  const [selectedColor, setSelectedColor] = useState<number>(productDetail?.color[0]);
+  const [selectedSize, setSelectedSize] = useState<number>(
+    productDetail?.size && productDetail?.size[0]
+  );
+  const [selectedColor, setSelectedColor] = useState<number>(
+    productDetail?.color && productDetail?.color[0]
+  );
   const [value, setValue] = useState<string>('1');
   const userCartProductDetails = useSelector(state => state.userSelectedProductListSlice);
 
@@ -87,7 +91,7 @@ const ItemDetailView: FC<itemDetailViewProps> = ({ product }) => {
             gap: '60px'
           }}>
           {/* left box */}
-          <SwiperSlider productDetail={productDetail}/>
+          <SwiperSlider productDetail={productDetail} />
           {/* right side */}
           <Box
             sx={{
@@ -159,30 +163,32 @@ const ItemDetailView: FC<itemDetailViewProps> = ({ product }) => {
                   display: 'flex',
                   gap: '10px'
                 }}>
-                {Array.from(Array(productDetail.reviewRate), (e, index) => {
-                  return (
-                    <Image
-                      src={'/images/star.png'}
-                      alt="likeicon"
-                      key={index}
-                      width={30}
-                      height={30}
-                    />
-                  );
-                })}
-                {Array.from(Array(5 - productDetail.reviewRate), (e, index) => {
-                  return (
-                    <Image
-                      src={'/images/graystar.png'}
-                      alt="likeicon"
-                      key={index}
-                      width={30}
-                      height={30}
-                    />
-                  );
-                })}
+                {productDetail?.reviewRate &&
+                  Array.from(Array(productDetail.reviewRate), (e, index) => {
+                    return (
+                      <Image
+                        src={'/images/star.png'}
+                        alt="likeicon"
+                        key={index}
+                        width={30}
+                        height={30}
+                      />
+                    );
+                  })}
+                {productDetail?.reviewRate &&
+                  Array.from(Array(5 - productDetail.reviewRate), (e, index) => {
+                    return (
+                      <Image
+                        src={'/images/graystar.png'}
+                        alt="likeicon"
+                        key={index}
+                        width={30}
+                        height={30}
+                      />
+                    );
+                  })}
               </Box>
-              <Box>{productDetail.reviewRate} reviews</Box>
+              <Box>{productDetail?.reviewRate} reviews</Box>
             </Box>
             <Box sx={{ width: '100%', typography: 'body1' }}>
               <TabContext value={value}>
@@ -251,23 +257,25 @@ const ItemDetailView: FC<itemDetailViewProps> = ({ product }) => {
                     marginTop: { xs: '25px', lg: '50px' },
                     display: 'flex'
                   }}>
-                  {product.size.map((size, index) => {
-                    let sizeDetail = sizeLists.find(s => s.id === size);
-                    return (
-                      <Button
-                        key={index}
-                        sx={{
-                          color: selectedSize === size ? 'white' : 'black',
-                          width: 'fit-content',
-                          border: '1px solid #000000',
-                          padding: '10px 20px',
-                          backgroundColor: selectedSize === size ? '#1B2437 !important' : 'white'
-                        }}
-                        onClick={e => changeHandler('size', sizeDetail?.id)}>
-                        {sizeDetail?.value}
-                      </Button>
-                    );
-                  })}
+                  {product?.size &&
+                    product.size.length > 0 &&
+                    product.size.map((size, index) => {
+                      let sizeDetail = sizeLists.find(s => s.id === size);
+                      return (
+                        <Button
+                          key={index}
+                          sx={{
+                            color: selectedSize === size ? 'white' : 'black',
+                            width: 'fit-content',
+                            border: '1px solid #000000',
+                            padding: '10px 20px',
+                            backgroundColor: selectedSize === size ? '#1B2437 !important' : 'white'
+                          }}
+                          onClick={e => changeHandler('size', sizeDetail?.id)}>
+                          {sizeDetail?.value}
+                        </Button>
+                      );
+                    })}
                 </Box>
               </Box>
               <Box
@@ -290,24 +298,26 @@ const ItemDetailView: FC<itemDetailViewProps> = ({ product }) => {
                       gap: '20px',
                       marginTop: '10px'
                     }}>
-                    {product.color.map((color, index) => {
-                      let colorDetail = colorLists.find(c => c.id === color);
-                      return (
-                        <Button
-                          key={index}
-                          sx={{
-                            border: selectedColor === color ? '1px solid red' : '1px solid white',
-                            borderWidth: selectedColor === color ? '3px' : '0',
-                            width: 'fit-content',
-                            outlineColor:
-                              selectedColor === color ? '1px solid red' : '1px solid black',
-                            padding: '20px',
-                            backgroundColor: colorDetail?.haxValue,
-                            '&:hover': { backgroundColor: colorDetail?.haxValue }
-                          }}
-                          onClick={e => changeHandler('color', colorDetail?.id)}></Button>
-                      );
-                    })}
+                    {product?.color &&
+                      product.color.length > 0 &&
+                      product.color.map((color, index) => {
+                        let colorDetail = colorLists.find(c => c.id === color);
+                        return (
+                          <Button
+                            key={index}
+                            sx={{
+                              border: selectedColor === color ? '1px solid red' : '1px solid white',
+                              borderWidth: selectedColor === color ? '3px' : '0',
+                              width: 'fit-content',
+                              outlineColor:
+                                selectedColor === color ? '1px solid red' : '1px solid black',
+                              padding: '20px',
+                              backgroundColor: colorDetail?.haxValue,
+                              '&:hover': { backgroundColor: colorDetail?.haxValue }
+                            }}
+                            onClick={e => changeHandler('color', colorDetail?.id)}></Button>
+                        );
+                      })}
                   </Box>
                 </Box>
               </Box>

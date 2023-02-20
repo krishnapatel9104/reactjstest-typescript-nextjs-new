@@ -1,14 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import Image from 'next/image';
-import { Swiper, SwiperProps, SwiperRef, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import SwiperCore, { Navigation, Scrollbar, Pagination, Mousewheel, Keyboard } from 'swiper';
 import { productsType } from '../../types/constants/products.type';
-import classes from '../ItemDetailView/swiper.module.css';
 interface SwiperSlideProps {
   productDetail: productsType;
 }
@@ -16,8 +15,7 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
   const [selectedImage, setSelectedImage] = useState<number>();
   const [firstCurrentIndex, setFirstCurrentIndex] = useState<number>(0);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-  const swiperRef = useRef(null);
+  const [swiper, setSwiper] = useState<SwiperCore>();
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const firstPrevRef = useRef(null);
@@ -47,9 +45,8 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
   };
 
   useEffect(() => {
-    if (swiperRef !== null && selectedImage !== undefined)
-      swiperRef?.current.swiper.slideTo(selectedImage - 1);
-  }, [selectedImage]);
+    if (swiper !== null && selectedImage !== undefined) swiper?.slideTo(selectedImage - 1);
+  }, [selectedImage, swiper]);
   return (
     <Box
       sx={{
@@ -82,6 +79,7 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
           <Image src={'/images/vectorLeft.png'} alt="left" height={20} width={15} />
         </Box>
         <Swiper
+          onSwiper={swiper => setSwiper(swiper)}
           onSlideChange={state => setFirstCurrentIndex(state.activeIndex)}
           slidesPerView={1}
           spaceBetween={30}
@@ -97,46 +95,46 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
           pagination={false}
           mousewheel={true}
           keyboard={true}
-          modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-          ref={swiperRef}>
-          {productDetail.productImages.map((item, index) => {
-            return (
-              <Box
-                key={item.id}
-                sx={{
-                  height: {
-                    xs: '450px',
-                    md: '550px'
-                  },
-                  width: {
-                    xs: '250px',
-                    md: '500px'
-                  }
-                }}>
-                <SwiperSlide>
-                  <Image
-                    src={item.productImage}
-                    alt="imageGirl"
-                    height={0}
-                    width={0}
-                    sizes="(max-width:0) 100vw,
+          modules={[Navigation, Pagination, Mousewheel, Keyboard]}>
+          {productDetail &&
+            productDetail?.productImages && productDetail.productImages.map((item, index) => {
+              return (
+                <Box
+                  key={item.id}
+                  sx={{
+                    height: {
+                      xs: '450px',
+                      md: '550px'
+                    },
+                    width: {
+                      xs: '250px',
+                      md: '500px'
+                    }
+                  }}>
+                  <SwiperSlide>
+                    <Image
+                      src={item.productImage}
+                      alt="imageGirl"
+                      height={0}
+                      width={0}
+                      sizes="(max-width:0) 100vw,
                                 (max-height:0) 100vh"
-                    style={{
-                      objectFit: 'contain',
-                      height: '80%',
-                      width: '80%'
-                    }}
-                  />
-                </SwiperSlide>
-              </Box>
-            );
-          })}
+                      style={{
+                        objectFit: 'contain',
+                        height: '80%',
+                        width: '80%'
+                      }}
+                    />
+                  </SwiperSlide>
+                </Box>
+              );
+            })}
         </Swiper>
         <Box
           className="swiper-button image-swiper-button-next"
           ref={firstNextRef}
           sx={{
-            opacity: firstCurrentIndex === productDetail.productImages.length - 1 ? 0.2 : 1
+            opacity: firstCurrentIndex === productDetail?.productImages?.length - 1 ? 0.2 : 1
           }}>
           <Image src={'/images/vectorRight.png'} alt="left" height={20} width={15} />
         </Box>
@@ -217,33 +215,34 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
           onBeforeInit={onBeforeInitSecond}
           pagination={false}
           modules={[Keyboard, Scrollbar, Navigation, Pagination]}>
-          {productDetail.productImages.map(item => {
-            return (
-              <Box key={item.id}>
-                <SwiperSlide
-                  style={{
-                    marginTop: '50px',
-                    textAlign: 'center',
-                    fontSize: '18px',
-                    background: '#fff',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                  }}>
-                  <Image
-                    src={item.productImage}
-                    alt="likeicon"
+          {productDetail &&
+            productDetail?.productImages && productDetail.productImages.map(item => {
+              return (
+                <Box key={item.id}>
+                  <SwiperSlide
                     style={{
-                      display: 'block'
-                    }}
-                    height={130}
-                    width={100}
-                    onClick={e => changeProductImage(item.id)}
-                  />
-                </SwiperSlide>
-              </Box>
-            );
-          })}
+                      marginTop: '50px',
+                      textAlign: 'center',
+                      fontSize: '18px',
+                      background: '#fff',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center'
+                    }}>
+                    <Image
+                      src={item.productImage}
+                      alt="likeicon"
+                      style={{
+                        display: 'block'
+                      }}
+                      height={130}
+                      width={100}
+                      onClick={e => changeProductImage(item.id)}
+                    />
+                  </SwiperSlide>
+                </Box>
+              );
+            })}
         </Swiper>
         <Box
           className="swiper-button image-swiper-button-next"

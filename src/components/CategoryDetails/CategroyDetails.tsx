@@ -98,9 +98,7 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
       // `/product/${productDetail.slug}`
     );
   };
-  // const handleChangePrice = (_: Event, value: <[number, number]>) => {
-
-  // };
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let name = e.target.name;
     let value = parseInt(e.target.value);

@@ -8,7 +8,7 @@ const LoginPage: NextPage<LoginPageProps> = () => {
   const [userData, setUserData] = useState({});
   const [error, setError] = useState('');
   const router = useRouter();
-  const handleClick = e => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     localStorage.setItem('userCredentials', JSON.stringify(userData));
     setTimeout(() => {
@@ -16,7 +16,7 @@ const LoginPage: NextPage<LoginPageProps> = () => {
     }, 500);
   };
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem('userCredentials'));
+    const userData = JSON.parse(localStorage.getItem('userCredentials') || '');
     if (userData) {
       if (userData.userName !== '' && userData.password !== '') {
         router.push('/');
@@ -24,7 +24,7 @@ const LoginPage: NextPage<LoginPageProps> = () => {
     }
   });
 
-  const handleChange = e => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (
       e.target.name === 'userName' &&
       (e.target.value === '' || e.target.value !== 'krishnaPatel9104')
