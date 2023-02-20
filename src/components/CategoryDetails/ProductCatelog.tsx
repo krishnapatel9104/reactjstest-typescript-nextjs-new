@@ -2,6 +2,7 @@ import { Box, Grid, Pagination, Typography } from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
 import { productsType } from '../../types/constants/products.type';
+import { checkoutNewArrivalProductLists } from '../../data/checkoutNewArrivalProductLists';
 
 interface ProductCatelogProps {
   count: number;
@@ -95,26 +96,26 @@ const ProductCatelog: React.FC<ProductCatelogProps> = ({
                         onClick={e => handleProductClick(product)}
                       />
                     </Box>
-                    {/* {product.isNewArrival && (
-                          <Box
-                            sx={{
-                              backgroundColor: '#111827',
-                              width: 'fit-content',
-                              padding: '2px 10px',
-                              position: 'absolute',
-                              top: '0%'
-                            }}>
-                            <Typography
-                              sx={{
-                                fontFamily: 'Jost',
-                                fontWeight: '400',
-                                fontSize: '12px',
-                                color: '#FFFFFF'
-                              }}>
-                              New Arrivals
-                            </Typography>
-                          </Box>
-                        )} */}
+                    {checkoutNewArrivalProductLists.productId.includes(product.id) && (
+                      <Box
+                        sx={{
+                          backgroundColor: '#111827',
+                          width: 'fit-content',
+                          padding: '2px 10px',
+                          position: 'absolute',
+                          top: '0%'
+                        }}>
+                        <Typography
+                          sx={{
+                            fontFamily: 'Jost',
+                            fontWeight: '400',
+                            fontSize: '12px',
+                            color: '#FFFFFF'
+                          }}>
+                          New Arrivals
+                        </Typography>
+                      </Box>
+                    )}
                     <Box
                       sx={{
                         background: 'rgba(0, 0, 0, 0.3)',

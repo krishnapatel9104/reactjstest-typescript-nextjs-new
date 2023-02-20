@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import { Button, Typography, Box } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -20,6 +20,9 @@ import { genderLists } from '../../data/genderLists';
 export const BestDeal = () => {
   const router = useRouter();
   const [bestDealProducts, setBestDealProducts] = useState<productsType[]>();
+  const [swiperCurrentIndex, setSwiperCurrentIndex] = useState<number>(0);
+  const bestDealPrevRef = useRef(null);
+  const bestDealNextRef = useRef(null);
 
   useEffect(() => {
     let result = productLists.filter(productItem =>
@@ -87,8 +90,10 @@ export const BestDeal = () => {
               sm: '30px',
               md: '25px',
               lg: '25px'
-            }
-          }}>
+            },
+            opacity: swiperCurrentIndex === 0 ? 0.2 : 1
+          }}
+          ref={bestDealPrevRef}>
           <Image
             src={'/images/vectorLeft.png'}
             alt="imageGirl"
@@ -104,6 +109,8 @@ export const BestDeal = () => {
           />
         </Box>
         <Swiper
+          onReachBeginning={(e) =>setSwiperCurrentIndex(0)}
+          onReachEnd={(e) => setSwiperCurrentIndex(1)}
           slidesPerView={4}
           centeredSlides={false}
           slidesPerGroupSkip={1}
@@ -112,8 +119,8 @@ export const BestDeal = () => {
             enabled: true
           }}
           navigation={{
-            nextEl: '.image-swiper-button-next',
-            prevEl: '.image-swiper-button-prev',
+            prevEl: bestDealPrevRef.current,
+            nextEl: bestDealNextRef.current,
             disabledClass: 'swiper-button-disabled'
           }}
           breakpoints={{
@@ -245,8 +252,10 @@ export const BestDeal = () => {
               sm: '30px',
               md: '25px',
               lg: '25px'
-            }
-          }}>
+            },
+            opacity: swiperCurrentIndex === 1 ? 0.2 : 1
+          }}
+          ref={bestDealNextRef}>
           <Image
             src={'/images/vectorRight.png'}
             alt="imageGirl"

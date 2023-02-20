@@ -13,11 +13,15 @@ import { productsType } from '../../types/constants/products.type';
 import theme from '../../theme';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 export const BestSeller = () => {
   const router = useRouter();
   const [bestSellerProducts, setBestSellerProducts] = useState<productsType[]>();
+  const [swiperCurrentIndex, setSwiperCurrentIndex] = useState<number>(0);
+
+  const bestSellerPrevRef = useRef(null);
+  const bestSellerNextRef = useRef(null);
 
   useEffect(() => {
     let result = productLists.filter(productItem =>
@@ -77,15 +81,18 @@ export const BestSeller = () => {
               sm: '30px',
               md: '25px',
               lg: '25px'
-            }
-          }}>
+            },
+            opacity: swiperCurrentIndex === 0 ? 0.2 : 1
+          }}
+          ref={bestSellerPrevRef}
+          >
           <Image
             src={'/images/vectorLeft.png'}
             alt="imageGirl"
             height={0}
             width={0}
             sizes="(max-width:0) 100vw,
-                                (max-height:0) 100vh"
+                    (max-height:0) 100vh"
             style={{
               objectFit: 'contain',
               height: '100%',
@@ -94,6 +101,8 @@ export const BestSeller = () => {
           />
         </Box>
         <Swiper
+          onReachBeginning={(e) =>setSwiperCurrentIndex(0)}
+          onReachEnd={(e) => setSwiperCurrentIndex(1)}
           slidesPerView={4}
           centeredSlides={false}
           slidesPerGroupSkip={1}
@@ -102,8 +111,8 @@ export const BestSeller = () => {
             enabled: true
           }}
           navigation={{
-            nextEl: '.image-swiper-button-next',
-            prevEl: '.image-swiper-button-prev',
+            prevEl: bestSellerPrevRef.current,
+            nextEl: bestSellerNextRef.current,
             disabledClass: 'swiper-button-disabled'
           }}
           breakpoints={{
@@ -241,15 +250,17 @@ export const BestSeller = () => {
               sm: '30px',
               md: '25px',
               lg: '25px'
-            }
-          }}>
+            },
+            opacity: swiperCurrentIndex === 1 ? 0.2 : 1
+          }}
+          ref={bestSellerNextRef}>
           <Image
             src={'/images/vectorRight.png'}
             alt="imageGirl"
             height={0}
             width={0}
             sizes="(max-width:0) 100vw,
-                                (max-height:0) 100vh"
+                    (max-height:0) 100vh"
             style={{
               objectFit: 'contain',
               height: '100%',

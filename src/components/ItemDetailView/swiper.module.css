@@ -1,0 +1,12 @@
+.swiper-button-next{
+  background-image:url("/images/vectorLeft.png");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+}
+.swiper-button-next::after{
+  display:none;
+}
+.swiper-button-next{
+  color:black;
+}

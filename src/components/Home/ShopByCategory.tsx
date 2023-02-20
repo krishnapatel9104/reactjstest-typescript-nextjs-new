@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Button, Typography, Box, Link } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
-import { Keyboard, Scrollbar, Pagination, Navigation } from 'swiper';
+import SwiperCore, { Keyboard, Scrollbar, Pagination, Navigation } from 'swiper';
 import { productLists } from '../../data/productLists';
 import { genderLists } from '../../data/genderLists';
 import { categoryLists } from '../../data/categoryLists';
@@ -17,6 +17,20 @@ export const ShopByCategory = () => {
   const router = useRouter();
   const [selectedGender, setSelectedGender] = useState<number>(genderLists[0].id);
   const [selectedCategory, setSelectedCategory] = useState<number>(categoryLists[0].id);
+  const [swiperCurrentIndex, setSwiperCurrentIndex] = useState<number>(0);
+
+  const shopByCategoryPrevRef = useRef(null);
+  const shopByCategoryNextRef = useRef(null);
+
+  const onBeforeInit = (Swiper: SwiperCore): void => {
+    if (typeof Swiper.params.navigation !== 'boolean') {
+      const navigation = Swiper.params.navigation;
+      if (navigation) {
+        navigation.prevEl = shopByCategoryPrevRef.current;
+        navigation.nextEl = shopByCategoryNextRef.current;
+      }
+    }
+  };
 
   return (
     <Box>
@@ -58,7 +72,10 @@ export const ShopByCategory = () => {
                   color: selectedGender === gender.id ? theme.palette.primary.main : '#757575',
                   borderBottom: selectedGender === gender.id ? '1px solid #757575' : 'none' //foractive
                 }}
-                onClick={() => setSelectedGender(gender.id)}>
+                onClick={() => {
+                  setSelectedGender(gender.id);
+                  setSwiperCurrentIndex(0);
+                }}>
                 For {gender.name}
               </Link>
             );
@@ -95,7 +112,10 @@ export const ShopByCategory = () => {
                 background:
                   selectedCategory === categoryObj.id ? '#E0E0E0' : theme.palette.background.default
               }}
-              onClick={() => setSelectedCategory(categoryObj.id)}>
+              onClick={e => {
+                setSelectedCategory(categoryObj.id);
+                setSwiperCurrentIndex(0);
+              }}>
               {categoryObj.name}
             </Link>
           );
@@ -133,15 +153,17 @@ export const ShopByCategory = () => {
               sm: '30px',
               md: '25px',
               lg: '25px'
-            }
-          }}>
+            },
+            opacity: swiperCurrentIndex === 0 ? 0.2 : 1
+          }}
+          ref={shopByCategoryPrevRef}>
           <Image
             src={'/images/vectorLeft.png'}
             alt="imageGirl"
             height={0}
             width={0}
             sizes="(max-width:0) 100vw,
-                                (max-height:0) 100vh"
+                    (max-height:0) 100vh"
             style={{
               objectFit: 'contain',
               height: '100%',
@@ -150,6 +172,8 @@ export const ShopByCategory = () => {
           />
         </Box>
         <Swiper
+          onReachBeginning={e => setSwiperCurrentIndex(0)}
+          onReachEnd={e => setSwiperCurrentIndex(1)}
           slidesPerView={4}
           centeredSlides={false}
           slidesPerGroupSkip={1}
@@ -157,9 +181,10 @@ export const ShopByCategory = () => {
           keyboard={{
             enabled: true
           }}
+          onBeforeInit={onBeforeInit}
           navigation={{
-            nextEl: '.image-swiper-button-next',
-            prevEl: '.image-swiper-button-prev',
+            prevEl: shopByCategoryPrevRef.current,
+            nextEl: shopByCategoryNextRef.current,
             disabledClass: 'swiper-button-disabled'
           }}
           breakpoints={{
@@ -186,10 +211,7 @@ export const ShopByCategory = () => {
             productLists.map(product => {
               let gender = genderLists.find(gender => gender.id === selectedGender);
               let category = categoryLists.find(category => category.id === selectedCategory);
-
               if (product.category === selectedCategory && product.gender === selectedGender) {
-                console.log('product :::::::::::: ', product);
-
                 return (
                   <Box key={product.id}>
                     <SwiperSlide
@@ -303,15 +325,17 @@ export const ShopByCategory = () => {
               sm: '30px',
               md: '25px',
               lg: '25px'
-            }
-          }}>
+            },
+            opacity: swiperCurrentIndex === 1 ? 0.2 : 1
+          }}
+          ref={shopByCategoryNextRef}>
           <Image
             src={'/images/vectorRight.png'}
             alt="imageGirl"
             height={0}
             width={0}
             sizes="(max-width:0) 100vw,
-                                (max-height:0) 100vh"
+                    (max-height:0) 100vh"
             style={{
               objectFit: 'contain',
               height: '100%',

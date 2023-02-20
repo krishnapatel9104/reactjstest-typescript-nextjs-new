@@ -1,23 +1,51 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import Image from 'next/image';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperProps, SwiperRef, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { Navigation, Scrollbar, Pagination, Mousewheel, Keyboard } from 'swiper';
+import SwiperCore, { Navigation, Scrollbar, Pagination, Mousewheel, Keyboard } from 'swiper';
 import { productsType } from '../../types/constants/products.type';
-
+import classes from '../ItemDetailView/swiper.module.css';
 interface SwiperSlideProps {
   productDetail: productsType;
 }
 const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
   const [selectedImage, setSelectedImage] = useState<number>();
+  const [firstCurrentIndex, setFirstCurrentIndex] = useState<number>(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
   const swiperRef = useRef(null);
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+  const firstPrevRef = useRef(null);
+  const firstNextRef = useRef(null);
+
   const changeProductImage = (item: number) => {
     setSelectedImage(item);
   };
+
+  const onBeforeInit = (Swiper: SwiperCore): void => {
+    if (typeof Swiper.params.navigation !== 'boolean') {
+      const navigation = Swiper.params.navigation;
+      if (navigation) {
+        navigation.prevEl = firstPrevRef.current;
+        navigation.nextEl = firstNextRef.current;
+      }
+    }
+  };
+  const onBeforeInitSecond = (Swiper: SwiperCore): void => {
+    if (typeof Swiper.params.navigation !== 'boolean') {
+      const navigation = Swiper.params.navigation;
+      if (navigation) {
+        navigation.prevEl = prevRef.current;
+        navigation.nextEl = nextRef.current;
+      }
+    }
+  };
+
   useEffect(() => {
     if (swiperRef !== null && selectedImage !== undefined)
       swiperRef?.current.swiper.slideTo(selectedImage - 1);
@@ -45,23 +73,27 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
             xl: '100px'
           }
         }}>
-        <Box className="swiper-button image-swiper-button-prev">
+        <Box
+          className="swiper-button image-swiper-button-prev"
+          ref={firstPrevRef}
+          sx={{
+            opacity: firstCurrentIndex === 0 ? 0.2 : 1
+          }}>
           <Image src={'/images/vectorLeft.png'} alt="left" height={20} width={15} />
-          {/* <KeyboardArrowLeftIcon style={{ color: "#333333", fontSize: "20px" }} /> */}
         </Box>
         <Swiper
-          // onSwiper={swiper => console.log('1st :', swiper)}
-          // onSlideChange={() => console.log('slide change 1st')}
+          onSlideChange={state => setFirstCurrentIndex(state.activeIndex)}
           slidesPerView={1}
           spaceBetween={30}
           centeredSlides={false}
           slidesPerGroupSkip={1}
           cssMode={true}
           navigation={{
-            nextEl: '.image-swiper-button-next',
-            prevEl: '.image-swiper-button-prev',
+            prevEl: firstPrevRef.current,
+            nextEl: firstNextRef.current,
             disabledClass: 'swiper-button-disabled'
           }}
+          onBeforeInit={onBeforeInit}
           pagination={false}
           mousewheel={true}
           keyboard={true}
@@ -100,9 +132,13 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
             );
           })}
         </Swiper>
-        <Box className="swiper-button image-swiper-button-next">
+        <Box
+          className="swiper-button image-swiper-button-next"
+          ref={firstNextRef}
+          sx={{
+            opacity: firstCurrentIndex === productDetail.productImages.length - 1 ? 0.2 : 1
+          }}>
           <Image src={'/images/vectorRight.png'} alt="left" height={20} width={15} />
-          {/* <ChevronRightIcon style={{ color: "#333333" }} /> */}
         </Box>
       </Box>
       <Box
@@ -117,13 +153,16 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
           alignItems: 'center',
           gap: '50px'
         }}>
-        <Box className="swiper-button image-swiper-button-prev">
+        <Box
+          className="swiper-button image-swiper-button-prev"
+          ref={prevRef}
+          sx={{
+            opacity: currentIndex === 0 ? 0.2 : 1
+          }}>
           <Image src={'/images/vectorLeft.png'} alt="left" height={20} width={15} />
-          {/* <KeyboardArrowLeftIcon style={{ color: "#333333" }} /> */}
         </Box>
         <Swiper
-          onSwiper={swiper => console.log('2nd : ', swiper)}
-          onSlideChange={() => console.log('slide change 2nd')}
+          onSlideChange={state => setCurrentIndex(state.activeIndex)}
           slidesPerView={5}
           spaceBetween={30}
           slidesPerGroupSkip={1}
@@ -171,13 +210,14 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
           }}
           scrollbar={false}
           navigation={{
-            nextEl: '.image-swiper-button-next',
-            prevEl: '.image-swiper-button-prev',
+            prevEl: prevRef.current,
+            nextEl: nextRef.current,
             disabledClass: 'swiper-button-disabled'
           }}
+          onBeforeInit={onBeforeInitSecond}
           pagination={false}
           modules={[Keyboard, Scrollbar, Navigation, Pagination]}>
-          {productDetail.productImages.map((item, index) => {
+          {productDetail.productImages.map(item => {
             return (
               <Box key={item.id}>
                 <SwiperSlide
@@ -205,9 +245,13 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
             );
           })}
         </Swiper>
-        <Box className="swiper-button image-swiper-button-next">
+        <Box
+          className="swiper-button image-swiper-button-next"
+          ref={nextRef}
+          sx={{
+            opacity: currentIndex === 1 ? 0.2 : 1
+          }}>
           <Image src={'/images/vectorRight.png'} alt="left" height={20} width={15} />
-          {/* <ChevronRightIcon style={{ color: "#333333" }} /> */}
         </Box>
       </Box>
     </Box>
