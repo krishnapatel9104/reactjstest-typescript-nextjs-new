@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { userCartProductsType, userCartProductType } from "../../../types/redux/userSelectedProductList.type";
 import { deleteUserSelectedProductListType, updateUserSelectedProductListType } from '../../../types/redux/updateUserSelectedProductList.type';
-// import { categoryProductListType } from "../../../types/constants/categoryProductList.type";
 
 const initialState: userCartProductsType = {
   cartProductDetails: []

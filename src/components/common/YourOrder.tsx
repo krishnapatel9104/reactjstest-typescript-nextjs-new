@@ -14,8 +14,13 @@ import { productsType } from '../../types/constants/products.type';
 import { productLists } from '../../data/productLists';
 import { sizeLists } from '../../data/sizeLists';
 import { colorLists } from '../../data/colorLists';
+import { userCartProductType } from '../../types/redux/userSelectedProductList.type';
 
-export const YourOrder = () => {
+interface YourOrderProps {
+  isLoading: boolean;
+  setIsLoading: (val: boolean) => void;
+}
+export const YourOrder: React.FC<YourOrderProps> = ({ isLoading, setIsLoading }) => {
   const dispatch = useDispatch();
   let total = 0;
 
@@ -28,20 +33,25 @@ export const YourOrder = () => {
   const [, setUserCartProductLists] = useState<productsType[]>([]);
 
   useEffect(() => {
-    if (productDetails) {
-      let allCartProductIds = productDetails.map(p => p.productId);
-      let cartProductLists = productLists.filter(productItem =>
-        allCartProductIds.some(cartProductId => productItem.id === cartProductId)
-      );
-      if (productDetails.length > 0) {
-        localStorage.setItem('userSelectedProductList', JSON.stringify(productDetails));
-      }
+    let allCartProductIds = productDetails.map(p => p.productId);
+    let cartProductLists = productLists.filter(productItem =>
+      allCartProductIds.some(cartProductId => productItem.id === cartProductId)
+    );
+    if (productDetails.length > 0) {
+      localStorage.setItem('userSelectedProductList', JSON.stringify(productDetails));
       setUserCartProductLists(cartProductLists);
     }
   }, [productDetails]);
 
-  const handleClick = (id: number | undefined) => {
-    if (id) dispatch(deleteSelectedProductList({ id: id }));
+  const handleClick = (id: number) => {
+    let list: userCartProductType[] = JSON.parse(
+      localStorage.getItem('userSelectedProductList') || ''
+    );
+    if (list?.length > 0) {
+      let newProductLists = list.filter(product => product.id !== id);
+      localStorage.setItem('userSelectedProductList', JSON.stringify(newProductLists));
+    }
+    dispatch(deleteSelectedProductList({ id: id }));
   };
   const handleQuantityChange = (identifier: string, id: number | undefined) => {
     if (identifier === 'add' && id) {
@@ -61,16 +71,13 @@ export const YourOrder = () => {
       );
     }
   };
-  const handleChange = (
-    e: SelectChangeEvent<string> | SelectChangeEvent<number | false>,
-    id: number | undefined
-  ) => {
+  const handleChange = (e: SelectChangeEvent<number>, id: number) => {
     const { name, value } = e.target;
     if (name === 'size' && id) {
       dispatch(
         updateUserSelectedProductList({
           id: id,
-          size: typeof value === 'string' ? parseInt(value) : undefined
+          size: typeof value === 'string' ? parseInt(value) : value
         })
       );
     }
@@ -78,7 +85,7 @@ export const YourOrder = () => {
       dispatch(
         updateUserSelectedProductList({
           id: id,
-          color: typeof value === 'string' ? parseInt(value) : undefined
+          color: typeof value === 'string' ? parseInt(value) : value
         })
       );
     }
@@ -125,7 +132,7 @@ export const YourOrder = () => {
                 {cartProductDetails?.productName}
               </Box>
               <Box>
-                <Button sx={{ color: 'red' }} onClick={e => handleClick(order.id)}>
+                <Button sx={{ color: 'red' }} onClick={e => handleClick(order.id || 0)}>
                   <DeleteOutlineSharpIcon />
                 </Button>
               </Box>
@@ -237,10 +244,8 @@ export const YourOrder = () => {
                     labelId="demo-multiple-name-label"
                     id="demo-multiple-name"
                     name="size"
-                    value={
-                      sizeObjects.length > 0 && sizeObjects.find(size => size.id === order.size)?.id
-                    }
-                    onChange={e => handleChange(e, order.id)}
+                    value={sizeObjects.find(size => size.id === order.size)?.id}
+                    onChange={e => handleChange(e, order.id || 0)}
                     sx={{
                       width: {
                         xs: '170px',
@@ -269,11 +274,8 @@ export const YourOrder = () => {
                     labelId="demo-multiple-name-label"
                     id="demo-multiple-name"
                     name="color"
-                    value={
-                      colorObjects.length > 0 &&
-                      colorObjects.find(color => color.id === order.size)?.id
-                    }
-                    onChange={e => handleChange(e, order.id)}
+                    value={colorObjects.find(color => color.id === order.color)?.id}
+                    onChange={e => handleChange(e, order.id || 0)}
                     sx={{
                       width: {
                         xs: '170px',
