@@ -10,11 +10,9 @@ import { productsType } from '../../types/constants/products.type';
 import { categoryLists } from '../../data/categoryLists';
 import { productLists } from '../../data/productLists';
 import { brandLists } from '../../data/brandLists';
-import { sizeLists } from '../../data/sizeLists';
 import { genderLists } from '../../data/genderLists';
 import FilterComponent from './FilterComponent';
 import ProductCatelog from './ProductCatelog';
-import { arrayBuffer } from 'stream/consumers';
 
 interface categoryDetailsProps {
   products: productsType[];
@@ -39,25 +37,25 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
   const router = useRouter();
 
   useEffect(() => {
+    let curRoute = router.asPath;
+    let genderValue = curRoute.split('/')[1];
+    let object = genderLists.find(gender => gender.slug === genderValue);
+    if (object) setSelectedGender(object.id);
+    let brandOrCategoryType = curRoute.split('/')[3];
+    if (brandOrCategoryType) setSelectedType(brandOrCategoryType);
+    let brandOrCategoryValue = curRoute.split('/')[4];
+    if (brandOrCategoryType === 'category' && brandOrCategoryValue && categoryLists) {
+      let object = categoryLists.find(category => category.slug === brandOrCategoryValue);
+      if (object) setCategoryFilter([object.id]);
+    }
+    if (brandOrCategoryType === 'brand' && brandOrCategoryValue && brandLists) {
+      let object = brandLists.find(brand => brand.slug === brandOrCategoryValue);
+      if (object) setBrandFilter([object.id]);
+    }
     if (products.length > 0) {
       let minPrice = Math.min(...products.map(product => product.productCurrentPrice));
       let maxPrice = Math.max(...products.map(product => product.productCurrentPrice));
       setPriceFilter([minPrice, maxPrice]);
-      let curRoute = router.asPath;
-      let genderValue = curRoute.split('/')[1];
-      let object = genderLists.find(gender => gender.slug === genderValue);
-      if (object) setSelectedGender(object.id);
-      let brandOrCategoryType = curRoute.split('/')[3];
-      if (brandOrCategoryType) setSelectedType(brandOrCategoryType);
-      let brandOrCategoryValue = curRoute.split('/')[4];
-      if (brandOrCategoryType === 'category' && brandOrCategoryValue && categoryLists) {
-        let object = categoryLists.find(category => category.slug === brandOrCategoryValue);
-        if (object) setCategoryFilter([object.id, ...categoryFilter]);
-      }
-      if (brandOrCategoryType === 'brand' && brandOrCategoryValue && brandLists) {
-        let object = brandLists.find(brand => brand.slug === brandOrCategoryValue);
-        if (object) setBrandFilter([object.id, ...brandFilter]);
-      }
     }
   }, [products, router.asPath]);
 
@@ -98,7 +96,7 @@ const CategroyDetails: FC<categoryDetailsProps> = ({ products }) => {
       // `/product/${productDetail.slug}`
     );
   };
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let name = e.target.name;
     let value = parseInt(e.target.value);

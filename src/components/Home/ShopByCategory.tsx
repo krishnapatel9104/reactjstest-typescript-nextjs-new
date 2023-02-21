@@ -154,7 +154,8 @@ export const ShopByCategory = () => {
               md: '25px',
               lg: '25px'
             },
-            opacity: swiperCurrentIndex === 0 ? 0.2 : 1
+            opacity: swiperCurrentIndex === 0 ? 0.2 : 1,
+            marginTop: '-90px'
           }}
           ref={shopByCategoryPrevRef}>
           <Image
@@ -326,7 +327,8 @@ export const ShopByCategory = () => {
               md: '25px',
               lg: '25px'
             },
-            opacity: swiperCurrentIndex === 1 ? 0.2 : 1
+            opacity: swiperCurrentIndex === 1 ? 0.2 : 1,
+            marginTop: '-90px'
           }}
           ref={shopByCategoryNextRef}>
           <Image

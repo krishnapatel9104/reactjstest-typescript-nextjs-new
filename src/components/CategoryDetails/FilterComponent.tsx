@@ -50,7 +50,7 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
             flexDirection: 'column',
             gap: '40px',
             position: 'absolute',
-            top: '9%',
+            top: '93px',
             left: 0,
             zIndex: 1,
             backgroundColor: 'white',

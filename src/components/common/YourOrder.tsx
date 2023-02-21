@@ -28,18 +28,13 @@ export const YourOrder: React.FC<YourOrderProps> = ({ isLoading, setIsLoading })
     Shipping: 64,
     vatAndTax: 64
   };
-  const reduxData = useSelector(state => state.userSelectedProductListSlice);
-  const productDetails = reduxData.cartProductDetails;
-  const [, setUserCartProductLists] = useState<productsType[]>([]);
+  const productDetails = useSelector(
+    state => state.userSelectedProductListSlice.cartProductDetails
+  );
 
   useEffect(() => {
-    let allCartProductIds = productDetails.map(p => p.productId);
-    let cartProductLists = productLists.filter(productItem =>
-      allCartProductIds.some(cartProductId => productItem.id === cartProductId)
-    );
     if (productDetails.length > 0) {
       localStorage.setItem('userSelectedProductList', JSON.stringify(productDetails));
-      setUserCartProductLists(cartProductLists);
     }
   }, [productDetails]);
 

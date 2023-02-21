@@ -19,7 +19,6 @@ const CategoryProductPage: NextPage<CategoryProductPageProps> = ({ products }) =
 export const getServerSideProps: GetServerSideProps = async context => {
   let gender = genderLists.find(gender => gender.slug === context.query.gender);
   let category = categoryLists.find(category => category.slug === context.query.category);
-
   let result = productLists.filter(
     productItem => productItem.gender === gender?.id && productItem.category === category?.id
   );

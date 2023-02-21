@@ -91,7 +91,8 @@ export const BestDeal = () => {
               md: '25px',
               lg: '25px'
             },
-            opacity: swiperCurrentIndex === 0 ? 0.2 : 1
+            opacity: swiperCurrentIndex === 0 ? 0.2 : 1,
+            marginTop: '-90px'
           }}
           ref={bestDealPrevRef}>
           <Image
@@ -156,7 +157,15 @@ export const BestDeal = () => {
                       justifyContent: 'center',
                       alignItems: 'center'
                     }}
-                    onClick={() => router.push(`/product/${product.slug}`)}>
+                    onClick={() => {
+                      router.replace(
+                        {
+                          pathname: `/product/${product.slug}`,
+                          query: { productId: product.id }
+                        }
+                        // `/product/${productDetail.slug}`
+                      );
+                    }}>
                     <Box
                       sx={{
                         marginLeft: '10px',
@@ -253,7 +262,8 @@ export const BestDeal = () => {
               md: '25px',
               lg: '25px'
             },
-            opacity: swiperCurrentIndex === 1 ? 0.2 : 1
+            opacity: swiperCurrentIndex === 1 ? 0.2 : 1,
+            marginTop: '-90px'
           }}
           ref={bestDealNextRef}>
           <Image

@@ -97,7 +97,8 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
           keyboard={true}
           modules={[Navigation, Pagination, Mousewheel, Keyboard]}>
           {productDetail &&
-            productDetail?.productImages && productDetail.productImages.map((item, index) => {
+            productDetail?.productImages &&
+            productDetail.productImages.map((item, index) => {
               return (
                 <Box
                   key={item.id}
@@ -149,13 +150,16 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          gap: '50px'
+          gap: '50px',
+          '& .swiper-slide:first-child': {
+              marginLeft: '10px'
+            }
         }}>
         <Box
           className="swiper-button image-swiper-button-prev"
           ref={prevRef}
           sx={{
-            opacity: currentIndex === 0 ? 0.2 : 1
+            opacity: currentIndex === 0 ? 0.2 : 1,
           }}>
           <Image src={'/images/vectorLeft.png'} alt="left" height={20} width={15} />
         </Box>
@@ -216,7 +220,8 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
           pagination={false}
           modules={[Keyboard, Scrollbar, Navigation, Pagination]}>
           {productDetail &&
-            productDetail?.productImages && productDetail.productImages.map(item => {
+            productDetail?.productImages &&
+            productDetail.productImages.map(item => {
               return (
                 <Box key={item.id}>
                   <SwiperSlide
@@ -233,7 +238,8 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
                       src={item.productImage}
                       alt="likeicon"
                       style={{
-                        display: 'block'
+                        display: 'block',
+                        objectFit: 'contain'
                       }}
                       height={130}
                       width={100}

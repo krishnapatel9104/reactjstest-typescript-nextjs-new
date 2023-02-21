@@ -49,25 +49,26 @@ const ItemDetailView: FC<itemDetailViewProps> = ({ product }) => {
     if (type === 'color' && value) setSelectedColor(value);
     else if (type === 'size' && value) setSelectedSize(value);
   };
-  const handleShopNow = () => {
+
+  const productObjectDetail = () => {
     let addProductToCartObject = {
       productId: productDetail?.id,
       quantity: 1,
       size: selectedSize,
       color: selectedColor
     };
-    dispatch(setUserSelectedProductList(addProductToCartObject));
+    return addProductToCartObject;
+  };
+
+  const handleShopNow = () => {
+    let object = productObjectDetail();
+    dispatch(setUserSelectedProductList(object));
     router.push('/shipping');
   };
 
   const handleAddToCart = () => {
-    let addProductToCartObject = {
-      productId: productDetail?.id,
-      quantity: 1,
-      size: selectedSize,
-      color: selectedColor
-    };
-    dispatch(setUserSelectedProductList(addProductToCartObject));
+    let object = productObjectDetail();
+    dispatch(setUserSelectedProductList(object));
   };
 
   return (

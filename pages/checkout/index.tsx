@@ -92,7 +92,14 @@ const CheckoutPage: NextPage<CheckoutPageProps> = () => {
       let curYear = new Date().getFullYear().toString().slice(-2);
       if (month.includes('_') || year.includes('_')) {
         setErrors({ ...errors, expiration: 'Enter Properly' });
-      } else if ((month < curMonth && year < curYear) || (month < curMonth && year <= curYear)) {
+      } else if (parseInt(month) > 12 || parseInt(month) === 0) {
+        setErrors({ ...errors, expiration: 'Month Invalid' });
+      } else if (
+        (month < curMonth && year < curYear) ||
+        (month < curMonth && year <= curYear) ||
+        year < curYear ||
+        month < curMonth
+      ) {
         setErrors({ ...errors, expiration: 'Expiration must be in future' });
       } else {
         setErrors({ ...errors, expiration: '' });

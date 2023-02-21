@@ -38,7 +38,7 @@ export const productLists: productsType[] = [
     size: [2, 4],
     color: [1, 3, 5],
     reviewRate: 3,
-    slug: 'louis-vouiton-active-wear'
+    slug: 'louisvouitonactivewear'
   },
   {
     id: 2,
@@ -78,7 +78,7 @@ export const productLists: productsType[] = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 3,
-    slug: 'ocean-blue-ring'
+    slug: 'oceanbluering'
   },
   {
     id: 3,
@@ -118,7 +118,7 @@ export const productLists: productsType[] = [
     size: [2, 3, 4],
     color: [2, 5],
     reviewRate: 3,
-    slug: 'brown-leathered-wallet'
+    slug: 'brownleatheredwallet'
   },
   {
     id: 4,
@@ -158,7 +158,7 @@ export const productLists: productsType[] = [
     size: [2, 4],
     color: [2, 3],
     reviewRate: 3,
-    slug: 'brown-leathered-wallet'
+    slug: 'brownleatheredwallet'
   },
   {
     id: 5,
@@ -198,7 +198,7 @@ export const productLists: productsType[] = [
     size: [2, 3, 4],
     color: [2, 5],
     reviewRate: 3,
-    slug: 'brown-leathered-wallet'
+    slug: 'brownleatheredwallet'
   },
   {
     id: 6,
@@ -238,7 +238,7 @@ export const productLists: productsType[] = [
     size: [2, 4, 5],
     color: [3, 5],
     reviewRate: 3,
-    slug: 'marie-claire-handbag'
+    slug: 'marieclairehandbag'
   },
   {
     id: 7,
@@ -278,7 +278,7 @@ export const productLists: productsType[] = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 3,
-    slug: 'red-gem-earrings'
+    slug: 'redgemearrings'
   },
   {
     id: 8,
@@ -318,7 +318,7 @@ export const productLists: productsType[] = [
     size: [3, 4],
     color: [2, 5],
     reviewRate: 4,
-    slug: 'brown-leathered-wallet'
+    slug: 'brownleatheredwallet'
   },
   {
     id: 9,
@@ -398,7 +398,7 @@ export const productLists: productsType[] = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 3,
-    slug: 'red-gem-earrings'
+    slug: 'redgemearrings'
   },
   {
     id: 11,
@@ -438,7 +438,7 @@ export const productLists: productsType[] = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 3,
-    slug: 'red-gem-earrings'
+    slug: 'redgemearrings'
   },
   {
     id: 12,
@@ -478,7 +478,7 @@ export const productLists: productsType[] = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: 'red-gem-earrings'
+    slug: 'redgemearrings'
   },
   {
     id: 13,
@@ -518,7 +518,7 @@ export const productLists: productsType[] = [
     size: [2],
     color: [5],
     reviewRate: 4,
-    slug: 'red-gem-earrings'
+    slug: 'redgemearrings'
   },
   {
     id: 14,
@@ -558,7 +558,7 @@ export const productLists: productsType[] = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: 'red-gem-earrings'
+    slug: 'redgemearrings'
   },
   {
     id: 15,
@@ -598,7 +598,7 @@ export const productLists: productsType[] = [
     size: [1, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: 'santiago-blood-white'
+    slug: 'santiagobloodwhite'
   },
   {
     id: 16,
@@ -638,7 +638,7 @@ export const productLists: productsType[] = [
     size: [1, 2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: 'salomon-lightning-blue'
+    slug: 'salomonlightning-blue'
   },
   {
     id: 17,
@@ -678,7 +678,7 @@ export const productLists: productsType[] = [
     size: [1, 2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: 'salomon-lightning-blue'
+    slug: 'salomonlightning-blue'
   },
   {
     id: 18,
@@ -718,7 +718,7 @@ export const productLists: productsType[] = [
     size: [1, 2],
     color: [2, 5],
     reviewRate: 4,
-    slug: 'salomon-lightning-blue'
+    slug: 'salomonlightning-blue'
   },
   {
     id: 19,
@@ -758,7 +758,7 @@ export const productLists: productsType[] = [
     size: [4, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: 'salomon-lightning-blue'
+    slug: 'salomonlightning-blue'
   },
   {
     id: 20,
@@ -1998,7 +1998,7 @@ export const productLists: productsType[] = [
     size: [1, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: 'red-gem-earrings'
+    slug: 'redgemearrings'
   },
   {
     id: 51,
@@ -2038,7 +2038,7 @@ export const productLists: productsType[] = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: 'red-gem-earrings'
+    slug: 'redgemearrings'
   },
   {
     id: 52,
@@ -2078,7 +2078,7 @@ export const productLists: productsType[] = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: 'red-gem-earrings'
+    slug: 'redgemearrings'
   },
   {
     id: 53,
@@ -2118,7 +2118,7 @@ export const productLists: productsType[] = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: 'red-gem-earrings'
+    slug: 'redgemearrings'
   },
   {
     id: 54,
@@ -2158,6 +2158,6 @@ export const productLists: productsType[] = [
     size: [2, 3],
     color: [2, 5],
     reviewRate: 4,
-    slug: 'red-gem-earrings'
+    slug: 'redgemearrings'
   }
 ];
