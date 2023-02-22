@@ -16,11 +16,8 @@ import { sizeLists } from '../../data/sizeLists';
 import { colorLists } from '../../data/colorLists';
 import { userCartProductType } from '../../types/redux/userSelectedProductList.type';
 
-interface YourOrderProps {
-  isLoading: boolean;
-  setIsLoading: (val: boolean) => void;
-}
-export const YourOrder: React.FC<YourOrderProps> = ({ isLoading, setIsLoading }) => {
+interface YourOrderProps {}
+export const YourOrder: React.FC<YourOrderProps> = ({}) => {
   const dispatch = useDispatch();
   let total = 0;
 

@@ -45,7 +45,7 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
   };
 
   useEffect(() => {
-    if (swiper !== null && selectedImage !== undefined) swiper?.slideTo(selectedImage - 1);
+    if (swiper !== undefined && selectedImage !== undefined) swiper?.slideTo(selectedImage - 1);
   }, [selectedImage, swiper]);
   return (
     <Box
@@ -57,7 +57,6 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
         }
       }}>
       <Box
-        className="mainSlider"
         sx={{
           display: 'flex',
           justifyContent: 'center',
@@ -91,7 +90,7 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
             nextEl: firstNextRef.current,
             disabledClass: 'swiper-button-disabled'
           }}
-          onBeforeInit={onBeforeInit}
+          onInit={onBeforeInit}
           pagination={false}
           mousewheel={true}
           keyboard={true}
@@ -141,7 +140,6 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
         </Box>
       </Box>
       <Box
-        className="secondSlider"
         sx={{
           marginTop: '50px',
           '& .swiper-button-next, .swiper-button-prev': {
@@ -152,14 +150,14 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
           alignItems: 'center',
           gap: '50px',
           '& .swiper-slide:first-child': {
-              marginLeft: '10px'
-            }
+            marginLeft: '10px'
+          }
         }}>
         <Box
           className="swiper-button image-swiper-button-prev"
           ref={prevRef}
           sx={{
-            opacity: currentIndex === 0 ? 0.2 : 1,
+            opacity: currentIndex === 0 ? 0.2 : 1
           }}>
           <Image src={'/images/vectorLeft.png'} alt="left" height={20} width={15} />
         </Box>
@@ -216,7 +214,7 @@ const SwiperSlider: React.FC<SwiperSlideProps> = ({ productDetail }) => {
             nextEl: nextRef.current,
             disabledClass: 'swiper-button-disabled'
           }}
-          onBeforeInit={onBeforeInitSecond}
+          onInit={onBeforeInitSecond}
           pagination={false}
           modules={[Keyboard, Scrollbar, Navigation, Pagination]}>
           {productDetail &&

@@ -5,8 +5,8 @@ export const ProtectedRoute = (props: any) => {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const checkUserToken = () => {
-    const userData = localStorage.getItem("userCredentials");
-    if (!userData || userData === "undefined") {
+    const userData = localStorage.getItem("isLoggedIn");
+    if (userData === null || userData === 'false') {
       setIsLoggedIn(false);
       return router.push("/login");
     }

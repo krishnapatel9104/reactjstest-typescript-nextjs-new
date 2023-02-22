@@ -5,22 +5,23 @@ import React, { useEffect, useState } from 'react';
 
 interface LoginPageProps {}
 const LoginPage: NextPage<LoginPageProps> = () => {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState<{ userName: string; password: string }>({
+    userName: '',
+    password: ''
+  });
   const [error, setError] = useState('');
   const router = useRouter();
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    localStorage.setItem('userCredentials', JSON.stringify(userData));
+    localStorage.setItem('isLoggedIn', true.toString());
     setTimeout(() => {
       router.push('/');
     }, 500);
   };
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem('userCredentials') || '');
-    if (userData) {
-      if (userData.userName !== '' && userData.password !== '') {
-        router.push('/');
-      }
+    const userData = localStorage.getItem('isLoggedIn');
+    if (userData !== null && userData === true.toString()) {
+      router.push('/');
     }
   });
 
@@ -105,12 +106,12 @@ const LoginPage: NextPage<LoginPageProps> = () => {
               fontSize: '22px',
               width: '100%',
               marginBottom: { xs: '50px', md: '0' },
-              '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
-                fontSize: '22px'
-              },
-              '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
-                marginTop: '30px !important'
-              },
+              // '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
+              //   fontSize: '22px'
+              // },
+              // '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
+              //   marginTop: '30px !important'
+              // },
               '& .MuiFormHelperText-root': {
                 color: 'red'
               }

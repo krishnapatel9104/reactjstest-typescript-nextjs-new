@@ -21,179 +21,16 @@ import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { userShippingDataType } from '../../src/types/redux/userShippingDetails.type';
 import { restoreUserSelectedProductList } from '../../src/store/reducers/userSelectedProductList/userSelectedProductList.slice';
+import { Formik, Form, FormikProps } from 'formik';
+
+import * as Yup from 'yup';
 
 interface ShippingPageProps {}
 const ShippingPage: NextPage<ShippingPageProps> = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
-  const [userData, setUserData] = useState<userShippingDataType>({
-    firstName: '',
-    lastName: '',
-    emailAddress: '',
-    phoneNumber: '',
-    deliveryDate: '',
-    convenientTime: '',
-    city: '0',
-    address: '',
-    zipCode: ''
-  });
-  const [errors, setErrors] = useState({
-    firstName: '',
-    lastName: '',
-    emailAddress: '',
-    phoneNumber: '',
-    deliveryDate: '',
-    convenientTime: '',
-    city: '',
-    address: '',
-    zipCode: ''
-  });
   const reduxProductDetails = useSelector(state => state.userSelectedProductListSlice);
 
-  const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    e.persist();
-    const { name, value } = e.target;
-    if (name === 'city') {
-      if (parseInt(value) === 0) {
-        setErrors({
-          ...errors,
-          [name]: 'Please select city'
-        });
-        setUserData({ ...userData, city: value });
-      } else {
-        setErrors({
-          ...errors,
-          [name]: ''
-        });
-        setUserData({ ...userData, city: value });
-      }
-    }
-  };
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.persist();
-    const { name, value } = e.target;
-    if (name === 'firstName') {
-      if (value === '') {
-        setErrors({ ...errors, [name]: 'Required' });
-      } else if (!/^[A-Za-z ]*$/i.test(value)) {
-        setErrors({
-          ...errors,
-          [name]: 'First Name should contain only alphabet'
-        });
-      } else {
-        setErrors({
-          ...errors,
-          [name]: ''
-        });
-        setUserData({ ...userData, firstName: value });
-      }
-    }
-
-    if (name === 'lastName') {
-      if (value === '') {
-        setErrors({ ...errors, [name]: 'Required' });
-      } else if (!/^[A-Za-z ]*$/i.test(value)) {
-        setErrors({
-          ...errors,
-          [name]: 'Last Name should contain only alphabet'
-        });
-      } else {
-        setErrors({
-          ...errors,
-          [name]: ''
-        });
-        setUserData({ ...userData, lastName: value });
-      }
-    }
-    if (name === 'emailAddress') {
-      if (value === '') {
-        setErrors({ ...errors, [name]: 'Required' });
-      } else if (!/^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/i.test(value)) {
-        setErrors({
-          ...errors,
-          [name]: 'Invalid Email'
-        });
-      } else {
-        setErrors({
-          ...errors,
-          [name]: ''
-        });
-        setUserData({ ...userData, emailAddress: value });
-      }
-    }
-    if (name === 'phoneNumber') {
-      if (value === '') {
-        setErrors({ ...errors, [name]: 'Required' });
-      } else if (!/^[987]{1}[0-9]{9}$/i.test(value)) {
-        setErrors({
-          ...errors,
-          [name]: 'Invalid Phone Number'
-        });
-      } else {
-        setErrors({
-          ...errors,
-          [name]: ''
-        });
-        setUserData({ ...userData, phoneNumber: value });
-      }
-    }
-    if (name === 'deliveryDate') {
-      if (isFuture(new Date(value))) {
-        setErrors({ ...errors, [name]: '' });
-        setUserData({ ...userData, deliveryDate: value });
-      } else {
-        if (!value) setErrors({ ...errors, [name]: 'Required' });
-        else setErrors({ ...errors, [name]: 'Date should be in future' });
-      }
-    }
-    if (name === 'convenientTime') {
-      if (!value) setErrors({ ...errors, [name]: 'Required' });
-      else {
-        setErrors({ ...errors, [name]: '' });
-        setUserData({ ...userData, convenientTime: value });
-      }
-    }
-    if (name === 'address') {
-      if (value === '') {
-        setErrors({ ...errors, [name]: 'Required' });
-      } else {
-        setErrors({
-          ...errors,
-          [name]: ''
-        });
-        setUserData({ ...userData, address: value });
-      }
-    }
-    if (name === 'zipCode') {
-      if (value === '') {
-        setErrors({ ...errors, [name]: 'Required' });
-      } else if (!/^[0-9]{6}$/i.test(value)) {
-        setErrors({
-          ...errors,
-          [name]: 'Invalid Zip Code'
-        });
-      } else {
-        setErrors({
-          ...errors,
-          [name]: ''
-        });
-        setUserData({ ...userData, zipCode: value });
-      }
-    }
-  };
-  const isValidate = () => {
-    if (
-      userData.firstName &&
-      userData.lastName &&
-      userData.emailAddress &&
-      userData.phoneNumber &&
-      userData.address !== '' &&
-      userData.zipCode
-    )
-      return true;
-    else return false;
-  };
   useEffect(() => {
     if (reduxProductDetails?.cartProductDetails?.length === 0) {
       let list = JSON.parse(localStorage.getItem('userSelectedProductList') || '');
@@ -205,87 +42,8 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
     }
   });
 
-  const handleClick = () => {
-    if (!userData.deliveryDate) {
-      setErrors({ ...errors, deliveryDate: 'Required' });
-    } else if (!userData.convenientTime) {
-      setErrors({ ...errors, convenientTime: 'Required' });
-    } else if (userData.city === '0') {
-      setErrors({ ...errors, city: 'Required' });
-    } else {
-      if (isValidate()) {
-        dispatch(setUserDetails(userData));
-        router.push('/checkout');
-      }
-    }
-  };
-  // const validate = (values) => {
-  //     const errors = {};
-  //     if (!values.firstName) {
-  //         errors.firstName = "Required";
-  //     }
-
-  //     if (!values.lastName) {
-  //         errors.lastName = "Required";
-  //     }
-
-  //     if (!values.emailAddress) {
-  //         errors.emailAddress = "Required";
-  //     } else if (
-  //         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(
-  //             values.emailAddress
-  //         )
-  //     ) {
-  //         errors.emailAddress = "Invalid email address";
-  //     }
-
-  //     if (!values.phoneNumber) {
-  //         errors.phoneNumber = "Required";
-  //     } else if (!/^[987]{1}[0-9]{9}$/i.test(values.phoneNumber)) {
-  //         errors.phoneNumber = "Invalid phone number";
-  //     }
-
-  //     if (!values.city) {
-  //         errors.city = "Required";
-  //     } else if (values.city === 0) {
-  //         errors.city = "Please select city";
-  //     }
-
-  //     if (!values.address) {
-  //         errors.address = "Required";
-  //     }
-
-  //     if (!values.zipCode) {
-  //         errors.zipCode = "Required";
-  //     } else if (!/^[0-9]{7}$/i.test(values.zipCode)) {
-  //         errors.zipCode = "Invalid zip code";
-  //     }
-  //     console.log("error: ", errors);
-  //     return errors;
-  // };
-  // const formik = useFormik({
-  //     initialValues: {
-  //         firstName: "",
-  //         lastName: "",
-  //         emailAddress: "",
-  //         phoneNumber: "",
-  //         deliveryDate: "",
-  //         convenientTime: "",
-  //         city: "",
-  //         address: "",
-  //         zipCode: "",
-  //     },
-  //     // handleChange,
-  //     validate,
-  //     onSubmit: (values) => {
-  //         console.log("btn clicked : ", values);
-  //     },
-  // });
   return (
     <ProtectedRoute>
-      {isLoading ? (
-        <Box>LOADER COMPONENT</Box>
-      ) : (
         <Box
           sx={{
             marginTop: '50px',
@@ -320,427 +78,457 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
                 }}>
                 Contact Information
               </Typography>
-              {/* <form onSubmit={formik.handleSubmit}> */}
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  marginTop: '20px',
-                  marginBottom: { md: '50px' },
-                  flexDirection: { xs: 'column', lg: 'row' },
-                  alignItems: { xs: 'flex-start' },
-                  width: { sm: '100%' },
-                  gap: { md: '40px' }
-                }}>
-                <TextField
-                  id="standard-number"
-                  label="First Name"
-                  type="text"
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  name="firstName"
-                  error={errors?.firstName ? true : false}
-                  helperText={errors?.firstName ? errors?.firstName : null}
-                  // value={formik.values.firstName}
-                  // onChange={formik.handleChange}
-                  onChange={handleChange}
-                  variant="standard"
-                  placeholder="First Name e.g John,Mary"
-                  sx={{
-                    fontSize: '22px',
-                    width: { xs: '100%', md: '95%', lg: '45%' },
-                    marginBottom: { xs: '50px', md: '0' },
-                    '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
-                      fontSize: '22px'
-                    },
-                    '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
-                      marginTop: '30px !important'
-                    },
-                    '& .MuiFormHelperText-root': {
-                      color: 'red'
-                    }
-                  }}
-                />
-                <TextField
-                  id="standard-number"
-                  label="Last Name"
-                  type="text"
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  error={errors?.lastName ? true : false}
-                  helperText={errors?.lastName ? errors?.lastName : null}
-                  // helperText={
-                  //     formik.errors.lastName ? (
-                  //         <div>{formik.errors.lastName}</div>
-                  //     ) : null
-                  // }
-                  name="lastName"
-                  // value={formik.values.lastName}
-                  // onChange={formik.handleChange}
-                  onChange={handleChange}
-                  variant="standard"
-                  placeholder="Last Name e.g John,Mary"
-                  sx={{
-                    fontSize: '22px',
-                    width: { xs: '100%', md: '95%', lg: '45%' },
-                    marginBottom: { xs: '50px', md: '0' },
-                    '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
-                      fontSize: '22px'
-                    },
-                    '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
-                      marginTop: '30px !important'
-                    },
-                    '& .MuiFormHelperText-root': {
-                      color: 'red'
-                    }
-                  }}
-                />
-              </Box>
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  // marginTop: "50px",
-                  flexDirection: { xs: 'column', lg: 'row' },
-                  alignItems: { xs: 'flex-start' },
-                  width: { sm: '100%' },
-                  gap: { md: '40px' },
-                  marginBottom: { md: '50px' }
-                }}>
-                <TextField
-                  id="standard-number"
-                  label="Email Address"
-                  type="email"
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  error={errors?.emailAddress ? true : false}
-                  helperText={errors?.emailAddress ? errors?.emailAddress : null}
-                  // helperText={
-                  //     formik.errors.emailAddress ? (
-                  //         <div>{formik.errors.emailAddress}</div>
-                  //     ) : null
-                  // }
-                  name="emailAddress"
-                  onChange={handleChange}
-                  // value={formik.values.emailAddress}
-                  // onChange={formik.handleChange}
-                  variant="standard"
-                  placeholder="Your email@gmail.com"
-                  sx={{
-                    fontSize: '22px',
-                    width: { xs: '100%', md: '95%', lg: '45%' },
-                    marginBottom: { xs: '50px', md: '0' },
-                    '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
-                      fontSize: '22px'
-                    },
-                    '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
-                      marginTop: '30px !important'
-                    },
-                    '& .MuiFormHelperText-root': {
-                      color: 'red'
-                    }
-                  }}
-                />
-                <TextField
-                  id="standard-number"
-                  label="Phone Number"
-                  type="text"
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  name="phoneNumber"
-                  error={errors?.phoneNumber ? true : false}
-                  helperText={errors?.phoneNumber ? errors?.phoneNumber : null}
-                  // helperText={
-                  //     formik.errors.phoneNumber ? (
-                  //         <div>{formik.errors.phoneNumber}</div>
-                  //     ) : null
-                  // }
-                  onChange={handleChange}
-                  // value={formik.values.phoneNumber}
-                  // onChange={formik.handleChange}
-                  variant="standard"
-                  placeholder="+1-(0000 000 0000)"
-                  sx={{
-                    fontSize: '22px',
-                    width: { xs: '100%', md: '95%', lg: '45%' },
-                    '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
-                      fontSize: '22px'
-                    },
-                    '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
-                      marginTop: '30px !important'
-                    },
-                    '& .MuiFormHelperText-root': {
-                      color: 'red'
-                    }
-                  }}
-                />
-              </Box>
+              <Formik
+                initialValues={{
+                  firstName: '',
+                  lastName: '',
+                  emailAddress: '',
+                  phoneNumber: '',
+                  deliveryDate: '',
+                  convenientTime: '',
+                  city: '0',
+                  address: '',
+                  zipCode: ''
+                }}
+                onSubmit={(values: userShippingDataType) => {
+                  dispatch(setUserDetails(values));
+                  router.push('/checkout');
+                }}
+                validationSchema={Yup.object().shape({
+                  firstName: Yup.string()
+                    .required('Required')
+                    .matches(/^.*[A-Za-z ].*$/, 'First name should contain only alphabets'),
+                  lastName: Yup.string()
+                    .required('Required')
+                    .matches(/^.*[A-Za-z ].*$/, 'Last name should contain only alphabets'),
+                  emailAddress: Yup.string().email('Invalid Email').required('Required'),
+                  phoneNumber: Yup.string()
+                    .required('Required')
+                    .matches(/^.*[987]{1}[0-9]{9}.*$/, 'Phone number should be 10 digit only'),
+                  deliveryDate: Yup.string()
+                    .required('Required')
+                    .test('validateDeliveryDate', 'DeliveryDate should be in future', value => {
+                      if (isFuture(new Date(value))) return true;
+                    }),
+                  convenientTime: Yup.string().required('Required'),
+                  city: Yup.string()
+                    .required('Required')
+                    .test('validateCity', 'Select city', value => {
+                      if (parseInt(value) !== 0) return true;
+                    }),
+                  address: Yup.string().required('Required'),
+                  zipCode: Yup.string()
+                    .required('Required')
+                    .matches(/^.*[0-9]{6}.*$/, 'Zip Code should be 7 digit only')
+                })}>
+                {(props: FormikProps<userShippingDataType>) => {
+                  const { values, touched, errors, handleBlur, handleChange, isValid } = props;
+                  return (
+                    <Form>
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          marginTop: '20px',
+                          marginBottom: { md: '50px' },
+                          flexDirection: { xs: 'column', lg: 'row' },
+                          alignItems: { xs: 'flex-start' },
+                          width: { sm: '100%' },
+                          gap: { md: '40px' }
+                        }}>
+                        <TextField
+                          id="standard-number"
+                          label="First Name"
+                          type="text"
+                          InputLabelProps={{
+                            shrink: true
+                          }}
+                          name="firstName"
+                          error={touched?.firstName && errors?.firstName ? true : false}
+                          helperText={
+                            touched?.firstName && errors?.firstName ? errors?.firstName : ''
+                          }
+                          value={values.firstName}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          variant="standard"
+                          placeholder="First Name e.g John,Mary"
+                          sx={{
+                            fontSize: '22px',
+                            width: { xs: '100%', md: '95%', lg: '45%' },
+                            marginBottom: { xs: '50px', md: '0' },
+                            '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
+                              fontSize: '22px'
+                            },
+                            '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
+                              marginTop: '30px !important'
+                            },
+                            '& .MuiFormHelperText-root': {
+                              color: 'red'
+                            }
+                          }}
+                        />
+                        <TextField
+                          id="standard-number"
+                          label="Last Name"
+                          type="text"
+                          InputLabelProps={{
+                            shrink: true
+                          }}
+                          error={touched?.lastName && errors?.lastName ? true : false}
+                          helperText={touched?.lastName && errors?.lastName ? errors?.lastName : ''}
+                          name="lastName"
+                          value={values.lastName}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          variant="standard"
+                          placeholder="Last Name e.g John,Mary"
+                          sx={{
+                            fontSize: '22px',
+                            width: { xs: '100%', md: '95%', lg: '45%' },
+                            marginBottom: { xs: '50px', md: '0' },
+                            '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
+                              fontSize: '22px'
+                            },
+                            '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
+                              marginTop: '30px !important'
+                            },
+                            '& .MuiFormHelperText-root': {
+                              color: 'red'
+                            }
+                          }}
+                        />
+                      </Box>
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          flexDirection: { xs: 'column', lg: 'row' },
+                          alignItems: { xs: 'flex-start' },
+                          width: { sm: '100%' },
+                          gap: { md: '40px' },
+                          marginBottom: { md: '50px' }
+                        }}>
+                        <TextField
+                          id="standard-number"
+                          label="Email Address"
+                          type="email"
+                          InputLabelProps={{
+                            shrink: true
+                          }}
+                          error={touched?.emailAddress && errors?.emailAddress ? true : false}
+                          helperText={
+                            touched?.emailAddress && errors?.emailAddress
+                              ? errors?.emailAddress
+                              : ''
+                          }
+                          name="emailAddress"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.emailAddress}
+                          variant="standard"
+                          placeholder="Your email@gmail.com"
+                          sx={{
+                            fontSize: '22px',
+                            width: { xs: '100%', md: '95%', lg: '45%' },
+                            marginBottom: { xs: '50px', md: '0' },
+                            '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
+                              fontSize: '22px'
+                            },
+                            '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
+                              marginTop: '30px !important'
+                            },
+                            '& .MuiFormHelperText-root': {
+                              color: 'red'
+                            }
+                          }}
+                        />
+                        <TextField
+                          id="standard-number"
+                          label="Phone Number"
+                          type="text"
+                          InputLabelProps={{
+                            shrink: true
+                          }}
+                          name="phoneNumber"
+                          error={touched?.phoneNumber && errors?.phoneNumber ? true : false}
+                          helperText={
+                            touched?.phoneNumber && errors?.phoneNumber ? errors?.phoneNumber : ''
+                          }
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.phoneNumber}
+                          variant="standard"
+                          placeholder="+1-(0000 000 0000)"
+                          sx={{
+                            fontSize: '22px',
+                            width: { xs: '100%', md: '95%', lg: '45%' },
+                            '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
+                              fontSize: '22px'
+                            },
+                            '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
+                              marginTop: '30px !important'
+                            },
+                            '& .MuiFormHelperText-root': {
+                              color: 'red'
+                            }
+                          }}
+                        />
+                      </Box>
 
-              <Typography
-                sx={{
-                  fontSize: '22px',
-                  fontWeight: '700',
-                  marginTop: '50px'
-                }}>
-                Delivery Information
-              </Typography>
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  marginTop: '20px',
-                  flexDirection: { xs: 'column', sm: 'row' },
-                  alignItems: { xs: 'flex-start' },
-                  width: { sm: '100%', md: '95%', lg: '100%' },
-                  gap: { sm: '50px' },
-                  marginBottom: { md: '40px' }
-                }}>
-                <TextField
-                  id="standard-number"
-                  label="Delivery Date"
-                  type="date"
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  InputProps={{
-                    inputProps: {
-                      min: format(new Date(), 'yyyy-MM-dd')
-                    }
-                  }}
-                  name="deliveryDate"
-                  onChange={handleChange}
-                  // onChange={formik.handleChange}
-                  error={errors?.deliveryDate ? true : false}
-                  helperText={errors?.deliveryDate ? errors.deliveryDate : null}
-                  variant="standard"
-                  placeholder="DD/MM/YYYY"
-                  sx={{
-                    fontSize: '22px',
-                    width: { xs: '100%', md: '45%' },
-                    marginBottom: { xs: '50px', md: '0' },
-                    '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
-                      fontSize: '22px'
-                    },
-                    '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
-                      marginTop: '30px !important'
-                    }
-                  }}
-                />
-                <TextField
-                  id="standard-number"
-                  label="Convenient Time"
-                  type="time"
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  name="convenientTime"
-                  // onChange={formik.handleChange}
-                  onChange={handleChange}
-                  error={errors?.convenientTime ? true : false}
-                  helperText={errors?.convenientTime ? errors.convenientTime : null}
-                  variant="standard"
-                  placeholder="1pm-9pm"
-                  sx={{
-                    fontSize: '22px',
-                    width: { xs: '100%', md: '45%' },
-                    marginBottom: { xs: '50px', md: '0' },
-                    '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
-                      fontSize: '22px'
-                    },
-                    '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
-                      marginTop: '30px !important'
-                    }
-                  }}
-                />
-              </Box>
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: { xs: 'flex-start', sm: 'center' },
-                  flexDirection: {
-                    xs: 'column',
-                    lg: 'row',
-                    md: 'column'
-                  },
-                  gap: { sm: '40px' },
-                  width: { xs: '100%', md: '95%', lg: '100%' }
-                }}>
-                <Box
-                  sx={{
-                    width: { xs: '100%', lg: 'inherit' },
-                    marginBottom: { xs: '50px', sm: '0' }
-                  }}>
-                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                    City
-                  </InputLabel>
-                  <NativeSelect
-                    required
-                    defaultValue={0}
-                    inputProps={{
-                      id: 'uncontrolled-native'
-                    }}
-                    name="city"
-                    value={userData.city}
-                    error={errors?.city ? true : false}
-                    // // helperText={
-                    //     formik.errors.city ? (
-                    //         <div>{formik.errors.city}</div>
-                    //     ) : null
-                    // }
-                    onChange={handleChangeSelect}
-                    // value={formik.values.city}
-                    // onChange={formik.handleChange}
-                    sx={{
-                      width: { xs: '100%', lg: 'inherit' },
-                      marginTop: '10px',
-                      color: 'gray'
-                    }}>
-                    <option value={0}>---Select City---</option>
-                    <option value={'Surat'}>Surat</option>
-                    <option value={'Pune'}>Pune</option>
-                    <option value={'Mumbai'}>Mumbai</option>
-                  </NativeSelect>
-                  <FormHelperText style={{ color: 'red' }}>
-                    {errors?.city ? errors?.city : null}
-                  </FormHelperText>
-                </Box>
-                <Box
-                  sx={{
-                    position: 'relative',
-                    width: { xs: '100%', lg: 'inherit' }
-                  }}>
-                  <TextField
-                    id="standard-number"
-                    label="Address"
-                    type="text"
-                    InputLabelProps={{
-                      shrink: true
-                    }}
-                    name="address"
-                    // helperText={
-                    //     formik.errors.address ? (
-                    //         <div>{formik.errors.address}</div>
-                    //     ) : null
-                    // }
-                    error={errors?.address ? true : false}
-                    helperText={errors?.address ? errors?.address : null}
-                    onChange={handleChange}
-                    // value={formik.values.address}
-                    // onChange={formik.handleChange}
-                    variant="standard"
-                    placeholder="Click to find Address"
-                    sx={{
-                      fontSize: '22px',
-                      width: { xs: '100%', lg: 'inherit' }, // md: "150px"
-                      marginBottom: { xs: '50px', sm: '0' },
-                      '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
-                        fontSize: '22px'
-                      },
-                      '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
-                        marginTop: '30px !important'
-                      },
-                      '& .MuiFormHelperText-root': {
-                        color: 'red'
-                      }
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      top: {
-                        xs: '32%',
-                        sm: '55%'
-                      },
-                      right: { xs: '0' }
-                    }}>
-                    <Image
-                      src={'/images/searchgrayicon.png'}
-                      alt="imageGirl"
-                      height={0}
-                      width={0}
-                      sizes="(max-width:0) 100vw,
+                      <Typography
+                        sx={{
+                          fontSize: '22px',
+                          fontWeight: '700',
+                          marginTop: '50px'
+                        }}>
+                        Delivery Information
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          marginTop: '20px',
+                          flexDirection: { xs: 'column', sm: 'row' },
+                          alignItems: { xs: 'flex-start' },
+                          width: { sm: '100%', md: '95%', lg: '100%' },
+                          gap: { sm: '50px' },
+                          marginBottom: { md: '40px' }
+                        }}>
+                        <TextField
+                          id="standard-number"
+                          label="Delivery Date"
+                          type="date"
+                          InputLabelProps={{
+                            shrink: true
+                          }}
+                          InputProps={{
+                            inputProps: {
+                              min: format(new Date(), 'yyyy-MM-dd')
+                            }
+                          }}
+                          value={values.deliveryDate}
+                          name="deliveryDate"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          error={touched?.deliveryDate && errors?.deliveryDate ? true : false}
+                          helperText={
+                            touched?.deliveryDate && errors?.deliveryDate ? errors.deliveryDate : ''
+                          }
+                          variant="standard"
+                          placeholder="DD/MM/YYYY"
+                          sx={{
+                            fontSize: '22px',
+                            width: { xs: '100%', md: '45%' },
+                            marginBottom: { xs: '50px', md: '0' },
+                            '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
+                              fontSize: '22px'
+                            },
+                            '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
+                              marginTop: '30px !important'
+                            }
+                          }}
+                        />
+                        <TextField
+                          id="standard-number"
+                          label="Convenient Time"
+                          type="time"
+                          InputLabelProps={{
+                            shrink: true
+                          }}
+                          name="convenientTime"
+                          value={values.convenientTime}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          error={touched?.convenientTime && errors?.convenientTime ? true : false}
+                          helperText={
+                            touched?.convenientTime && errors?.convenientTime
+                              ? errors.convenientTime
+                              : ''
+                          }
+                          variant="standard"
+                          placeholder="1pm-9pm"
+                          sx={{
+                            fontSize: '22px',
+                            width: { xs: '100%', md: '45%' },
+                            marginBottom: { xs: '50px', md: '0' },
+                            '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
+                              fontSize: '22px'
+                            },
+                            '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
+                              marginTop: '30px !important'
+                            }
+                          }}
+                        />
+                      </Box>
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: { xs: 'flex-start', sm: 'center' },
+                          flexDirection: {
+                            xs: 'column',
+                            lg: 'row',
+                            md: 'column'
+                          },
+                          gap: { sm: '40px' },
+                          width: { xs: '100%', md: '95%', lg: '100%' }
+                        }}>
+                        <Box
+                          sx={{
+                            width: { xs: '100%', lg: 'inherit' },
+                            marginBottom: { xs: '50px', sm: '0' }
+                          }}>
+                          <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                            City
+                          </InputLabel>
+                          <NativeSelect
+                            required
+                            defaultValue={0}
+                            inputProps={{
+                              id: 'uncontrolled-native'
+                            }}
+                            name="city"
+                            error={touched?.city && errors?.city ? true : false}
+                            value={values.city}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            sx={{
+                              width: { xs: '100%', lg: 'inherit' },
+                              marginTop: '10px',
+                              color: 'gray'
+                            }}>
+                            <option value={0}>---Select City---</option>
+                            <option value={'Surat'}>Surat</option>
+                            <option value={'Pune'}>Pune</option>
+                            <option value={'Mumbai'}>Mumbai</option>
+                          </NativeSelect>
+                          <FormHelperText style={{ color: 'red' }}>
+                            {/* {errors?.city ? errors?.city : null} */}
+                            {touched?.city && errors.city ? <div>{errors.city}</div> : ''}
+                          </FormHelperText>
+                        </Box>
+                        <Box
+                          sx={{
+                            position: 'relative',
+                            width: { xs: '100%', lg: 'inherit' }
+                          }}>
+                          <TextField
+                            id="standard-number"
+                            label="Address"
+                            type="text"
+                            InputLabelProps={{
+                              shrink: true
+                            }}
+                            name="address"
+                            error={touched?.address && errors?.address ? true : false}
+                            helperText={touched?.address && errors?.address ? errors?.address : ''}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.address}
+                            variant="standard"
+                            placeholder="Click to find Address"
+                            sx={{
+                              fontSize: '22px',
+                              marginBottom: { xs: '50px', sm: '0' },
+                              '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
+                                fontSize: '22px'
+                              },
+                              '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
+                                marginTop: '30px !important'
+                              },
+                              '& .MuiFormHelperText-root': {
+                                color: 'red'
+                              }
+                            }}
+                          />
+                          <Box
+                            sx={{
+                              position: 'absolute',
+                              top: {
+                                xs: '32%',
+                                sm: '55%'
+                              },
+                              right: { xs: '0' }
+                            }}>
+                            <Image
+                              src={'/images/searchgrayicon.png'}
+                              alt="imageGirl"
+                              height={0}
+                              width={0}
+                              sizes="(max-width:0) 100vw,
                         (max-height:0) 100vh"
-                      style={{
-                        objectFit: 'cover',
-                        height: '100%',
-                        width: '100%'
-                      }}
-                    />
-                  </Box>
-                </Box>
-                <TextField
-                  id="standard-number"
-                  label="Zip Code"
-                  type="text"
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  error={errors?.zipCode ? true : false}
-                  helperText={errors?.zipCode ? errors?.zipCode : null}
-                  // helperText={
-                  //     formik.errors.zipCode ? (
-                  //         <div>{formik.errors.firstName}</div>
-                  //     ) : null
-                  // }
-                  name="zipCode"
-                  onChange={handleChange}
-                  // value={formik.values.zipCode}
-                  // onChange={formik.handleChange}
-                  variant="standard"
-                  placeholder="00000"
-                  sx={{
-                    fontSize: '22px',
-                    width: { xs: '100%', lg: 'inherit' }, // sm: "340px", md: "150px"
-                    '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
-                      fontSize: '22px'
-                    },
-                    '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
-                      marginTop: '30px !important'
-                    },
-                    '& .MuiFormHelperText-root': {
-                      color: 'red'
-                    }
-                  }}
-                />
-              </Box>
-              <Box
-                sx={{
-                  marginTop: { xs: '50px', md: '90px' },
-                  marginBottom: { xs: '100px', md: '150px' },
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                <Button
-                  variant="contained"
-                  sx={{
-                    fontFamily: 'Nunito',
-                    fontSyle: 'normal',
-                    fontWeight: '900',
-                    fontSize: '22px',
-                    lineHeight: '27px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    textAlign: 'center',
-                    color: '#FFFFFF',
-                    backgroundColor: '#111827',
-                    width: { xs: '100%', md: 'objectFit' },
-                    padding: { xs: '20px', md: '15px 100px' },
-                    textTransform: 'inherit'
-                  }}
-                  onClick={handleClick}
-                  disabled={!isValidate()}
-                  // type="submit"
-                >
-                  Proceed to Payment
-                </Button>
-              </Box>
-              {/* </form> */}
+                              style={{
+                                objectFit: 'cover',
+                                height: '100%',
+                                width: '100%'
+                              }}
+                            />
+                          </Box>
+                        </Box>
+                        <TextField
+                          id="standard-number"
+                          label="Zip Code"
+                          type="text"
+                          InputLabelProps={{
+                            shrink: true
+                          }}
+                          error={touched?.zipCode && errors?.zipCode ? true : false}
+                          helperText={touched?.zipCode && errors?.zipCode ? errors?.zipCode : ''}
+                          name="zipCode"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.zipCode}
+                          variant="standard"
+                          placeholder="00000"
+                          sx={{
+                            fontSize: '22px',
+                            '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
+                              fontSize: '22px'
+                            },
+                            '& label+.css-v4u5dn-MuiInputBase-root-MuiInput-root': {
+                              marginTop: '30px !important'
+                            },
+                            '& .MuiFormHelperText-root': {
+                              color: 'red'
+                            }
+                          }}
+                        />
+                      </Box>
+                      <Box
+                        sx={{
+                          marginTop: { xs: '50px', md: '90px' },
+                          marginBottom: { xs: '100px', md: '150px' },
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center'
+                        }}>
+                        <Button
+                          variant="contained"
+                          sx={{
+                            fontFamily: 'Nunito',
+                            fontSyle: 'normal',
+                            fontWeight: '900',
+                            fontSize: '22px',
+                            lineHeight: '27px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            textAlign: 'center',
+                            color: '#FFFFFF',
+                            backgroundColor: '#111827',
+                            width: { xs: '100%', md: 'objectFit' },
+                            padding: { xs: '20px', md: '15px 100px' },
+                            textTransform: 'inherit'
+                          }}
+                          disabled={!isValid}
+                          type="submit">
+                          Proceed to Payment
+                        </Button>
+                      </Box>
+                    </Form>
+                  );
+                }}
+              </Formik>
             </Box>
           </Box>
           <Box
@@ -748,10 +536,9 @@ const ShippingPage: NextPage<ShippingPageProps> = () => {
               width: { xs: '100%', md: '100%' },
               paddingTop: '40px'
             }}>
-            <YourOrder isLoading={isLoading} setIsLoading={setIsLoading} />
+            <YourOrder />
           </Box>
         </Box>
-      )}
     </ProtectedRoute>
   );
 };
